@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قبرص - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #003F87;
+            --secondary-blue: #0055A4;
+            --light-blue: #4C8CE6;
+            --orange: #FF7F00;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            background: var(--secondary-blue);
+            transform: scale(1.1);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        .section-title {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .info-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .day-title {
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .resource-link {
+            display: block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .resource-link:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-3px);
+        }
+        .alert {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        .warning {
+            background: #F8D7DA;
+            border-left: 4px solid #DC3545;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="asia.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/cy.png')"></div>
+            <h1>قبرص (Cyprus)</h1>
+            <h2>جمهورية قبرص - قارة آسيا</h2>
+            <p>عاصمة: نيقوسيا - اللغة الرسمية: اليونانية، التركية - التوقيت: UTC+2 (الصيف UTC+3)</p>
+        </div>
+    </header>
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>خلفية بيضاء مع خريطة الجزيرة باللون الذهبي/النحاسي تحت فرعين من أغصان الزيتون</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>9,251 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 1.2 مليون نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>نيقوسيا</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC+2 (توقيت قبرص الرسمي)، UTC+3 في الصيف</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+357</p>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>يحتاجون تأشيرة شنغن لدخول قبرص (عضوة في الاتحاد الأوروبي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع التأشيرات</h3>
+                    <p>شنغن سياحية، شنغن عمل، شنغن دراسة</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر ساري المفعول (3 أشهر على الأقل بعد انتهاء التأشيرة)، صور شخصية، حجز فندق، تذكرة طيران، كشف حساب بنكي، تأمين سفر</p>
+                </div>
+                <div class="info-card">
+                    <h3>التكلفة والمدة</h3>
+                    <p>80 يورو للتأشيرة القصيرة الأجل، مجانية للأطفال تحت 12 سنة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة المعالجة</h3>
+                    <p>تستغرق عادة من 10 إلى 15 يوم عمل</p>
+                </div>
+                <div class="info-card">
+                    <h3>مكان التقديم</h3>
+                    <p>السفارة أو القنصلية القبرصية أو مركز تقديم طلبات التأشيرة المعتمد</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>ملاحظة:</strong> قبرص عضو في الاتحاد الأوروبي ولكنها ليست جزءاً من منطقة شنغن بعد. ومع ذلك، تطلب تأشيرة شنغن للدخول.</p>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>توجد رحلات مباشرة من مسقط إلى لارنكا عبر الطيران العماني وعدد من الشركات الأخرى</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>حوالي 5 ساعات للرحلة المباشرة</p>
+                </div>
+                <div class="info-card">
+                    <h3>شركات الطيران</h3>
+                    <p>الطيران العماني، طيران الخليج، طيران العربية، الإيجه، رايان إير</p>
+                </div>
+                <div class="info-card">
+                    <h3>من المطار إلى المدينة</h3>
+                    <p>تتوفر سيارات الأجرة والحافلات من مطار لارنكا الدولي إلى وسط المدينة (حوالي 20 دقيقة)</p>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل المناطق للسكن</h3>
+                    <p>لارنكا، ليماسول، بافوس، أييا نابا، نيقوسيا</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>فنادق فاخرة (5★)، منتجعات، شقق فندقية، بيوت ضيافة</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>فنادق 4★ تبدأ من ~80-150 يورو لليلة حسب الموسم</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>يُمكن الحجز عبر Booking.com، Airbnb، أو مواقع الفنادق مباشرة</p>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>اليورو (EUR)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 OMR ≈ 2.40 EUR (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>يُفضل استخدام البطاقات الائتمانية (فيزا، ماستركارد) والنقد</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>أجهزة الصراف الآلي متوفرة على نطاق واسع في جميع المدن</p>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>أبريل إلى يونيو وسبتمبر إلى نوفمبر لطقس معتدل ومثالي للسياحة</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>صيف حار وجاف، وشتاء معتدل وممطر، أكثر من 300 يوم مشمس سنوياً</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس خفيفة صيفاً، مع ملابس سباحة. معطف خفيف شتاءً. ملابس محتشمة للزيارات الدينية</p>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>اليونانية والتركية هما اللغتان الرسميتان، الإنجليزية منتشرة على نطاق واسع</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>احترام القوانين المحلية، عدم التقاط صور للمنشآت العسكرية خاصة في المنطقة العازلة</p>
+                </div>
+                <div class="info-card">
+                    <h3>أوقات العمل</h3>
+                    <p>المحلات تفتح عادة من 9:00-18:00 مع إغلاق خلال عطلة نهاية الأسبوع في بعض المناطق</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات</h3>
+                    <p>التحية باليد، المجاملة في التعامل، احترام التقاليد المحلية خاصة في القرى</p>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>Cyta, MTN Cyprus, Epic</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات مسبقة الدفع متوفرة في المحلات والسوبرماركت</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>خدمة الإنترنت سريعة ومتوفرة في جميع المدن والمنتجعات السياحية</p>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>قبرص آمنة بشكل عام للسياح مع معدل جريمة منخفض</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يُشدد على ضرورة الحصول على تأمين صحي شامل يغطي العلاج في أوروبا</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>الشرطة: 112 — إسعاف: 112 — إطفاء: 112</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>ملاحظة:</strong> يُنصح بعدم عبور الخط الأخضر إلى الجزء الشمالي (التركي) من قبرص دون التأكد من الإجراءات القانونية اللازمة.</p>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>نيقوسيا</h3>
+                    <p>المتحف القبرصي، بوابة فاماغوستا، شارع ليدرا، المتاحف</p>
+                </div>
+                <div class="info-card">
+                    <h3>لارنكا</h3>
+                    <p>شاطئ فينيكوديس، مسجد لالا مصطفى باشا، كنيسة القديس لازاروس، بحيرة الملح</p>
+                </div>
+                <div class="info-card">
+                    <h3>بافوس</h3>
+                    <p>المنتزه الأثري، قبور الملوك، ميناء بافوس، الحمامات الصخرية</p>
+                </div>
+                <div class="info-card">
+                    <h3>أييا نابا</h3>
+                    <p>شاطئ نيسي، منتزه أكوا، دير أييا نابا، بحيرة</p>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~15-25 يورو</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات عامة</h3>
+                    <p>~1.5-2 يورو</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة معلم سياحي</h3>
+                    <p>~5-10 يورو</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>80-150 يورو/يوم للشخص الواحد (يعتمد على نمط الإنفاق)</p>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى لارنكا</h3>
+                    <p>الوصول إلى مطار لارنكا الدولي - الانتقال إلى الفندق - استراحة - نزهة على شاطئ فينيكوديس - عشاء بالميناء.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: استكشاف لارنكا</h3>
+                    <p>زيارة كنيسة القديس لازاروس - مسجد لالا مصطفى باشا - بحيرة الملح (في الموسم) - متحف لارنكا.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: رحلة إلى ليماسول</h3>
+                    <p>التوجه إلى ليماسول (حوالي 45 دقيقة) - زيارة قلعة ليماسول - المنتزه المائي - الميناء القديم.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: رحلة إلى بافوس</h3>
+                    <p>التوجه إلى بافوس (حوالي ساعة) - زيارة المنتزه الأثري - قبور الملوك - الحمامات الصخرية لأفروديت.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: رحلة إلى أييا نابا</h3>
+                    <p>التوجه إلى أييا نابا (حوالي ساعة) - شاطئ نيسي - منتزه أكوا - دير أييا نابا.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: نيقوسيا والعودة</h3>
+                    <p>التوجه إلى نيقوسيا (حوالي ساعة) - زيارة المتحف القبرصي - بوابة فاماغوستا - التسوق في شارع ليدرا.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.mofa.gov.om" class="resource-link" target="_blank">وزارة الخارجية العمانية</a>
+                <a href="https://www.visitcyprus.com" class="resource-link" target="_blank">الموقع الرسمي لسياحة قبرص</a>
+                <a href="https://www.schengenvisainfo.com" class="resource-link" target="_blank">معلومات تأشيرة شنغن</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً إذا لزم الأمر
+    </script>
+</body>
+</html>

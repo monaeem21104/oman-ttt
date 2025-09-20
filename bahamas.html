@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البهاما - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-orange: #FF6B35;
+            --secondary-orange: #FF8C42;
+            --light-orange: #FFB366;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-orange);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-orange);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-orange);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-orange);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-orange);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-orange);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-orange);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="caribbean.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/bs.png')"></div>
+            <h1>جزر البهاما (Bahamas)</h1>
+            <h2>كومنولث جزر البهاما - قارة أمريكا الشمالية</h2>
+            <p>عاصمة: ناسو - اللغة الرسمية: الإنجليزية - توقيت ناسو: EST/EDT</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>ثلاثة خطوط أفقية (أزرق - أصفر - أزرق) مع مثلث أسود على الجانب</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>13,878 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 400,000 نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>ناسو</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC-5 (توقيت شرق الولايات المتحدة) - UTC-4 (توقيت الصيف)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+1-242</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>لا يحتاجون إلى تأشيرة مسبقة لدخول البهاما للسياحة لمدة تصل إلى 90 يوماً</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر ساري المفعول (6 أشهر على الأقل)، تذكرة عودة، إثبات الإقامة، كشف حساب بنكي، نموذج الهجرة</p>
+                </div>
+                <div class="info-card">
+                    <h3>تصريح الإقامة</h3>
+                    <p>يتم منحه عند الوصول لمدة 90 يوماً قابلة للتمديد</p>
+                </div>
+                <div class="info-card">
+                    <h3>الرسوم</h3>
+                    <p>لا توجد رسوم تأشيرة، لكن هناك رسوم مغادرة (Departure Tax) حوالي 29 دولاراً</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>لا توجد رحلات مباشرة من عمان إلى البهاما، تتطلب توقف في أوروبا أو الولايات المتحدة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>بما في ذلك التوقف، تستغرق الرحلة من 16 إلى 22 ساعة حسب خط السير</p>
+                </div>
+                <div class="info-card">
+                    <h3>المطارات الرئيسية</h3>
+                    <p>مطار ليندن بيندلنغ الدولي (NAS) في ناسو، ومطار فريبورت الدولي (FPO)</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواصلات الداخلية</h3>
+                    <p>سيارات الأجرة، الحافلات المحلية (jitneys)، العبارات بين الجزر، استئجار سيارات وسيارات جولف</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل المناطق للإقامة</h3>
+                    <p>بارادايس آيلاند في ناسو، جزيرة جراند بهاما، جزيرة هاربور، منتجعات الجزر الخارجية</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>منتجعات فاخرة، فنادق، شقق فندقية، فيلات، منتجعات كل-inclusive</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>فنادق 4 نجوم تبدأ من 200-400 دولار، المنتجعات الفاخرة من 500-1000 دولار</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>Booking.com, Expedia, أو الحجز مباشرة عبر مواقع المنتجعات</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>الدولار البهامي (BSD) - مرتبط بالدولار الأمريكي 1:1</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 BSD ≈ 0.38 OMR (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>الدولار الأمريكي مقبول في كل مكان، بطاقات الائتمان مقبولة على نطاق واسع</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>أجهزة الصراف الآلي متوفرة في المدن الكبرى والمنتجعات</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>من ديسمبر إلى أبريل (موسم الجفاف) حيث الطقس معتدل وهطول أمطار قليل</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>استوائي معتدل، متوسط درجات الحرارة 24-29°م، موسم الأعاصير من يونيو إلى نوفمبر</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس خفيفة قطنية، ملابس سباحة، واقي شمس، نظارات شمسية، ملابس رسمية للمطاعم الفاخرة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>الإنجليزية هي اللغة الرسمية، مع وجود لهجة محلية (Bahamian Dialect)</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>القيادة على الجانب الأيسر من الطريق، تجنب الملابس الكاشفة خارج الشواطئ، احترام القوانين البحرية</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات</h3>
+                    <p>ثقافة استرخاء "Island Time"، التحية الودية، احترام التقاليد المحلية</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإكراميات</h3>
+                    <p>متعارف عليها بنسبة 15-20% في المطاعم، 1-2 دولار للحقيبة، حسب الخدمة في الفنادق</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>BTC (Bahamas Telecommunications Company), Aliv</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات SIM مسبقة الدفع متوفرة في المطارات ومحلات البيع</p>
+                </div>
+                <div class="info-card">
+                    <h3>التغطية</h3>
+                    <p>تغطية جيدة في الجزر المأهولة، محدودة في الجزر النائية</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>Wi-Fi متوفّر في معظم الفنادق والمنتجعات، قد يكون مدفوعاً في بعض الأماكن</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>آمنة بشكل عام لكن يجب توخي الحذر في المناطق غير السياحية ليلاً</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يوصى بشدة بتأمين سفر يغطي النفقات الطبية والطوارئ والإجلاء</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>شرطة/إسعاف/إطفاء: 911 أو 919</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح السلامة</h3>
+                    <p>احتياطات السباحة، حماية من الشمس، توخي الحذر أثناء الأنشطة المائية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>ناسو</h3>
+                    <p>الدرج الملكي، سوق القش، المتحف البحري، منتزه أرداسترا للحدائق والنباتات</p>
+                </div>
+                <div class="info-card">
+                    <h3>الجزر الخارجية</h3>
+                    <p>جزيرة إكسوما، جزيرة إليوثيرا، جزيرة هاربور، جزيرة بييميني</p>
+                </div>
+                <div class="info-card">
+                    <h3>الأنشطة البحرية</h3>
+                    <p>الغوص في الحواجز المرجانية، السباحة مع الخنازير، رحلات الغوص بالأنبوب، صيد الأسماك</p>
+                </div>
+                <div class="info-card">
+                    <h3>المعالم الطبيعية</h3>
+                    <p>حديقة لوكيان الوطنية، الثقب الأزرق في جزيرة أندروس، كهوف هاري في جزيرة إليوثيرا</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~20-40 دولاراً</p>
+                </div>
+                <div class="info-card">
+                    <h3>مشروب</h3>
+                    <p>~5-10 دولارات للمشروبات غير الكحولية، ~8-15 دولاراً للكحولية</p>
+                </div>
+                <div class="info-card">
+                    <h3>جولة بالقارب</h3>
+                    <p>~50-150 دولاراً للفرد حسب النشاط والمدة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>150-300 دولار/يوم (يعتمد على نمط الإنفاق والإقامة)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى ناسو</h3>
+                    <p>الوصول إلى مطار ناسو - الانتقال إلى الفندق - استراحة - نزهة على الواجهة البحرية - عشاء في مطعم محلي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: استكشاف ناسو</h3>
+                    <p>زيارة الدرج الملكي - جولة في سوق القش - متحف القراصنة - الاستمتاع بشاطئ كيبل بيتش.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: رحلة إلى جزيرة بارادايس</h3>
+                    <p>عبّارة إلى جزيرة بارادايس - زيارة منتزه أرداسترا - الاسترخاء على الشاطئ - عشاء بالمطعم البحري.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: أنشطة مائية</h3>
+                    <p>جولة غوص بالأنبوب في الحاجز المرجاني - سباحة مع الدلافين - رحلة صيد مسائية (اختياري).</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: رحلة إلى جزيرة أخرى</h3>
+                    <p>رحلة يومية إلى إحدى الجزر القريبة (إكسوما أو إليوثيرا) - استكشاف الشواطئ والمناظر الطبيعية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: يوم استرخاء وتسوق</h3>
+                    <p>الاستمتاع بمنتجع الفندق - علاج spa - تسوق للهدايا التذكارية - عشاء الوداع.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> يوصى بحجز الأنشطة والجزر مسبقاً خاصة في مواسم الذروة، وحمل واقي شمس عالي الجودة.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.bahamas.com" class="resource-link" target="_blank">الموقع الرسمي للسياحة في البهاما</a>
+                <a href="https://www.bahamas.gov.bs" class="resource-link" target="_blank">الحكومة البهامية</a>
+                <a href="https://travel.state.gov" class="resource-link" target="_blank">معلومات السفر الأمريكية (للعبور)</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبت مطلوب هنا
+    </script>
+</body>
+</html>

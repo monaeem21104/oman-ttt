@@ -1,0 +1,2713 @@
+<!--
+         // Auto-open Travex after 30 ثانية مع رسالة ترحيب Travex
+        setTimeout(() => {
+            addMessage('مرحباً! أنا Travex مساعد السفر الذكي. من فضلك اكتب اسم الدولة التي ترغب زيارتها لأخبرك بمعلومات التأشيرة والرابط.', false);
+            aiChat.classList.add('active');
+        }, 30000);
+
+        // Country routing map (Arabic name -> relative page URL)
+        const countryRoutes = {
+            // Asia
+            'الإمارات العربية المتحدة': 'asia/uae.html',
+            'السعودية': 'asia/saudi-arabia.html',
+            'قطر': 'asia/qatar.html',
+            'الكويت': 'asia/kuwait.html',
+            'البحرين': 'asia/bahrain.html',
+            'عُمان': 'asia/oman.html',
+            'اليابان': 'asia/japan.html',
+            'الصين': 'asia/china.html',
+            'الهند': 'asia/india.html',
+            'تركيا': 'asia/turkey.html',
+            'إندونيسيا': 'asia/indonesia.html',
+            'ماليزيا': 'asia/malaysia.html',
+            'تايلاند': 'asia/thailand.html',
+            'الفلبين': 'asia/philippines.html',
+            'سري لانكا': 'asia/sri-lanka.html',
+            'سنغافورة': 'asia/singapore.html',
+            'نيبال': 'asia/nepal.html',
+            'فيتنام': 'asia/vietnam.html',
+            'أذربيجان': 'asia/azerbaijan.html',
+            'أرمينيا': 'asia/armenia.html',
+            'جورجيا': 'asia/georgia.html',
+            'روسيا': 'asia/russia.html',
+
+            // Europe
+            'ألمانيا': 'europe/germany.html',
+            'فرنسا': 'europe/france.html',
+            'إيطاليا': 'europe/italy.html',
+            'إسبانيا': 'europe/spain.html',
+            'المملكة المتحدة': 'europe/united-kingdom.html',
+            'النرويج': 'europe/norway.html',
+            'السويد': 'europe/sweden.html',
+            'هولندا': 'europe/netherlands.html',
+            'البرتغال': 'europe/portugal.html',
+            'سويسرا': 'europe/switzerland.html',
+            'النمسا': 'europe/austria.html',
+            'بلجيكا': 'europe/belgium.html',
+            'التشيك': 'europe/czech-republic.html',
+            'بولندا': 'europe/poland.html',
+            'اليونان': 'europe/greece.html',
+            'ألبانيا': 'europe/albania.html',
+            'البوسنة والهرسك': 'europe/bosnia.html',
+            'صربيا': 'europe/serbia.html',
+            'جورجيا (أوروبا)': 'europe/georgia.html',
+
+            // Africa
+            'المغرب': 'africa/morocco.html',
+            'تونس': 'africa/tunisia.html',
+            'الجزائر': 'africa/algeria.html',
+            'مصر': 'africa/egypt.html',
+            'جنوب إفريقيا': 'africa/south-africa.html',
+            'كينيا': 'africa/kenya.html',
+            'تنزانيا': 'africa/tanzania.html',
+            'رواندا': 'africa/rwanda.html',
+            'أوغندا': 'africa/uganda.html',
+            'زامبيا': 'africa/zambia.html',
+            'مدغشقر': 'africa/madagascar.html',
+            'سيشل': 'africa/seychelles.html',
+            'موريشيوس': 'africa/mauritius.html',
+
+            // North America
+            'الولايات المتحدة الأمريكية': 'north-america/united-states.html',
+            'كندا': 'north-america/canada.html',
+            'المكسيك': 'north-america/mexico.html',
+            'جامايكا': 'north-america/jamaica.html',
+            'كوستاريكا': 'north-america/costa-rica.html',
+            'بنما': 'north-america/panama.html',
+            'جزر البهاما': 'north-america/bahamas.html',
+            'بربادوس': 'north-america/barbados.html',
+
+            // South America
+            'الأرجنتين': 'south-america/argentina.html',
+            'البرازيل': 'south-america/brazil.html',
+            'تشيلي': 'south-america/chile.html',
+            'بيرو': 'south-america/peru.html',
+            'كولومبيا': 'south-america/colombia.html',
+            'الإكوادور': 'south-america/ecuador.html',
+            'أوروغواي': 'south-america/uruguay.html',
+            'فنزويلا': 'south-america/venezuela.html',
+
+            // Oceania
+            'أستراليا': 'oceania/australia.html',
+            'نيوزيلندا': 'oceania/new-zealand.html',
+            'فيجي': 'oceania/fiji.html',
+            'ساموا': 'oceania/samoa.html',
+            'فانواتو': 'oceania/vanuatu.html',
+            'بالاو': 'oceania/palau.html'
+        };
+
+        function normalize(str) {
+            return (str || '').toString().trim().toLowerCase();
+        }
+
+        // Search behavior: suggestions + redirect
+        const countryInputEl = document.getElementById('country-search-input');
+        const countryBtnEl = document.getElementById('country-search-btn');
+        const suggestionsEl = document.getElementById('country-suggestions');
+
+        function getSuggestions(term) {
+            const n = normalize(term);
+            if (!n || n.length < 2) return [];
+            return Object.keys(countryRoutes).filter(name => normalize(name).includes(n)).slice(0, 6);
+        }
+
+        function renderSuggestions() {
+            const list = getSuggestions(countryInputEl.value);
+            if (list.length) {
+                suggestionsEl.innerHTML = 'اقتراحات: ' + list.map(x => `<span style="cursor:pointer;text-decoration:underline;">${x}</span>`).join('، ');
+                // clickable suggestions
+                Array.from(suggestionsEl.querySelectorAll('span')).forEach(span => {
+                    span.onclick = () => {
+                        countryInputEl.value = span.textContent;
+                        redirectToCountry();
+                    };
+                });
+            } else {
+                suggestionsEl.innerHTML = '';
+            }
+        }
+
+        function redirectToCountry() {
+            const input = countryInputEl.value.trim();
+            if (!input) return;
+            // exact or partial match
+            let target = countryRoutes[input];
+            if (!target) {
+                const candidates = getSuggestions(input);
+                if (candidates.length) target = countryRoutes[candidates[0]];
+            }
+            if (target) {
+                window.location.href = target;
+            } else {
+                alert('لم يتم العثور على صفحة لهذه الدولة.');
+            }
+        }
+
+        countryInputEl.addEventListener('input', renderSuggestions);
+        countryBtnEl.addEventListener('click', redirectToCountry);
+        countryInputEl.addEventListener('keypress', (e) => { if (e.key === 'Enter') redirectToCountry(); });
+
+        // Provide a simple visa reply using the same routing map
+        function getVisaInfoReply(msg) {
+            const input = msg.trim();
+            if (!input) return 'من فضلك اكتب اسم الدولة.';
+            // Try direct match
+            if (countryRoutes[input]) {
+                return `بالنسبة لدولة "${input}", يمكنك الاطلاع على تفاصيل التأشيرة من هذه الصفحة: ${window.location.origin}/${countryRoutes[input]}\nهل ترغب أن أرسل لك الرابط على واتساب؟`;
+            }
+            const candidates = getSuggestions(input);
+            if (candidates.length) {
+                const name = candidates[0];
+                return `هل تقصد "${name}"؟ إليك الصفحة: ${window.location.origin}/${countryRoutes[name]}`;
+            }
+            return 'لم أتعرف على هذه الدولة. حاول كتابة الاسم بالعربية بشكل أوضح.';
+        }
+-->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عمان للسفر - دليلك السياحي الشامل حول العالم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-orange: #FF6B35;
+            --secondary-orange: #FF8C42;
+            --light-orange: #FFB366;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --footer-bg: #2C3E50;
+            --footer-text: #FFFFFF;
+        }
+
+        .dark-mode {
+            --bg-color: #1a1a2e;
+            --text-color: #e6e6e6;
+            --card-bg: #16213e;
+            --footer-bg: #0f3460;
+            --footer-text: #e6e6e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--primary-orange);
+            opacity: 0.2;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .circle:nth-child(1) {
+            width: 150px;
+            height: 150px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle:nth-child(2) {
+            width: 100px;
+            height: 100px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+
+        .circle:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            top: 40%;
+            left: 60%;
+            animation-delay: 4s;
+        }
+
+        .circle:nth-child(4) {
+            width: 120px;
+            height: 120px;
+            top: 80%;
+            left: 30%;
+            animation-delay: 6s;
+        }
+
+        .circle:nth-child(5) {
+            width: 180px;
+            height: 180px;
+            top: 20%;
+            left: 50%;
+            animation-delay: 8s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .airplane-animation {
+            position: fixed;
+            top: 20%;
+            right: -100px;
+            font-size: 2rem;
+            color: var(--primary-orange);
+            animation: flyAcross 15s linear infinite;
+            z-index: 1000;
+        }
+
+        @keyframes flyAcross {
+            0% { right: -100px; }
+            100% { right: 100vw; }
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: transparent; /* remove white bar */
+            backdrop-filter: none;
+            z-index: 999;
+            padding: 0.6rem 0;
+            transition: all 0.3s ease;
+            border-bottom: none;
+            box-shadow: none;
+        }
+
+        .dark-mode .navbar {
+            background: transparent; /* keep transparent in dark mode too */
+            border-bottom: none;
+        }
+
+        .navbar.scrolled {
+            background: transparent; /* no background on scroll */
+            box-shadow: none;
+            padding: 0.8rem 0;
+        }
+
+        .dark-mode .navbar.scrolled {
+            box-shadow: none;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        .nav-left, .nav-center, .nav-right {
+            display: flex;
+            align-items: center;
+            flex: 1 1 0;
+        }
+        .nav-center { justify-content: center; }
+        .nav-right { justify-content: flex-end; }
+
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem; /* icon size only */
+            color: var(--primary-orange);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: rotate(15deg) scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5);
+        }
+
+        /* Remove nav links styling as per simplified nav */
+
+        .nav-actions { display: none; }
+
+        .theme-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(0,0,0,0.4); /* high contrast over hero */
+            border: 2px solid rgba(255,255,255,0.35);
+            color: #fff; /* ensure icon is visible */
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+        }
+        .theme-toggle i { font-size: 1.25rem; }
+        .theme-toggle:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(0,0,0,0.45); }
+        .theme-toggle:focus-visible { outline: 3px solid rgba(255,255,255,0.6); outline-offset: 2px; }
+        .dark-mode .theme-toggle { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.45); color: #fff; }
+
+        .theme-toggle:hover {
+            color: var(--primary-orange);
+        }
+
+        .language-selector { display: none; }
+
+        .lang-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--primary-orange);
+            background: rgba(255,255,255,0.92);
+            color: var(--primary-orange);
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.98rem;
+            line-height: 1;
+            font-family: 'Cairo', system-ui, -apple-system, Segoe UI Emoji, Noto Color Emoji, sans-serif; /* ensure emoji flags render well */
+        }
+        .dark-mode .lang-select {
+            background: rgba(22, 33, 62, 0.92);
+            color: #fff;
+            border-color: var(--secondary-orange);
+        }
+        /* make flag emoji more visible inside option text */
+        #lang-select option { font-size: 1rem; }
+
+        /* Mobile-first consistency: keep navbar layout identical at all widths */
+        .navbar .nav-container { gap: 10px; }
+        .nav-left, .nav-center, .nav-right { min-width: 0; }
+        .logo-icon { flex: 0 0 auto; }
+        @media (max-width: 480px) {
+            .lang-select { padding: 0.45rem 0.8rem; font-size: 0.95rem; }
+            .theme-toggle { width: 42px; height: 42px; }
+            .logo-icon { width: 46px; height: 46px; }
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--primary-orange);
+            background: transparent;
+            color: var(--primary-orange);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .lang-btn.active,
+        .lang-btn:hover {
+            background: var(--primary-orange);
+            color: var(--white);
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button {
+            padding: 1rem 2.5rem;
+            background: var(--primary-orange);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .cta-button:hover {
+            background: var(--secondary-orange);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.5);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid var(--white);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--white);
+            color: var(--primary-orange);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-sections {
+            padding: 5rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            color: var(--primary-orange);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary-orange);
+            border-radius: 2px;
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--primary-orange);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .section-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .section-icon {
+            font-size: 4rem;
+            color: var(--primary-orange);
+            margin-bottom: 1rem;
+        }
+
+        .section-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .section-card p {
+            color: var(--text-color);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-color) 100%);
+            position: relative;
+        }
+
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            color: var(--primary-orange);
+            margin-bottom: 1.5rem;
+        }
+
+        .typewriter {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            min-height: 200px;
+            border-right: 2px solid var(--primary-orange);
+            white-space: pre-wrap;
+            overflow: hidden;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { border-color: transparent; }
+            50% { border-color: var(--primary-orange); }
+        }
+
+        .continents-section {
+            padding: 5rem 0;
+            background: var(--card-bg);
+        }
+
+        .continents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .continent-card {
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+            color: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .continent-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+
+        .continent-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .continent-card p {
+            position: relative;
+            z-index: 2;
+        }
+
+        .continent-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.3);
+        }
+
+        .europe {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1467269204594-9661b134dd2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .north-america {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .south-america {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1483729558449-99ef09a8c325?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .asia {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1535139262971-c518c09b4e16?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .australia {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .africa {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1442570468985-f63ed5de9086?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .travel-tips {
+            padding: 5rem 2rem;
+            background: var(--bg-color);
+        }
+
+        .tips-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tips-accordion {
+            margin-top: 3rem;
+        }
+
+        .accordion-item {
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .accordion-header {
+            background: var(--primary-orange);
+            color: var(--white);
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+        }
+
+        .accordion-content {
+            background: var(--card-bg);
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .accordion-content.active {
+            max-height: 500px;
+            padding: 1.5rem;
+        }
+
+        .accordion-content p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .accordion-content ul {
+            padding-right: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .accordion-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .booking-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .booking-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Booking form card box */
+        .booking-card {
+            background: var(--white);
+            color: var(--text-dark);
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: right;
+        }
+
+        .booking-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            text-align: right;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Oswald', sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+        }
+
+        .form-group-full {
+            grid-column: 1 / -1;
+        }
+
+        .submit-btn {
+            grid-column: 1 / -1;
+            padding: 1rem 2rem;
+            background: var(--white);
+            color: var(--primary-orange);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--light-gray);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #25D366;
+            color: var(--white);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-orange);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--footer-text);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-orange);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .designer-credit {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        /* AI Assistant Styles */
+        .ai-assistant {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #2d572c; /* Travex color */
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .ai-assistant:hover {
+            transform: scale(1.1);
+        }
+
+        .ai-chat-container {
+            position: fixed;
+            bottom: 160px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .ai-chat-container.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .ai-chat-header {
+            background: #2d572c; /* Travex header color */
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ai-chat-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .ai-chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            padding: 0.8rem;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .message.user {
+            background: #2d572c; /* Travex user bubble */
+            color: white;
+            align-self: flex-end;
+        }
+
+        .message.bot {
+            background: var(--light-gray);
+            color: var(--text-dark);
+            align-self: flex-start;
+        }
+
+        .ai-chat-input {
+            display: flex;
+            padding: 0.5rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .ai-chat-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 20px;
+            background: var(--light-gray);
+            color: var(--text-dark);
+        }
+
+        .ai-chat-input button {
+            background: #2d572c; /* Travex send button */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+
+        /* Booking title white and inputs distinct (global) */
+        .booking-section .section-title {
+            color: #ffffff;
+        }
+        .booking-form input,
+        .booking-form select,
+        .booking-form textarea {
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            color: #333;
+        }
+        .booking-form input::placeholder,
+        .booking-form textarea::placeholder {
+            color: #9aa3af;
+        }
+        .booking-form input:focus,
+        .booking-form select:focus,
+        .booking-form textarea:focus {
+            outline: none;
+            border-color: #2d572c;
+            box-shadow: 0 0 0 3px rgba(45,87,44,0.15);
+        }
+
+        @media (max-width: 768px) {
+            /* No nav links on mobile either */
+            
+            .mobile-menu {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: var(--primary-orange);
+                cursor: pointer;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .sections-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+            
+            .continents-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .booking-form {
+                grid-template-columns: 1fr;
+            }
+
+            /* Booking title white and inputs distinct */
+            .booking-section .section-title {
+                color: #ffffff;
+            }
+            .booking-form input,
+            .booking-form select,
+            .booking-form textarea {
+                background: #ffffff;
+                border: 2px solid #e5e7eb;
+                border-radius: 8px;
+                color: #333;
+            }
+            .booking-form input:focus,
+            .booking-form select:focus,
+            .booking-form textarea:focus {
+                outline: none;
+                border-color: #2d572c;
+                box-shadow: 0 0 0 3px rgba(45,87,44,0.15);
+            }
+            
+            .language-selector {
+                flex-wrap: wrap;
+                gap: 0.25rem;
+            }
+            
+            .lang-btn {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.8rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .ai-chat-container {
+                width: 300px;
+                height: 400px;
+                right: 10px;
+            }
+        }
+        /* Visa section tables */
+        .visa-section {
+            padding: 5rem 2rem;
+            background: var(--bg-color);
+        }
+        .visa-section .section-title {
+            margin-bottom: 2rem;
+        }
+        .visa-section .sub-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.6rem;
+            color: var(--text-color);
+            margin: 2rem 0 1rem;
+        }
+        .visa-table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 2rem;
+        }
+        .visa-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        .visa-table thead {
+            background: var(--primary-orange);
+            color: #fff;
+        }
+        .visa-table th, .visa-table td {
+            padding: 12px 14px;
+            text-align: right;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .visa-table tbody tr:nth-child(even) {
+            background: rgba(0,0,0,0.03);
+        }
+        .visa-note {
+            font-size: 0.95rem;
+            color: #6b7280;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-background">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <div class="airplane-animation">
+        <i class="fas fa-plane"></i>
+    </div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="#" class="logo" aria-label="عمان للسفر">
+                    <div class="logo-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-center">
+                <button class="theme-toggle" id="theme-toggle" aria-label="تبديل الوضع">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <div class="nav-right">
+                <select id="lang-select" class="lang-select" aria-label="Change language">
+                    <option value="ar">🇴🇲 العربية</option>
+                    <option value="en">🇬🇧 English</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="es">🇪🇸 Español</option>
+                </select>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 data-translate="hero-title">اكتشف العالم مع عُمان للسفر</h1>
+            <p data-translate="hero-subtitle">دليلك الشامل لأجمل الوجهات السياحية حول العالم</p>
+            <div class="cta-buttons">
+                <a href="#booking" class="cta-button">
+                    <i class="fas fa-calendar-check"></i>
+                    <span data-translate="book-now">احجز رحلتك الآن</span>
+                </a>
+                <a href="#continents" class="cta-button secondary">
+                    <i class="fas fa-globe-americas"></i>
+                    <span data-translate="explore">استكشف الوجهات</span>
+                </a>
+            </div>
+
+            <!-- Country Search -->
+            <div class="country-search" style="max-width:700px;margin:1.5rem auto 0;">
+                <div style="display:flex;gap:8px;background:rgba(255,255,255,0.1);backdrop-filter:blur(6px);padding:8px;border-radius:12px;">
+                    <input id="country-search-input" type="text" placeholder="اكتب اسم الدولة باللغة العربية للانتقال إلى صفحتها" data-translate-placeholder="search-placeholder" style="flex:1;padding:12px 14px;border-radius:10px;border:none;outline:none;" />
+                    <button id="country-search-btn" class="cta-button" style="border-radius:10px;">
+                        <i class="fas fa-search"></i>
+                        <span data-translate="search">بحث</span>
+                    </button>
+                </div>
+                <div id="country-suggestions" style="margin-top:8px;color:#fff;font-size:0.95rem;"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-content">
+                <h2 data-translate="about-title">عن شركة عمان للسفر</h2>
+                <div class="typewriter" id="typewriter"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="continents-section" id="continents">
+        <h2 class="section-title" data-translate="continents-title">استكشف القارات</h2>
+        <div class="continents-grid">
+            <div class="continent-card europe" onclick="window.location.href='europe.html'">
+                <h3 data-translate="europe">أوروبا</h3>
+                <p data-translate="europe-desc">اكتشف جمال القارة العجوز بثقافاتها المتنوعة وتاريخها العريق</p>
+            </div>
+            <div class="continent-card north-america" onclick="window.location.href='north-america.html'">
+                <h3 data-translate="north-america">أمريكا الشمالية</h3>
+                <p data-translate="north-america-desc">استمتع بمدنها الحديثة وطبيعتها الخلابة ومناظرها البانورامية</p>
+            </div>
+            <div class="continent-card south-america" onclick="window.location.href='south-america.html'">
+                <h3 data-translate="south-america">أمريكا الجنوبية</h3>
+                <p data-translate="south-america-desc">اغوص في غاباتها الاستوائية وشواطئها الساحرة وتاريخها العريق</p>
+            </div>
+            <div class="continent-card asia" onclick="window.location.href='asia.html'">
+                <h3 data-translate="asia">آسيا</h3>
+                <p data-translate="asia-desc">تعرف على حضاراتها القديمة وثقافاتها المتنوعة وطعامها اللذيذ</p>
+            </div>
+            <div class="continent-card australia" onclick="window.location.href='australia.html'">
+                <h3 data-translate="australia">أستراليا</h3>
+                <p data-translate="australia-desc">استمتع بطبيعتها الفريدة وحياتها البرية المميزة وشواطئها الذهبية</p>
+            </div>
+            <div class="continent-card africa" onclick="window.location.href='africa.html'">
+                <h3 data-translate="africa">أفريقيا</h3>
+                <p data-translate="africa-desc">تجربة سفاري لا تُنسى في قلب الحياة البرية والطبيعة البكر</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="travel-tips" id="tips">
+        <div class="tips-container">
+            <h2 class="section-title" data-translate="tips-title">نصائح ومعلومات للسفر</h2>
+            <div class="tips-accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span data-translate="documents-title">مستندات السفر المطلوبة</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p data-translate="documents-desc">لضمان رحلة سلسة وخالية من المتاعب، تأكد من وجود المستندات التالية:</p>
+                        <ul>
+                            <li data-translate="documents-1">جواز سفر ساري المفعول لمدة لا تقل عن 6 أشهر</li>
+                            <li data-translate="documents-2">تأشيرة دخول لبلد المقصد (إذا لزم الأمر)</li>
+                            <li data-translate="documents-3">تذاكر الطيران ذهاباً وإياباً</li>
+                            <li data-translate="documents-4">حجوزات الفنادق والإقامة</li>
+                            <li data-translate="documents-5">بوليصة تأمين سفر شاملة</li>
+                            <li data-translate="documents-6">رخصة قيادة دولية (إذا كنت تنوي القيادة)</li>
+                            <li data-translate="documents-7">بطاقات ائتمان وبعض العملة المحلية</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span data-translate="delay-title">نصائح للتغلب على تأخر الطائرة</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p data-translate="delay-desc">تأخر الطائرات من الأمور الشائعة في السفر. إليك بعض النصائح للتعامل معها:</p>
+                        <ul>
+                            <li data-translate="delay-1">احرص على الوصول مبكراً إلى المطار</li>
+                            <li data-translate="delay-2">احتفظ بشاحن محمول لشحن هاتفك</li>
+                            <li data-translate="delay-3">احمل كتاباً أو موسيقى للترفيه عن نفسك</li>
+                            <li data-translate="delay-4">ابق على اتصال مع شركة الطيران للحصول على updates</li>
+                            <li data-translate="delay-5">تعرف على حقوقك في حالة التأخير أو الإلغاء</li>
+                            <li data-translate="delay-6">احتفظ بأرقام الطوارئ ولواحق السفر</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span data-translate="currency-title">كيفية التعامل مع العملات المختلفة</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p data-translate="currency-desc">إدارة الأموال أثناء السفر تحتاج إلى تخطيط مسبق. اتبع هذه النصائح:</p>
+                        <ul>
+                            <li data-translate="currency-1">قم بتبليل بعض العملة المحلية قبل السفر</li>
+                            <li data-translate="currency-2">أخبئ أموالك في أكثر من مكان</li>
+                            <li data-translate="currency-3">استخدم بطاقات الائتمان للسداد في الأماكن الآمنة</li>
+                            <li data-translate="currency-4">تعرف على سعر الصرف الحقيقي قبل التبادل</li>
+                            <li data-translate="currency-5">احتفظ بقائمة بأرقام بطاقات الائتمان للطوارئ</li>
+                            <li data-translate="currency-6">استخدم تطبيقات التحويل المالي للأسعار الأفضل</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span data-translate="safety-title">نصائح للبقاء في أمان أثناء السفر</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p data-translate="safety-desc">السلامة أولاً. اتبع هذه الإرشادات لضمان رحلة آمنة:</p>
+                        <ul>
+                            <li data-translate="safety-1">احتفظ بنسخ من مستنداتك المهمة</li>
+                            <li data-translate="safety-2">تعرف على أرقام الطوارئ المحلية</li>
+                            <li data-translate="safety-3">احرص على تأمين أمتعتك في جميع الأوقات</li>
+                            <li data-translate="safety-4">تجنب المناطق الخطرة ليلاً</li>
+                            <li data-translate="safety-5">احتفظ بأرقام السفارة أو القنصلية</li>
+                            <li data-translate="safety-6">استخدم خزائن الفنادق لحفظ القيم</li>
+                            <li data-translate="safety-7">اشرب المياه المعبأة فقط في بعض الدول</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span data-translate="packing-title">نصائح التعبئة والحقائب</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p data-translate="packing-desc">التعبئة الذكية توفر عليك الكثير من المتاعب أثناء السفر:</p>
+                        <ul>
+                            <li data-translate="packing-1">اعمل قائمة بالأشياء المطلوبة قبل التعبئة</li>
+                            <li data-translate="packing-2">ضع الأدوية والمستندات في الحقيبة اليدوية</li>
+                            <li data-translate="packing-3">استخدم مكعبات التعبئة لتنظيم الملابس</li>
+                            <li data-translate="packing-4">اترك مساحة فارغة للهدايا والمشتريات</li>
+                            <li data-translate="packing-5">تأكد من وزن الحقيبة قبل الذهاب للمطار</li>
+                            <li data-translate="packing-6">احمل طقم ملابس إضافي في الحقيبة اليدوية</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span data-translate="health-title">الصحة والتطعيمات</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p data-translate="health-desc">اهتم بصحتك قبل وأثناء السفر:</p>
+                        <ul>
+                            <li data-translate="health-1">استشر طبيبك قبل السفر لبلدان معينة</li>
+                            <li data-translate="health-2">احصل على التطعيمات المطلوبة مسبقاً</li>
+                            <li data-translate="health-3">احمل أدويتك الأساسية في العبوة الأصلية</li>
+                            <li data-translate="health-4">احتفظ بوصفة طبية مترجمة للأدوية</li>
+                            <li data-translate="health-5">تعرف على أقرب مستشفى أو عيادة في وجهتك</li>
+                            <li data-translate="health-6">احمل بطاقة طبية تحتوي على حالاتك الصحية</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span data-translate="culture-title">آداب السفر والثقافات المحلية</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p data-translate="culture-desc">احترم الثقافات المحلية لتجربة سفر أفضل:</p>
+                        <ul>
+                            <li data-translate="culture-1">تعلم بعض الكلمات الأساسية باللغة المحلية</li>
+                            <li data-translate="culture-2">اقرأ عن العادات والتقاليد المحلية</li>
+                            <li data-translate="culture-3">احترم قوانين اللباس المحلية</li>
+                            <li data-translate="culture-4">تعرف على آداب الطعام والشراب</li>
+                            <li data-translate="culture-5">احترم الأماكن الدينية والمقدسة</li>
+                            <li data-translate="culture-6">كن مهذباً ومتفهماً للاختلافات الثقافية</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="booking-section" id="booking">
+        <div class="booking-container">
+            <h2 class="section-title" data-translate="booking-title">احجز رحلتك</h2>
+            <p data-translate="booking-subtitle">املأ النموذج أدناه وسنتصل بك في أقرب وقت لتأكيد الحجز</p>
+            
+            <div class="booking-card">
+            <form class="booking-form" id="booking-form">
+                <div class="form-group">
+                    <label for="name" data-translate="form-name">الاسم بالكامل</label>
+                    <input type="text" id="name" required placeholder="اكتب اسمك الكامل">
+                </div>
+                <div class="form-group">
+                    <label for="email" data-translate="form-email">البريد الإلكتروني</label>
+                    <input type="email" id="email" required placeholder="example@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone" data-translate="form-phone">رقم الهاتف</label>
+                    <input type="tel" id="phone" required placeholder="مثال: 9689xxxxxxx">
+                </div>
+                <div class="form-group">
+                    <label for="destination" data-translate="form-destination">الوجهة</label>
+                    <select id="destination" required>
+                        <option value="" data-translate="form-choose">اختر الوجهة</option>
+                        <option value="europe" data-translate="europe">أوروبا</option>
+                        <option value="north-america" data-translate="north-america">أمريكا الشمالية</option>
+                        <option value="south-america" data-translate="south-america">أمريكا الجنوبية</option>
+                        <option value="asia" data-translate="asia">آسيا</option>
+                        <option value="australia" data-translate="australia">أستراليا</option>
+                        <option value="africa" data-translate="africa">أفريقيا</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="departure" data-translate="form-departure">تاريخ المغادرة</label>
+                    <input type="date" id="departure" required placeholder="اختر تاريخ المغادرة">
+                </div>
+                <div class="form-group">
+                    <label for="return" data-translate="form-return">تاريخ العودة</label>
+                    <input type="date" id="return" required placeholder="اختر تاريخ العودة">
+                </div>
+                <div class="form-group">
+                    <label for="travelers" data-translate="form-travelers">عدد المسافرين</label>
+                    <input type="number" id="travelers" min="1" required placeholder="مثال: 2">
+                </div>
+                <div class="form-group">
+                    <label for="budget" data-translate="form-budget">الميزانية (ريال عماني)</label>
+                    <input type="number" id="budget" min="0" required placeholder="مثال: 500">
+                </div>
+                <div class="form-group form-group-full">
+                    <label for="message" data-translate="form-message">ملاحظات إضافية</label>
+                    <textarea id="message" rows="4" placeholder="أدخل أي ملاحظات إضافية"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    <span data-translate="form-submit">إرسال طلب الحجز</span>
+                </button>
+            </form>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <div class="ai-assistant" id="ai-assistant">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <div class="ai-chat-container" id="ai-chat">
+        <div class="ai-chat-header">
+            <h3 data-translate="ai-title">Travex - مساعد التأشيرة</h3>
+            <button class="close-chat" id="close-chat">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="ai-chat-messages" id="chat-messages">
+            <div class="message bot" data-translate="ai-welcome">مرحباً! أنا Travex مساعد التأشيرة. اكتب اسم الدولة التي ترغب في زيارتها لأعطيك متطلبات التأشيرة والرابط الرسمي.</div>
+        </div>
+        <div class="ai-chat-input">
+            <input type="text" id="chat-input" placeholder="اكتب رسالتك هنا..." data-translate-placeholder="ai-placeholder">
+            <button id="send-message">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <a href="https://wa.me/96891030311?text=مرحباً، أريد حجز رحلة سياحية" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home" data-translate="home">الرئيسية</a>
+                <a href="#about" data-translate="about">عن الشركة</a>
+                <a href="#continents" data-translate="continents">القارات</a>
+                <a href="#tips" data-translate="tips">نصائح السفر</a>
+                <a href="#booking" data-translate="booking">احجز رحلتك</a>
+                <a href="#" data-translate="privacy">سياسة الخصوصية</a>
+                <a href="#" data-translate="terms">الشروط والأحكام</a>
+            </div>
+            <!-- Replace social links with two CTAs -->
+            <div class="cta-buttons" style="margin-top: 1rem;">
+                <a href="https://wa.me/96891030311" class="cta-button" target="_blank">
+                    <i class="fas fa-robot"></i>
+                    <span data-translate="cta-bot">اذهب إلى بوت السفر الذكي</span>
+                </a>
+                <a href="https://www.instagram.com/ib3.om?igsh=M2N1cmNsbnN5b2w0" class="cta-button secondary" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                    <span data-translate="cta-ig">تابعنا على إنستاجرام</span>
+                </a>
+            </div>
+        <div class="footer-bottom">
+            <div class="copyright">
+                <i class="far fa-copyright"></i> 2025 عمان للسفر. جميع الحقوق محفوظة.
+            </div>
+            <div class="designer-credit">
+                <span>Designed by</span>
+                <i class="fas fa-heart" style="color: #ff6b35;"></i>
+                <span>Mohammed Naeem</span>
+            </div>
+        </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Set CSS variables for dark mode
+        document.documentElement.style.setProperty('--bg-color-rgb', '255, 255, 255');
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Typewriter effect for about section
+        const typewriterElement = document.getElementById('typewriter');
+        let aboutText = `شركة عمان للسفر هي وكالة سفر وسياحة رائدة، متخصصة في تقديم خدمات سياحية متكاملة لعملائنا الكرام. لدينا فريق من الخبراء والمستشارين السياحيين المحترفين الذين يمتلكون سنوات من الخبرة في مجال السياحة والسفر.
+نقدم مجموعة واسعة من الخدمات تشمل حجوزات الطيران، حجوزات الفنادق، تنظيم الرحلات السياحية، تأمين التأشيرات، وتنظيم المؤتمرات والفعاليات.
+نسعى دائماً لتقديم أفضل الخدمات لعملائنا من خلال شراكاتنا مع أفضل شركات الطيران والفنادق حول العالم، مما يمكننا من تقديم عروض حصرية وأسعار تنافسية.
+رؤيتنا هي أن نكون الوكالة السياحية المفضلة في المنطقة من خلال تقديم خدمات متميزة وبرامج سياحية مبتكرة تلبي تطلعات عملائنا وتترك لديهم ذكريات لا تنسى.`;
+
+        const aboutTexts = {
+            ar: `شركة عمان للسفر هي وكالة سفر وسياحة رائدة، متخصصة في تقديم خدمات سياحية متكاملة لعملائنا الكرام. لدينا فريق من الخبراء والمستشارين السياحيين المحترفين الذين يمتلكون سنوات من الخبرة في مجال السياحة والسفر.
+نقدم مجموعة واسعة من الخدمات تشمل حجوزات الطيران، حجوزات الفنادق، تنظيم الرحلات السياحية، تأمين التأشيرات، وتنظيم المؤتمرات والفعاليات.
+نسعى دائماً لتقديم أفضل الخدمات لعملائنا من خلال شراكاتنا مع أفضل شركات الطيران والفنادق حول العالم، مما يمكننا من تقديم عروض حصرية وأسعار تنافسية.
+رؤيتنا هي أن نكون الوكالة السياحية المفضلة في المنطقة من خلال تقديم خدمات متميزة وبرامج سياحية مبتكرة تلبي تطلعات عملائنا وتترك لديهم ذكريات لا تنسى.`,
+            en: `Oman Travel is a leading travel and tourism agency, specializing in delivering end-to-end travel services to our valued clients. Our team of expert, professional travel consultants brings years of experience in the travel and tourism industry.
+We offer a wide range of services including flight bookings, hotel reservations, tour arrangements, visa facilitation, and the organization of conferences and events.
+We are committed to providing the best services to our clients through our partnerships with top airlines and hotels worldwide, enabling us to offer exclusive deals and competitive prices.
+Our vision is to be the preferred travel agency in the region by delivering exceptional services and innovative travel programs that meet our clients’ aspirations and leave them with unforgettable memories.`,
+            es: `Oman Travel es una agencia líder de viajes y turismo, especializada en ofrecer servicios turísticos integrales a nuestros apreciados clientes. Contamos con un equipo de expertos y asesores de viajes profesionales con años de experiencia en el sector.
+Ofrecemos una amplia gama de servicios, que incluyen reservas de vuelos, reservas de hoteles, organización de excursiones y circuitos, tramitación de visados y la organización de congresos y eventos.
+Estamos comprometidos a brindar el mejor servicio a nuestros clientes mediante alianzas con las mejores aerolíneas y hoteles del mundo, lo que nos permite ofrecer ofertas exclusivas y precios competitivos.
+Nuestra visión es ser la agencia de viajes preferida de la región, ofreciendo servicios excepcionales y programas innovadores que cumplan las expectativas de nuestros clientes y les dejen recuerdos inolvidables.`,
+            fr: `Oman Travel est une agence de voyages et de tourisme de premier plan, spécialisée dans la fourniture de services touristiques intégrés à nos précieux clients. Notre équipe d’experts et de conseillers en voyages professionnels cumule des années d’expérience dans le secteur.
+Nous proposons une large gamme de services, notamment la réservation de vols, la réservation d’hôtels, l’organisation de circuits touristiques, la facilitation des visas ainsi que l’organisation de conférences et d’événements.
+Nous nous engageons à offrir les meilleurs services à nos clients grâce à nos partenariats avec les meilleures compagnies aériennes et hôtels à travers le monde, ce qui nous permet de proposer des offres exclusives et des tarifs compétitifs.
+Notre vision est de devenir l’agence de voyages préférée de la région en offrant des services d’exception et des programmes innovants qui répondent aux aspirations de nos clients et leur laissent des souvenirs inoubliables.`
+        };
+
+        let i = 0;
+        let speed = 20; // typing speed in milliseconds
+
+        function typeWriter() {
+            if (i < aboutText.length) {
+                typewriterElement.innerHTML += aboutText.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+        function resetAndType() {
+            typewriterElement.innerHTML = '';
+            i = 0;
+            typeWriter();
+        }
+
+        function setAboutTextForLang(lang) {
+            aboutText = aboutTexts[lang] || aboutTexts['ar'];
+            resetAndType();
+        }
+
+        // Initialize typewriter and UI for saved language on load
+        window.addEventListener('load', () => {
+            const savedLang = localStorage.getItem('lang') || 'ar';
+            changeLanguage(savedLang); // this will also set about text
+            const langSel = document.getElementById('lang-select');
+            if (langSel) {
+                langSel.value = savedLang;
+                langSel.addEventListener('change', () => {
+                    const val = langSel.value;
+                    localStorage.setItem('lang', val);
+                    changeLanguage(val);
+                });
+            }
+        });
+
+        // Dark mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                document.documentElement.style.setProperty('--bg-color-rgb', '26, 26, 46');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                document.documentElement.style.setProperty('--bg-color-rgb', '255, 255, 255');
+            }
+        });
+
+        // Accordion functionality
+        function toggleAccordion(element) {
+            const content = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                // Close all other accordions
+                document.querySelectorAll('.accordion-content').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelectorAll('.accordion-header i').forEach(item => {
+                    item.classList.remove('fa-chevron-up');
+                    item.classList.add('fa-chevron-down');
+                });
+                
+                // Open this accordion
+                content.classList.add('active');
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            }
+        }
+
+        // Booking form submission
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const destination = document.getElementById('destination').value;
+            const departure = document.getElementById('departure').value;
+            const returnDate = document.getElementById('return').value;
+            const travelers = document.getElementById('travelers').value;
+            const budget = document.getElementById('budget').value;
+            const message = document.getElementById('message').value;
+            
+            // Create WhatsApp message (each field on its own line prefixed with '-')
+            const lines = [
+                'طلب حجز جديد',
+                `- الاسم: ${name}`,
+                `- البريد الإلكتروني: ${email}`,
+                `- رقم الهاتف: ${phone}`,
+                `- الوجهة: ${destination}`,
+                `- تاريخ المغادرة: ${departure}`,
+                `- تاريخ العودة: ${returnDate}`,
+                `- عدد المسافرين: ${travelers}`,
+                `- الميزانية: ${budget}`,
+                `- ملاحظات: ${message || 'لا يوجد'}`
+            ];
+            const whatsappMessage = encodeURIComponent(lines.join('\n'));
+            
+            // Open WhatsApp with pre-filled message
+            window.open(`https://wa.me/96891030311?text=${whatsappMessage}`, '_blank');
+            
+            // Reset form
+            this.reset();
+            
+            // Show success message
+            alert('شكراً لك! سنتصل بك قريباً لتأكيد الحجز.');
+        });
+
+        // AI Assistant functionality (Travex)
+        const aiAssistant = document.getElementById('ai-assistant');
+        const aiChat = document.getElementById('ai-chat');
+        const closeChat = document.getElementById('close-chat');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const sendMessage = document.getElementById('send-message');
+        
+        aiAssistant.addEventListener('click', function() {
+            aiChat.classList.toggle('active');
+        });
+        
+        closeChat.addEventListener('click', function() {
+            aiChat.classList.remove('active');
+        });
+        
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(isUser ? 'user' : 'bot');
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        sendMessage.addEventListener('click', function() {
+            const message = chatInput.value.trim();
+            if (message) {
+                addMessage(message, true);
+                chatInput.value = '';
+                
+                // Simulate AI response
+                setTimeout(function() {
+                    // Visa info response based on user's country message
+                    const reply = getVisaInfoReply(message);
+                    addMessage(reply, false);
+                }, 1000);
+            }
+        });
+        
+        // Travex: Static internal dataset (no external files, no tables)
+        let countriesData = [
+            // GCC
+            { name: 'الإمارات العربية المتحدة', type: 'بدون تأشيرة', duration: '90 يومًا', link: null, notes: null },
+            { name: 'السعودية', type: 'بدون تأشيرة', duration: '90 يومًا', link: null, notes: null },
+            { name: 'الكويت', type: 'بدون تأشيرة', duration: '90 يومًا', link: null, notes: null },
+            { name: 'البحرين', type: 'بدون تأشيرة', duration: '14 يومًا', link: null, notes: null },
+            { name: 'قطر', type: 'بدون تأشيرة', duration: '30 يومًا', link: null, notes: null },
+
+            // MENA
+            { name: 'الأردن', type: 'تأشيرة عند الوصول', duration: '30 يومًا', link: 'https://visas.jordan.gov.jo', notes: null },
+            { name: 'مصر', type: 'تأشيرة عند الوصول / eVisa', duration: '30 يومًا', link: 'https://visa.egypt.gov.eg', notes: null },
+            { name: 'المغرب', type: 'بدون تأشيرة', duration: '90 يومًا', link: null, notes: null },
+            { name: 'تونس', type: 'بدون تأشيرة', duration: '90 يومًا', link: null, notes: null },
+
+            // Asia
+            { name: 'ماليزيا', type: 'بدون تأشيرة', duration: '14 يومًا', link: null, notes: null },
+            { name: 'إندونيسيا', type: 'بدون تأشيرة', duration: '30 يومًا', link: 'https://molina.imigrasi.go.id', notes: null },
+            { name: 'الهند', type: 'eVisa', duration: '60 يومًا', link: 'https://indianvisaonline.gov.in', notes: null },
+            { name: 'سري لانكا', type: 'eVisa', duration: '30 يومًا', link: 'https://www.eta.gov.lk', notes: null },
+            { name: 'سنغافورة', type: 'بدون تأشيرة', duration: '30 يومًا', link: null, notes: null },
+            { name: 'تركيا', type: 'بدون تأشيرة', duration: '90 يومًا', link: null, notes: null },
+
+            // Europe (Schengen requirement – generic info)
+            { name: 'ألمانيا', type: 'تأشيرة شنغن مسبقة', duration: 'حتى 90 يومًا خلال 180 يومًا', link: 'https://visa.vfsglobal.com/omn/ar/deu', notes: null },
+            { name: 'فرنسا', type: 'تأشيرة شنغن مسبقة', duration: 'حتى 90 يومًا خلال 180 يومًا', link: 'https://fr.tlscontact.com/om/MSA', notes: null },
+            { name: 'إيطاليا', type: 'تأشيرة شنغن مسبقة', duration: 'حتى 90 يومًا خلال 180 يومًا', link: 'https://it.tlscontact.com/om/MSA', notes: null },
+            { name: 'إسبانيا', type: 'تأشيرة شنغن مسبقة', duration: 'حتى 90 يومًا خلال 180 يومًا', link: 'https://es.tlscontact.com/om/MSA', notes: null },
+            { name: 'هولندا', type: 'تأشيرة شنغن مسبقة', duration: 'حتى 90 يومًا خلال 180 يومًا', link: 'https://visa.vfsglobal.com/omn/ar/nld', notes: null },
+
+            // Other prior visa
+            { name: 'المملكة المتحدة', type: 'تأشيرة مسبقة', duration: 'حتى 6 أشهر', link: 'https://www.gov.uk/standard-visitor-visa', notes: 'التقديم إلكتروني' },
+            { name: 'الولايات المتحدة الأمريكية', type: 'تأشيرة مسبقة', duration: 'حسب نوع التأشيرة', link: 'https://travel.state.gov', notes: null },
+            { name: 'كندا', type: 'تأشيرة مسبقة', duration: 'حتى 6 أشهر', link: 'https://visa.vfsglobal.com/omn/en/can', notes: 'التقديم عبر مركز مسقط' },
+            { name: 'الصين', type: 'تأشيرة مسبقة', duration: '30 يومًا', link: 'https://www.visaforchina.cn', notes: null },
+            { name: 'اليابان', type: 'تأشيرة مسبقة', duration: '90 يومًا', link: 'https://www.mofa.go.jp/japanvisa', notes: null }
+        ];
+
+        // No special initialization needed; dataset is ready immediately
+
+        function levenshteinDistance(a, b) {
+            const matrix = [];
+            for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+            for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+            for (let i = 1; i <= b.length; i++) {
+                for (let j = 1; j <= a.length; j++) {
+                    if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                        matrix[i][j] = matrix[i - 1][j - 1];
+                    } else {
+                        matrix[i][j] = Math.min(
+                            matrix[i - 1][j - 1] + 1,
+                            matrix[i][j - 1] + 1,
+                            matrix[i - 1][j] + 1
+                        );
+                    }
+                }
+            }
+            return matrix[b.length][a.length];
+        }
+
+        function findClosestCountry(term) {
+            const t = (term || '').trim().toLowerCase();
+            if (!t) return null;
+            let found = countriesData.find(c => c.name.toLowerCase() === t);
+            if (found) return found;
+            found = countriesData.find(c => c.name.toLowerCase().includes(t));
+            if (found) return found;
+            let best = null, min = Infinity;
+            for (const c of countriesData) {
+                const d = levenshteinDistance(t, c.name.toLowerCase());
+                if (d < min) { min = d; best = c; }
+            }
+            return min <= 5 ? best : null;
+        }
+
+        function getVisaInfoReply(message) {
+            const country = findClosestCountry(message);
+            if (!country) {
+                return 'لم أتعرف على هذه الدولة. من فضلك اكتب اسم الدولة بالعربية (مثال: ألمانيا، تركيا، ماليزيا).';
+            }
+            let reply = `الدولة: ${country.name}\nنوع الدخول: ${country.type}\nمدة الإقامة: ${country.duration}`;
+            if (country.notes) reply += `\nملاحظات: ${country.notes}`;
+            if (country.link) reply += `\nالرابط الرسمي: ${country.link}`;
+            return reply;
+        }
+
+        // Auto-open Travex after 30s with a welcome prompt
+        setTimeout(() => {
+            if (!aiChat.classList.contains('active')) {
+                aiChat.classList.add('active');
+            }
+            addMessage('مرحباً! أنا Travex مساعد التأشيرة. اكتب اسم الدولة التي ترغب في زيارتها لأعطيك المتطلبات والرابط الرسمي.', false);
+        }, 30000);
+        
+        // ================= Country search (English filenames) =================
+        (function() {
+            const input = document.getElementById('country-search-input');
+            const button = document.getElementById('country-search-btn');
+            const sugg = document.getElementById('country-suggestions');
+            if (!input || !button || !sugg) return;
+
+            // Build route map from discovered files (normalized lower-case keys)
+            const countryRoutesEn = {
+                // Europe
+                'ألبانيا': 'albania.html',
+                'أندورا': 'andorra.html',
+                'النمسا': 'austria.html',
+                'بيلاروسيا': 'belarus.html',
+                'بلجيكا': 'belgium.html',
+                'البوسنة': 'bosnia.html',
+                'بلغاريا': 'bulgaria.html',
+                'كرواتيا': 'croatia.html',
+                'التشيك': 'czech-republic.html',
+                'czech-republic': 'czech-republic.html',
+                'الدنمارك': 'denmark.html',
+                'إستونيا': 'estonia.html',
+                'فنلندا': 'finland.html',
+                'فرنسا': 'france.html',
+                'ألمانيا': 'germany.html',
+                'اليونان': 'greece.html',
+                'المجر': 'hungary.html',
+                'أيسلندا': 'iceland.html',
+                'أيرلندا': 'ireland.html',
+                'إيطاليا': 'italy.html',
+                'كوسوفو': 'kosovo.html',
+                'لاتفيا': 'latvia.html',
+                'ليختنشتاين': 'liechtenstein.html',
+                'ليتوانيا': 'lithuania.html',
+                'لوكسمبورغ': 'luxembourg.html',
+                'مالطا': 'malta.html',
+                'مولدوفا': 'moldova.html',
+                'موناكو': 'monaco.html',
+                'الجبل الأسود': 'montenegro.html',
+                'هولندا': 'netherlands.html',
+                'مقدونيا الشمالية': 'north-macedonia.html',
+                'north-macedonia': 'north-macedonia.html',
+                'النرويج': 'norway.html',
+                'بولندا': 'poland.html',
+                'البرتغال': 'portugal.html',
+                'رومانيا': 'romania.html',
+                'سان مارينو': 'san-marino.html',
+                'san-marino': 'san-marino.html',
+                'صربيا': 'serbia.html',
+                'سلوفاكيا': 'slovakia.html',
+                'سلوفينيا': 'slovenia.html',
+                'إسبانيا': 'spain.html',
+                'السويد': 'sweden.html',
+                'سويسرا': 'switzerland.html',
+                'أوكرانيا': 'ukraine.html',
+                'بريطانيا-المملكة المتحدة': 'united-kingdom.html',
+                'إنجلترا': 'united-kingdom.html',
+                'الفاتيكان': 'vaican.html',
+
+                // Asia
+                'أفغانستان': 'afghanistan.html',
+                'أرمينيا': 'armenia.html',
+                'أذربيجان': 'azerbaijan.html',
+                'البحرين': 'bahrain.html',
+                'بنجلاديش': 'bangladesh.html',
+                'بوتان': 'bhutan.html',
+                'بروناى': 'brunei.html',
+                'كمبوديا': 'cambodia.html',
+                'الصين': 'china.html',
+                'قبرص': 'cyprus.html',
+                'جورجيا': 'georgia.html',
+                'الهند': 'india.html',
+                'إندونيسيا': 'indonesia.html',
+                'إيران': 'iran.html',
+                'العراق': 'iraq.html',
+                'اليابان': 'japan.html',
+                'الأردن': 'jordon.html',
+                'الكويت': 'kuwait.html',
+                'قيرغيزستان': 'kyrgyzstan.html',
+                'كازاخستان': 'kzakhstan.html',
+                'لاوس': 'laos.html',
+                'لبنان': 'lebanon.html',
+                'ماليزيا': 'malaysia.html',
+                'الملديف': 'maldives.html',
+                'منغوليا': 'mongolia.html',
+                'ميانمار': 'myanmar.html',
+                'نيبال': 'nepal.html',
+                'كوريا الشمالية': 'north-korea.html',
+                'north-korea': 'north-korea.html',
+                'عمان': 'oman.html',
+                'باكستان': 'pakistan.html',
+                'فلسطين': 'palestine.html',
+                'الفلبين': 'philippines.html',
+                'قطر': 'qatar.html',
+                'روسيا': 'russia.html',
+                'السعودية': 'saudi-arabia.html',
+                'saudi-arabia': 'saudi-arabia.html',
+                'سنغافورة': 'singapore.html',
+                'كوريا الجنوبية': 'south-korea.html',
+                'south-korea': 'south-korea.html',
+                'سريلانكا': 'sri-lanka.html',
+                'sri-lanka': 'sri-lanka.html',
+                'سوريا': 'asia/syria.html',
+                'تايوان': 'taiwan.html',
+                'طاجيكستان': 'tajikistan.html',
+                'تايلاند': 'thailand.html',
+                'تيمور الشرقية': 'timor-liste.html',
+                'timor-liste': 'timor-liste.html',
+                'تركيا': 'turkey.html',
+                'تركمانستان': 'turkmenistan.html',
+                'الإمارات': 'uae.html',
+                'أوزبكستان': 'uzbekistan.html',
+                'فيتنام': 'vietnam.html',
+                'اليمن': 'yemen.html',
+
+                // Africa
+                'الجززائر': 'algeria.html',
+                'أنجولا': 'angola.html',
+                'بنين': 'benin.html',
+                'بوتسوانا': 'botswana.html',
+                'بوركينا فاسو': 'burkina-faso.html',
+                'burkina-faso': 'burkina-faso.html',
+                'بوروندى': 'burundi.html',
+                'الكاميرون': 'cameroon.html',
+                'كاب فيردى': 'cape-verde.html',
+                'cape-verde': 'cape-verde.html',
+                'أفريقيا الوسطى ': 'central-african-republic.html',
+                'central-african-republic': 'central-african-republic.html',
+                'تشاد': 'chad.html',
+                'جزر القمر': 'comoros.html',
+                'الكونغو اليمقراطية': 'democratic-republic-congo.html',
+                'democratic republic congo': 'democratic-republic-congo.html',
+                'democratic-republic-congo': 'democratic-republic-congo.html',
+                'جيبوتى': 'djibouti.html',
+                'مصر': 'egypt.html',
+                'equatorial guinea': 'equatorial-guinea.html',
+                'غينيا الاستوائية': 'equatorial-guinea.html',
+                'إريتريا': 'eritrea.html',
+                'إسواتينى': 'eswatini.html',
+                'إثيوبيا': 'ethiopia.html',
+                'الجابون': 'gabon.html',
+                'جامبيا': 'gambia.html',
+                'غانا': 'ghana.html',
+                'غينيا': 'guinea.html',
+                'غينيا بيساو ': 'guinea-bissau.html',
+                'ساحل العاج': 'ivory-coast.html',
+                'ivory-coast': 'ivory-coast.html',
+                'كينيا': 'kenya.html',
+                'ليسوتو': 'lesotho.html',
+                'ليبيريا': 'liberia.html',
+                'ليبيا': 'libya.html',
+                'مدغشقر': 'madagascar.html',
+                'ملاوى': 'malawi.html',
+                'مالى': 'mali.html',
+                'موريتانيا': 'mauritania.html',
+                'موريشيوس': 'mauritius.html',
+                'المغرب': 'morocco.html',
+                'موزمبيق': 'mozambique.html',
+                'ناميبيا': 'namibia.html',
+                'النيجر': 'niger.html',
+                'نيجيريا': 'nigeria.html',
+                'الكونغو': 'republic-congo.html',
+                'republic-congo': 'republic-congo.html',
+                'رواندا': 'rwanda.html',
+                'ساو تومى': 'sao-tome.html',
+                'sao-tome': 'sao-tome.html',
+                'السنغال': 'senegal.html',
+                'سيشيل': 'seychelles.html',
+                'سيراليون': 'sierra-leone.html',
+                'sierra-leone': 'sierra-leone.html',
+                'somalia': 'somalia.html',
+                'جنوب أفريقيا': 'south-africa.html',
+                'south-africa': 'south-africa.html',
+                'جنوب السودان': 'south-sudan.html',
+                'south-sudan': 'south-sudan.html',
+                'السودان': 'sudan.html',
+                'تنزانيا': 'tanzania.html',
+                'توجو': 'togo.html',
+                'تونس': 'tunisia.html',
+                'أوغاندا': 'uganda.html',
+                'زامبيا': 'zambia.html',
+                'زيمبابوى': 'zimbabwe.html',
+
+                // North America
+                'أنتيجوا': 'antigua.html',
+                'الباهاماس': 'bahamas.html',
+                'باربادوس': 'barbados.html',
+                'بليز': 'belize.html',
+                'كندا': 'canada.html',
+                'كوستاريكا': 'costa-rica.html',
+                'costa-rica': 'costa-rica.html',
+                'كوبا': 'cuba.html',
+                'دومينيكا': 'dominica.html',
+                'جمهورية الدومنيكان': 'dominican-republic.html',
+                'dominican-republic': 'dominican-republic.html',
+                'السلفادور': 'el-salvador.html',
+                'el-salvador': 'el-salvador.html',
+                'جرينلاند': 'greenland.html',
+                'جرينادا': 'grenada.html',
+                'جواتيمالا': 'guatemala.html',
+                'هايتى': 'haiti.html',
+                'هندوراس': 'honduras.html',
+                'جاميكا': 'jamaica.html',
+                'المكسيك': 'mexico.html',
+                'نيكارجوا': 'nicaragua.html',
+                'بنما': 'panama.html',
+                'saint kitts': 'saint-kitts.html',
+                'saint-kitts': 'saint-kitts.html',
+                'saint lucia': 'saint-lucia.html',
+                'saint-lucia': 'saint-lucia.html',
+                'saint vincent': 'saint-vincent.html',
+                'saint-vincent': 'saint-vincent.html',
+                'trinidad': 'trinidad.html',
+                'الولايات المتحدة الأمريكية': 'united-states.html',
+                'أمريكا': 'united-states.html',
+
+                // South America
+                'الأرجنتين': 'argentina.html',
+                'بوليفيا': 'bolivia.html',
+                'البرازيل': 'brazil.html',
+                'تشيلى': 'chile.html',
+                'كولومبيا': 'colombia.html',
+                'الإكوادور': 'ecuador.html',
+                'غيانا': 'guyana.html',
+                'باراغواى': 'paraguay.html',
+                'بيرو': 'peru.html',
+                'سورينام': 'suriname.html',
+               'أوروغواى': 'uruguay.html',
+                'فنزويلا': 'venezuela.html',
+
+                // Oceania
+                'أستراليا': 'australia.html',
+                'فيجى': 'fiji.html',
+                'كيريباتى': 'kiribati.html',
+                'جزر مارشال': 'marshall-islands.html',
+                'marshall-islands': 'marshall-islands.html',
+                'ميكرونيزيا': 'micronesia.html',
+                'ناوررو': 'nauru.html',
+                'نيوزيلاندا': 'new-zealand.html',
+                'new-zealand': 'new-zealand.html',
+                'بالاو': 'palau.html',
+                'papua new guinea': 'papua-new-guinea.html',
+                'papua-new-guinea': 'papua-new-guinea.html',
+                'samoa': 'samoa.html',
+                'solomon islands': 'solomon-islands.html',
+                'solomon-islands': 'solomon-islands.html',
+                'تونغا': 'tonga.html',
+                'توفالو': 'tuvalu.html',
+                'فانواتو': 'vanuatu.html'
+            };
+
+            function normalizeKey(s) {
+                return (s || '').toString().trim().toLowerCase().replace(/\s+/g, ' ');
+            }
+
+            function toTitle(s) {
+                return s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+            }
+
+            function getSuggestionsEn(term) {
+                const t = normalizeKey(term);
+                if (!t || t.length < 2) return [];
+                const keys = Object.keys(countryRoutesEn);
+                return keys.filter(k => k.includes(t)).slice(0, 8);
+            }
+
+            function renderSuggestionsEn() {
+                const list = getSuggestionsEn(input.value);
+                if (!list.length) { sugg.innerHTML = ''; return; }
+                sugg.innerHTML = 'اقتراحات: ' + list.map(k => `<span style="cursor:pointer;text-decoration:underline;">${toTitle(k)}</span>`).join('، ');
+                Array.from(sugg.querySelectorAll('span')).forEach(span => {
+                    span.onclick = () => {
+                        const key = normalizeKey(span.textContent);
+                        const url = countryRoutesEn[key] || countryRoutesEn[key.replace(/\s+/g,'-')] || countryRoutesEn[key.replace(/\s+/g,' ')];
+                        if (url) window.location.href = url;
+                    };
+                });
+            }
+
+            function redirectToCountryEn() {
+                const keyRaw = normalizeKey(input.value);
+                let url = countryRoutesEn[keyRaw] || countryRoutesEn[keyRaw.replace(/\s+/g,'-')];
+                if (!url) {
+                    const cand = getSuggestionsEn(keyRaw)[0];
+                    if (cand) url = countryRoutesEn[cand];
+                }
+                if (url) {
+                    window.location.href = url;
+                } else {
+                    sugg.innerHTML = 'لم يتم العثور على صفحة لهذه الدولة.';
+                }
+            }
+
+            input.addEventListener('input', renderSuggestionsEn);
+            button.addEventListener('click', redirectToCountryEn);
+            input.addEventListener('keypress', e => { if (e.key === 'Enter') redirectToCountryEn(); });
+        })();
+        
+        // Language translations
+        const translations = {
+            ar: {
+                'company-name': 'عمان للسفر',
+                'home': 'الرئيسية',
+                'about': 'عن الشركة',
+                'continents': 'القارات',
+                'tips': 'نصائح السفر',
+                'booking': 'احجز رحلتك',
+                'contact': 'اتصل بنا',
+                'hero-title': 'اكتشف العالم مع عُمان للسفر',
+                'hero-subtitle': 'دليلك الشامل لأجمل الوجهات السياحية حول العالم',
+                'book-now': 'احجز رحلتك الآن',
+                'explore': 'استكشف الوجهات',
+                'search': 'بحث',
+                'search-placeholder': 'اكتب اسم الدولة للانتقال إلى صفحتها',
+                'about-title': 'عن شركة عمان للسفر',
+                'continents-title': 'استكشف القارات',
+                'europe': 'أوروبا',
+                'europe-desc': 'اكتشف جمال القارة العجوز بثقافاتها المتنوعة وتاريخها العريق',
+                'north-america': 'أمريكا الشمالية',
+                'north-america-desc': 'استمتع بمدنها الحديثة وطبيعتها الخلابة ومناظرها البانورامية',
+                'south-america': 'أمريكا الجنوبية',
+                'south-america-desc': 'اغوص في غاباتها الاستوائية وشواطئها الساحرة وتاريخها العريق',
+                'asia': 'آسيا',
+                'asia-desc': 'تعرف على حضاراتها القديمة وثقافاتها المتنوعة وطعامها اللذيذ',
+                'australia': 'أستراليا',
+                'australia-desc': 'استمتع بطبيعتها الفريدة وحياتها البرية المميزة وشواطئها الذهبية',
+                'africa': 'أفريقيا',
+                'africa-desc': 'تجربة سفاري لا تُنسى في قلب الحياة البرية والطبيعة البكر',
+                'cta-bot': 'اذهب إلى بوت السفر الذكي',
+                'cta-ig': 'تابعنا على إنستاجرام',
+                'tips-title': 'نصائح ومعلومات للسفر',
+                'documents-title': 'مستندات السفر المطلوبة',
+                'documents-desc': 'لضمان رحلة سلسة وخالية من المتاعب، تأكد من وجود المستندات التالية:',
+                'documents-1': 'جواز سفر ساري المفعول لمدة لا تقل عن 6 أشهر',
+                'documents-2': 'تأشيرة دخول لبلد المقصد (إذا لزم الأمر)',
+                'documents-3': 'تذاكر الطيران ذهاباً وإياباً',
+                'documents-4': 'حجوزات الفنادق والإقامة',
+                'documents-5': 'بوليصة تأمين سفر شاملة',
+                'documents-6': 'رخصة قيادة دولية (إذا كنت تنوي القيادة)',
+                'documents-7': 'بطاقات ائتمان وبعض العملة المحلية',
+                'delay-title': 'نصائح للتغلب على تأخر الطائرة',
+                'delay-desc': 'تأخر الطائرات من الأمور الشائعة في السفر. إليك بعض النصائح للتعامل معها:',
+                'delay-1': 'احرص على الوصول مبكراً إلى المطار',
+                'delay-2': 'احتفظ بشاحن محمول لشحن هاتفك',
+                'delay-3': 'احمل كتاباً أو موسيقى للترفيه عن نفسك',
+                'delay-4': 'ابق على اتصال مع شركة الطيران للحصول على updates',
+                'delay-5': 'تعرف على حقوقك في حالة التأخير أو الإلغاء',
+                'delay-6': 'احتفظ بأرقام الطوارئ ولواحق السفر',
+                'currency-title': 'كيفية التعامل مع العملات المختلفة',
+                'currency-desc': 'إدارة الأموال أثناء السفر تحتاج إلى تخطيط مسبق. اتبع هذه النصائح:',
+                'currency-1': 'قم بتبليل بعض العملة المحلية قبل السفر',
+                'currency-2': 'أخبئ أموالك في أكثر من مكان',
+                'currency-3': 'استخدم بطاقات الائتمان للسداد في الأماكن الآمنة',
+                'currency-4': 'تعرف على سعر الصرف الحقيقي قبل التبادل',
+                'currency-5': 'احتفظ بقائمة بأرقام بطاقات الائتمان للطوارئ',
+                'currency-6': 'استخدم تطبيقات التحويل المالي للأسعار الأفضل',
+                'safety-title': 'نصائح للبقاء في أمان أثناء السفر',
+                'safety-desc': 'السلامة أولاً. اتبع هذه الإرشادات لضمان رحلة آمنة:',
+                'safety-1': 'احتفظ بنسخ من مستنداتك المهمة',
+                'safety-2': 'تعرف على أرقام الطوارئ المحلية',
+                'safety-3': 'احرص على تأمين أمتعتك في جميع الأوقات',
+                'safety-4': 'تجنب المناطق الخطرة ليلاً',
+                'safety-5': 'احتفظ بأرقام السفارة أو القنصلية',
+                'safety-6': 'استخدم خزائن الفنادق لحفظ القيم',
+                'safety-7': 'اشرب المياه المعبأة فقط في بعض الدول',
+                'packing-title': 'نصائح التعبئة والحقائب',
+                'packing-desc': 'التعبئة الذكية توفر عليك الكثير من المتاعب أثناء السفر:',
+                'packing-1': 'اعمل قائمة بالأشياء المطلوبة قبل التعبئة',
+                'packing-2': 'ضع الأدوية والمستندات في الحقيبة اليدوية',
+                'packing-3': 'استخدم مكعبات التعبئة لتنظيم الملابس',
+                'packing-4': 'اترك مساحة فارغة للهدايا والمشتريات',
+                'packing-5': 'تأكد من وزن الحقيبة قبل الذهاب للمطار',
+                'packing-6': 'احمل طقم ملابس إضافي في الحقيبة اليدوية',
+                'health-title': 'الصحة والتطعيمات',
+                'health-desc': 'اهتم بصحتك قبل وأثناء السفر:',
+                'health-1': 'استشر طبيبك قبل السفر لبلدان معينة',
+                'health-2': 'احصل على التطعيمات المطلوبة مسبقاً',
+                'health-3': 'احمل أدويتك الأساسية في العبوة الأصلية',
+                'health-4': 'احتفظ بوصفة طبية مترجمة للأدوية',
+                'health-5': 'تعرف على أقرب مستشفى أو عيادة في وجهتك',
+                'health-6': 'احمل بطاقة طبية تحتوي على حالاتك الصحية',
+                'culture-title': 'آداب السفر والثقافات المحلية',
+                'culture-desc': 'احترم الثقافات المحلية لتجربة سفر أفضل:',
+                'culture-1': 'تعلم بعض الكلمات الأساسية باللغة المحلية',
+                'culture-2': 'اقرأ عن العادات والتقاليد المحلية',
+                'culture-3': 'احترم قوانين اللباس المحلية',
+                'culture-4': 'تعرف على آداب الطعام والشراب',
+                'culture-5': 'احترم الأماكن الدينية والمقدسة',
+                'culture-6': 'كن مهذباً ومتفهماً للاختلافات الثقافية',
+                'booking-title': 'احجز رحلتك',
+                'booking-subtitle': 'املأ النموذج أدناه وسنتصل بك في أقرب وقت لتأكيد الحجز',
+                'form-name': 'الاسم بالكامل',
+                'form-email': 'البريد الإلكتروني',
+                'form-phone': 'رقم الهاتف',
+                'form-destination': 'الوجهة',
+                'form-choose': 'اختر الوجهة',
+                'form-departure': 'تاريخ المغادرة',
+                'form-return': 'تاريخ العودة',
+                'form-travelers': 'عدد المسافرين',
+                'form-budget': 'الميزانية (ريال عماني)',
+                'form-message': 'ملاحظات إضافية',
+                'form-submit': 'إرسال طلب الحجز',
+                'privacy': 'سياسة الخصوصية',
+                'terms': 'الشروط والأحكام',
+                'ai-title': 'Travex - مساعد التأشيرة',
+                'ai-welcome': 'مرحباً! أنا Travex مساعد التأشيرة. اكتب اسم الدولة التي ترغب زيارتها لأعطيك متطلبات التأشيرة والرابط الرسمي.',
+                'ai-placeholder': 'اكتب رسالتك هنا...'
+            },
+            en: {
+                'company-name': 'Oman Travel',
+                'home': 'Home',
+                'about': 'About',
+                'continents': 'Continents',
+                'tips': 'Travel Tips',
+                'booking': 'Book Your Trip',
+                'contact': 'Contact Us',
+                'hero-title': 'Discover the World with Oman Travel',
+                'hero-subtitle': 'Your comprehensive guide to the most beautiful tourist destinations around the world',
+                'book-now': 'Book Your Trip Now',
+                'explore': 'Explore Destinations',
+                'search': 'Search',
+                'search-placeholder': 'Type a country name to go to its page',
+                'about-title': 'About Oman Travel Company',
+                'continents-title': 'Explore Continents',
+                'europe': 'Europe',
+                'europe-desc': 'Discover the beauty of the old continent with its diverse cultures and rich history',
+                'north-america': 'North America',
+                'north-america-desc': 'Enjoy its modern cities, stunning nature and panoramic views',
+                'south-america': 'South America',
+                'south-america-desc': 'Immerse yourself in its tropical forests, charming beaches and ancient history',
+                'asia': 'Asia',
+                'asia-desc': 'Learn about its ancient civilizations, diverse cultures and delicious food',
+                'australia': 'Australia',
+                'australia-desc': 'Enjoy its unique nature, distinctive wildlife and golden beaches',
+                'africa': 'Africa',
+                'africa-desc': 'An unforgettable safari experience in the heart of wildlife and pristine nature',
+                'cta-bot': 'Go to Smart Travel Bot',
+                'cta-ig': 'Follow us on Instagram',
+                'tips-title': 'Travel Tips and Information',
+                'documents-title': 'Required Travel Documents',
+                'documents-desc': 'To ensure a smooth and hassle-free trip, make sure you have the following documents:',
+                'documents-1': 'Valid passport for at least 6 months',
+                'documents-2': 'Entry visa for the destination country (if required)',
+                'documents-3': 'Round-trip flight tickets',
+                'documents-4': 'Hotel and accommodation reservations',
+                'documents-5': 'Comprehensive travel insurance policy',
+                'documents-6': 'International driving license (if you plan to drive)',
+                'documents-7': 'Credit cards and some local currency',
+                'delay-title': 'Tips to Deal with Flight Delays',
+                'delay-desc': 'Flight delays are common in travel. Here are some tips to deal with them:',
+                'delay-1': 'Make sure to arrive early at the airport',
+                'delay-2': 'Keep a portable charger to charge your phone',
+                'delay-3': 'Carry a book or music to entertain yourself',
+                'delay-4': 'Stay in touch with the airline for updates',
+                'delay-5': 'Know your rights in case of delay or cancellation',
+                'delay-6': 'Keep emergency numbers and travel attachments',
+                'currency-title': 'How to Deal with Different Currencies',
+                'currency-desc': 'Managing money while traveling requires advance planning. Follow these tips:',
+                'currency-1': 'Exchange some local currency before traveling',
+                'currency-2': 'Hide your money in more than one place',
+                'currency-3': 'Use credit cards for payment in secure places',
+                'currency-4': 'Know the real exchange rate before exchanging',
+                'currency-5': 'Keep a list of credit card numbers for emergencies',
+                'currency-6': 'Use money transfer apps for better rates',
+                'safety-title': 'Tips to Stay Safe While Traveling',
+                'safety-desc': 'Safety first. Follow these guidelines to ensure a safe trip:',
+                'safety-1': 'Keep copies of your important documents',
+                'safety-2': 'Know the local emergency numbers',
+                'safety-3': 'Ensure your luggage is secure at all times',
+                'safety-4': 'Avoid dangerous areas at night',
+                'safety-5': 'Keep embassy or consulate numbers',
+                'safety-6': 'Use hotel safes to store valuables',
+                'safety-7': 'Drink only bottled water in some countries',
+                'packing-title': 'Packing Tips',
+                'packing-desc': 'Smart packing saves you a lot of hassle while traveling:',
+                'packing-1': 'Make a checklist of needed items before packing',
+                'packing-2': 'Place medications and documents in your carry-on bag',
+                'packing-3': 'Use packing cubes to organize clothing',
+                'packing-4': 'Leave some space for gifts and purchases',
+                'packing-5': 'Check your bag’s weight before going to the airport',
+                'packing-6': 'Pack a spare outfit in your carry-on',
+                'health-title': 'Health & Vaccinations',
+                'health-desc': 'Take care of your health before and during travel:',
+                'health-1': 'Consult your doctor before traveling to certain countries',
+                'health-2': 'Get required vaccinations in advance',
+                'health-3': 'Carry your essential medicines in their original packaging',
+                'health-4': 'Keep a translated prescription for your medications',
+                'health-5': 'Identify the nearest hospital or clinic at your destination',
+                'health-6': 'Carry a medical card listing your health conditions',
+                'culture-title': 'Travel Etiquette & Local Cultures',
+                'culture-desc': 'Respect local cultures for a better travel experience:',
+                'culture-1': 'Learn a few basic words in the local language',
+                'culture-2': 'Read about local customs and traditions',
+                'culture-3': 'Respect local dress codes',
+                'culture-4': 'Learn dining and drinking etiquette',
+                'culture-5': 'Respect religious and sacred sites',
+                'culture-6': 'Be polite and open-minded toward cultural differences',
+                'booking-title': 'Book Your Trip',
+                'booking-subtitle': 'Fill out the form below and we will contact you as soon as possible to confirm the booking',
+                'form-name': 'Full Name',
+                'form-email': 'Email Address',
+                'form-phone': 'Phone Number',
+                'form-destination': 'Destination',
+                'form-choose': 'Choose Destination',
+                'form-departure': 'Departure Date',
+                'form-return': 'Return Date',
+                'form-travelers': 'Number of Travelers',
+                'form-budget': 'Budget (OMR)',
+                'form-message': 'Additional Notes',
+                'form-submit': 'Submit Booking Request',
+                'privacy': 'Privacy Policy',
+                'terms': 'Terms and Conditions',
+                'ai-title': 'Travex - Visa Assistant',
+                'ai-welcome': 'Hello! I am Travex, the visa assistant. Type the country you want to visit and I will give you visa info and the official link.',
+                'ai-placeholder': 'Type your message here...'
+            },
+            fr: {
+                'company-name': 'Oman Travel',
+                'home': 'Accueil',
+                'about': 'À propos',
+                'continents': 'Continents',
+                'tips': 'Conseils de voyage',
+                'booking': 'Réservez votre voyage',
+                'contact': 'Contactez-nous',
+                'hero-title': 'Découvrez le monde avec Oman Travel',
+                'hero-subtitle': 'Votre guide complet des plus belles destinations touristiques du monde',
+                'book-now': 'Réservez votre voyage maintenant',
+                'explore': 'Explorer les destinations',
+                'search': 'Rechercher',
+                'search-placeholder': 'Saisissez un pays pour ouvrir sa page',
+                'about-title': 'À propos de la société Oman Travel',
+                'continents-title': 'Explorer les continents',
+                'europe': 'Europe',
+                'europe-desc': 'Découvrez la beauté du vieux continent avec ses cultures diversifiées et son histoire riche',
+                'north-america': 'Amérique du Nord',
+                'north-america-desc': 'Profitez de ses villes modernes, de sa nature époustouflante et de ses vues panoramiques',
+                'south-america': 'Amérique du Sud',
+                'south-america-desc': 'Plongez dans ses forêts tropicales, ses plages charmantes et son histoire ancienne',
+                'asia': 'Asie',
+                'asia-desc': 'Découvrez ses anciennes civilisations, ses cultures diversifiées et sa délicieuse cuisine',
+                'australia': 'Australie',
+                'australia-desc': 'Profitez de sa nature unique, de sa faune distinctive et de ses plages dorées',
+                'africa': 'Afrique',
+                'africa-desc': 'Une expérience de safari inoubliable au cœur de la nature sauvage et de la nature vierge',
+                'cta-bot': 'Aller au bot de voyage intelligent',
+                'cta-ig': 'Suivez-nous sur Instagram',
+                'tips-title': 'Conseils et informations de voyage',
+                'documents-title': 'Documents de voyage requis',
+                'documents-desc': 'Pour assurer un voyage sans tracas, assurez-vous davoir les documents suivants:',
+                'documents-1': 'Passeport valide pour au moins 6 mois',
+                'documents-2': 'Visa dentrée pour le pays de destination (si requis)',
+                'documents-3': 'Billets davion aller-retour',
+                'documents-4': 'Réservations dhôtel et dhébergement',
+                'documents-5': 'Police dassurance voyage complète',
+                'documents-6': 'Permis de conduire international (si vous prévoyez de conduire)',
+                'documents-7': 'Cartes de crédit et de la monnaie locale',
+                'delay-title': 'Conseils pour faire face aux retards de vol',
+                'delay-desc': 'Les retards de vol sont courants dans les voyages. Voici quelques conseils pour y faire face:',
+                'delay-1': 'Assurez-vous darriver tôt à laéroport',
+                'delay-2': 'Gardez un chargeur portable pour charger votre téléphone',
+                'delay-3': 'Apportez un livre ou de la musique pour vous divertir',
+                'delay-4': 'Restez en contact avec la compagnie aérienne pour les mises à jour',
+                'delay-5': 'Connaissez vos droits en cas de retard dannulation',
+                'delay-6': 'Gardez les numéros durgence et les pièces jointes de voyage',
+                'currency-title': 'Comment traiter avec différentes devises',
+                'currency-desc': 'La gestion de largent pendant les voyages nécessite une planification préalable. Suivez ces conseils:',
+                'currency-1': 'Échangez un peu de monnaie locale avant de voyager',
+                'currency-2': 'Cachez votre argent dans plus dun endroit',
+                'currency-3': 'Utilisez des cartes de crédit pour payer dans des endroits sûrs',
+                'currency-4': 'Connaissez le taux de change réel avant déchanger',
+                'currency-5': 'Gardez une liste des numéros de cartes de crédit pour les urgences',
+                'currency-6': 'Utilisez des applications de transfert dargent pour de meilleurs taux',
+                'safety-title': 'Conseils pour rester en sécurité en voyage',
+                'safety-desc': 'La sécurité dabord. Suivez ces directives pour assurer un voyage en toute sécurité:',
+                'safety-1': 'Conservez des copies de vos documents importants',
+                'safety-2': 'Connaissez les numéros durgence locaux',
+                'safety-3': 'Assurez-vous que vos bagages sont sécurisés en tout temps',
+                'safety-4': 'Évitez les zones dangereuses la nuit',
+                'safety-5': 'Gardez les numéros de lambassade ou du consulat',
+                'safety-6': 'Utilisez les coffres-forts de lhôtel pour ranger les objets de valeur',
+                'safety-7': 'Buvez uniquement de leau en bouteille dans certains pays',
+                'packing-title': 'Conseils d’emballage',
+                'packing-desc': 'Un emballage malin vous évite bien des tracas pendant le voyage :',
+                'packing-1': 'Faites une liste des articles nécessaires avant de faire vos bagages',
+                'packing-2': 'Placez les médicaments et les documents dans le bagage à main',
+                'packing-3': 'Utilisez des cubes de rangement pour organiser les vêtements',
+                'packing-4': 'Laissez de la place pour les cadeaux et les achats',
+                'packing-5': 'Vérifiez le poids de la valise avant d’aller à l’aéroport',
+                'packing-6': 'Emportez une tenue de rechange dans le bagage à main',
+                'health-title': 'Santé et vaccinations',
+                'health-desc': 'Prenez soin de votre santé avant et pendant le voyage :',
+                'health-1': 'Consultez votre médecin avant de voyager vers certains pays',
+                'health-2': 'Faites les vaccins requis à l’avance',
+                'health-3': 'Transportez vos médicaments essentiels dans leur emballage d’origine',
+                'health-4': 'Conservez une ordonnance traduite pour vos médicaments',
+                'health-5': 'Repérez l’hôpital ou la clinique la plus proche de votre destination',
+                'health-6': 'Gardez sur vous une carte médicale mentionnant vos affections',
+                'culture-title': 'Étiquette de voyage et cultures locales',
+                'culture-desc': 'Respectez les cultures locales pour une meilleure expérience de voyage :',
+                'culture-1': 'Apprenez quelques mots de base dans la langue locale',
+                'culture-2': 'Renseignez-vous sur les coutumes et traditions locales',
+                'culture-3': 'Respectez les codes vestimentaires locaux',
+                'culture-4': 'Informez-vous sur les règles de savoir-vivre à table et pour les boissons',
+                'culture-5': 'Respectez les lieux religieux et sacrés',
+                'culture-6': 'Soyez poli et ouvert aux différences culturelles',
+                'booking-title': 'Réservez votre voyage',
+                'booking-subtitle': 'Remplissez le formulaire ci-dessous et nous vous contacterons dès que possible pour confirmer la réservation',
+                'form-name': 'Nom complet',
+                'form-email': 'Adresse e-mail',
+                'form-phone': 'Numéro de téléphone',
+                'form-destination': 'Destination',
+                'form-choose': 'Choisissez la destination',
+                'form-departure': 'Date de départ',
+                'form-return': 'Date de retour',
+                'form-travelers': 'Nombre de voyageurs',
+                'form-budget': 'Budget (OMR)',
+                'form-message': 'Remarques supplémentaires',
+                'form-submit': 'Soumettre la demande de réservation',
+                'privacy': 'Politique de confidentialité',
+                'terms': 'Termes et conditions',
+                'ai-title': 'Travex - Assistant de visa',
+                'ai-welcome': 'Bonjour ! Je suis Travex, l’assistant de visa. Tapez le pays que vous souhaitez visiter et je vous donnerai les informations de visa et le lien officiel.',
+                'ai-placeholder': 'Tapez votre message ici...'
+            },
+            es: {
+                'company-name': 'Oman Travel',
+                'home': 'Inicio',
+                'about': 'Acerca de',
+                'continents': 'Continentes',
+                'tips': 'Consejos de viaje',
+                'booking': 'Reserva tu viaje',
+                'contact': 'Contáctenos',
+                'hero-title': 'Descubre el mundo con Oman Travel',
+                'hero-subtitle': 'Tu guía completa para los destinos turísticos más bellos del mundo',
+                'book-now': 'Reserva tu viaje ahora',
+                'explore': 'Explorar destinos',
+                'search': 'Buscar',
+                'search-placeholder': 'Escribe un país para ir a su página',
+                'about-title': 'Acerca de la empresa Oman Travel',
+                'continents-title': 'Explorar continentes',
+                'europe': 'Europa',
+                'europe-desc': 'Descubre la belleza del viejo continente con sus diversas culturas y rica historia',
+                'north-america': 'América del Norte',
+                'north-america-desc': 'Disfruta de sus ciudades modernas, naturaleza impresionante y vistas panorámicas',
+                'south-america': 'América del Sur',
+                'south-america-desc': 'Sumérgete en sus bosques tropicales, playas encantadoras y historia antigua',
+                'asia': 'Asia',
+                'asia-desc': 'Conoce sus antiguas civilizaciones, diversas culturas y deliciosa comida',
+                'australia': 'Australia',
+                'australia-desc': 'Disfruta de su naturaleza única, vida silvestre distintiva y playas doradas',
+                'africa': 'África',
+                'africa-desc': 'Una experiencia de safari inolvidable en el corazón de la vida silvestre y la naturaleza virgen',
+                'cta-bot': 'Ir al bot de viaje inteligente',
+                'cta-ig': 'Síguenos en Instagram',
+                'tips-title': 'Consejos e información de viaje',
+                'documents-title': 'Documentos de viaje requeridos',
+                'documents-desc': 'Para garantizar un viaje sin problemas, asegúrese de tener los siguientes documentos:',
+                'documents-1': 'Pasaporte válido por al menos 6 meses',
+                'documents-2': 'Visa de entrada para el país de destino (si es requerida)',
+                'documents-3': 'Boletos de avión de ida y vuelta',
+                'documents-4': 'Reservas de hotel y alojamiento',
+                'documents-5': 'Póliza de seguro de viaje integral',
+                'documents-6': 'Licencia de conducir internacional (si planea conducir)',
+                'documents-7': 'Tarjetas de crédito y algo de moneda local',
+                'delay-title': 'Consejos para lidiar con retrasos de vuelos',
+                'delay-desc': 'Los retrasos de vuelos son comunes en los viajes. Aquí hay algunos consejos para lidiar con ellos:',
+                'delay-1': 'Asegúrese de llegar temprano al aeropuerto',
+                'delay-2': 'Mantenga un cargador portátil para cargar su teléfono',
+                'delay-3': 'Lleve un libro o música para entretenerse',
+                'delay-4': 'Manténgase en contacto con la aerolínea para actualizaciones',
+                'delay-5': 'Conozca sus derechos en caso de retraso o cancelación',
+                'delay-6': 'Guarde números de emergencia y anexos de viaje',
+                'currency-title': 'Cómo lidiar con diferentes monedas',
+                'currency-desc': 'Manejar dinero durante los viajes requiere planificación anticipada. Siga estos consejos:',
+                'currency-1': 'Intercambie algo de moneda local antes de viajar',
+                'currency-2': 'Oculte su dinero en más de un lugar',
+                'currency-3': 'Use tarjetas de crédito para pagar en lugares seguros',
+                'currency-4': 'Conozca la tasa de cambio real antes de cambiar',
+                'currency-5': 'Mantenga una lista de números de tarjetas de crédito para emergencias',
+                'currency-6': 'Use aplicaciones de transferencia de dinero para mejores tarifas',
+                'safety-title': 'Consejos para mantenerse seguro durante viajes',
+                'safety-desc': 'Seguridad primero. Siga estas pautas para garantizar un viaje seguro:',
+                'safety-1': 'Mantenga copias de sus documentos importantes',
+                'safety-2': 'Conozca los números de emergencia locales',
+                'safety-3': 'Asegúrese de que su equipaje esté seguro en todo momento',
+                'safety-4': 'Evite áreas peligrosas por la noche',
+                'safety-5': 'Guarde números de embajada o consulado',
+                'safety-6': 'Use cajas fuertes de hotel para almacenar objetos de valor',
+                'safety-7': 'Beba solo agua embotellada en algunos países',
+                'packing-title': 'Consejos de embalaje',
+                'packing-desc': 'Empacar de forma inteligente te ahorra muchos contratiempos durante el viaje:',
+                'packing-1': 'Haz una lista de lo necesario antes de empacar',
+                'packing-2': 'Coloca los medicamentos y documentos en el equipaje de mano',
+                'packing-3': 'Usa cubos de embalaje para organizar la ropa',
+                'packing-4': 'Deja espacio libre para regalos y compras',
+                'packing-5': 'Verifica el peso de la maleta antes de ir al aeropuerto',
+                'packing-6': 'Lleva un cambio de ropa adicional en el equipaje de mano',
+                'health-title': 'Salud y vacunaciones',
+                'health-desc': 'Cuida tu salud antes y durante el viaje:',
+                'health-1': 'Consulta a tu médico antes de viajar a ciertos países',
+                'health-2': 'Obtén las vacunas requeridas con antelación',
+                'health-3': 'Lleva tus medicamentos esenciales en su envase original',
+                'health-4': 'Guarda una receta médica traducida de tus medicamentos',
+                'health-5': 'Identifica el hospital o la clínica más cercana en tu destino',
+                'health-6': 'Lleva una tarjeta médica con tus condiciones de salud',
+                'culture-title': 'Etiqueta de viaje y culturas locales',
+                'culture-desc': 'Respeta las culturas locales para una mejor experiencia de viaje:',
+                'culture-1': 'Aprende algunas palabras básicas en el idioma local',
+                'culture-2': 'Lee sobre las costumbres y tradiciones locales',
+                'culture-3': 'Respeta los códigos de vestimenta locales',
+                'culture-4': 'Conoce la etiqueta de comida y bebida',
+                'culture-5': 'Respeta los lugares religiosos y sagrados',
+                'culture-6': 'Sé educado y comprensivo con las diferencias culturales',
+                'booking-title': 'Reserva tu viaje',
+                'booking-subtitle': 'Complete el formulario a continuación y nos comunicaremos con usted lo antes posible para confirmar la reserva',
+                'form-name': 'Nombre completo',
+                'form-email': 'Dirección de correo electrónico',
+                'form-phone': 'Número de teléfono',
+                'form-destination': 'Destino',
+                'form-choose': 'Elige destino',
+                'form-departure': 'Fecha de salida',
+                'form-return': 'Fecha de regreso',
+                'form-travelers': 'Número de viajeros',
+                'form-budget': 'Presupuesto (OMR)',
+                'form-message': 'Notas adicionales',
+                'form-submit': 'Enviar solicitud de reserva',
+                'privacy': 'Política de privacidad',
+                'terms': 'Términos y condiciones',
+                'ai-title': 'Travex - Asistente de visados',
+                'ai-welcome': '¡Hola! Soy Travex, el asistente de visados. Escribe el país que quieres visitar y te daré la información de visado y el enlace oficial.',
+                'ai-placeholder': 'Escribe tu mensaje aquí...'
+            }
+        };
+
+        let currentLanguage = 'ar';
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+            // Persist selection
+            try { localStorage.setItem('lang', lang); } catch (e) {}
+
+            // Update active language button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update translations
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (translations[lang] && translations[lang][key]) {
+                    element.placeholder = translations[lang][key];
+                }
+            });
+
+            // Update about typewriter text
+            if (typeof setAboutTextForLang === 'function') {
+                setAboutTextForLang(lang);
+            }
+        }
+
+        // Add event listeners to language buttons
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                changeLanguage(lang);
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

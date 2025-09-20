@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تشيلي - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-orange: #FF6B35;
+            --secondary-orange: #FF8C42;
+            --light-orange: #FFB366;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-orange);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-orange);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-orange);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-orange);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-orange);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-orange);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-orange);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="south-america.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/cl.png')"></div>
+            <h1>تشيلي (Chile)</h1>
+            <h2>جمهورية تشيلي - قارة أمريكا الجنوبية</h2>
+            <p>عاصمة: سانتياغو - اللغة الرسمية: الإسبانية - التوقيت: CLT (UTC-4) / CLST (UTC-3)</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>شريطان أفقيان (أبيض وأحمر) مع مربع أزرق في الأعلى يحتوي على نجمة بيضاء</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>756,096 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 19.5 مليون نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>سانتياغو</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>CLT (UTC-4) - CLST (UTC-3) (توقيت الصيف من سبتمبر إلى أبريل)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+56</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>لا يحتاجون تأشيرة مسبقة لدخول تشيلي كسياح لمدة تصل إلى 90 يومًا</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة عند الوصول</h3>
+                    <p>جواز سفر ساري المفعول (6 أشهر على الأقل)، تذكرة عودة، إثبات القدرة المالية، قد يُطلب حجز فندق</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع التأشيرات للبقاء الطويل</h3>
+                    <p>تأشيرة عمل، دراسة، إقامة دائمة</p>
+                </div>
+                <div class="info-card">
+                    <h3>رسوم الدخول</h3>
+                    <p>لا توجد رسوم دخول للمواطنين العمانيين</p>
+                </div>
+                <div class="info-card">
+                    <h3>مكان التقديم للبقاء الطويل</h3>
+                    <p>القنصلية التشيلية أو عبر الموقع الإلكتروني لوزارة الخارجية التشيلية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>لا توجد رحلات مباشرة من عمان إلى تشيلي. أفضل المسارات عبر أوروبا أو الولايات المتحدة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>بما في ذلك التوقف: 20-28 ساعة حسب المسار ووقت الانتظار</p>
+                </div>
+                <div class="info-card">
+                    <h3>شركات الطيران</h3>
+                    <p>الخطوط الجوية القطرية، الإمارات، لاتام، إيبيريا، إيروفلوت عبر نقاط توقف مختلفة</p>
+                </div>
+                <div class="info-card">
+                    <h3>فيزا ترانزيت</h3>
+                    <p>تحقق من متطلبات التأشيرة لدول الترانزيت (الولايات المتحدة، أوروبا، إلخ)</p>
+                </div>
+                <div class="info-card">
+                    <h3>من المطار إلى المدينة</h3>
+                    <p>تاكسي رسمي، حافلات نقل المطار، خدمة النقل المشترك. زمن الوصول لوسط سانتياغو 20-40 دقيقة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل المناطق للسكن في سانتياغو</h3>
+                    <p>لاس كوندس، فيتاكورا، بروفيدنسيا، بيللافيسا، وسط المدينة التاريخي</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>فنادق (من 2★ إلى 5★)، شقق فندقية، نزل، منتجعات، Airbnb</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>فنادق 3★ قد تبدأ من ~60–100 دولار أمريكي لليلة</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>Booking.com, Expedia, Airbnb، أو عبر وكالات محلية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>بيزو تشيلي (CLP)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 CLP ≈ 0.0015 OMR (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>بطاقات الائتمان مقبولة على نطاق واسع في المدن، الكاش مفضل في الأسواق والمتاجر الصغيرة</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>أجهزة الصراف الآلي متوفرة بكثرة في المدن الكبرى</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>من سبتمبر إلى نوفمبر (الربيع) ومن مارس إلى مايو (الخريف) لطقس معتدل وأقل ازدحام</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>يختلف حسب المنطقة: صحراوي في الشمال، متوسطي في الوسط، بحري وممطر في الجنوب</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>طبقات (layering) بسبب اختلاف درجات الحرارة، ملابس خفيفة للصيف، معطف دافئ للشتاء</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>الإسبانية هي اللغة الرسمية، الإنجليزية مستخدمة في المناطق السياحية لكن ليست على نطاق واسع</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>التدخين ممنوع في الأماكن المغلقة، القيادة تحت تأثير الكحول عقوباتها صارمة</p>
+                </div>
+                <div class="info-card">
+                    <h3>أوقات العمل</h3>
+                    <p>المحلات عادةً تفتح من 10:00–20:00؛ البنوك من 9:00–14:00 تقريبًا</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات والإكراميات</h3>
+                    <p>الإكراميات (tips) متوقعة في المطاعم بنسبة 10% من الفاتورة، وغير إلزامية ولكن مقدرة في الخدمات الأخرى</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>Entel, Movistar, Claro, WOM</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات مسبقة الدفع متوفرة بالمطارات ومحلات الهاتف</p>
+                </div>
+                <div class="info-card">
+                    <h3>تكلفة الشريحة</h3>
+                    <p>شريحة محلية مع باقة بيانات يومية/أسبوعية متاحة من نحو 10–20 دولار أمريكي تقريبًا</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>Wi-Fi متوفّر في معظم الفنادق والمقاهي في المدن</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>تشيلي آمنة نسبيًا لكن كن حذرًا من النشل في المناطق المزدحمة والسياحية</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يوصى بشدة بتأمين سفر يغطي التكاليف الطبية والطوارئ</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>شرطة 133 — إسعاف 131 — إطفاء 132</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>سانتياغو</h3>
+                    <p>سيرو سان كريستوبال، الحي التاريخي، بالاسيو دي لا مونيدا، متحف الذاكرة وحقوق الإنسان</p>
+                </div>
+                <div class="info-card">
+                    <h3>صحراء أتاكاما</h3>
+                    <p>أكثر صحراء جافة في العالم، geysers، وادي القمر، مراصد فلكية</p>
+                </div>
+                <div class="info-card">
+                    <h3>باتاغونيا التشيلية</h3>
+                    <p>توريس ديل باينيه، متنزهات وطنية، أنهار جليدية، وتسلق الجبال</p>
+                </div>
+                <div class="info-card">
+                    <h3>منطقة البحيرات</h3>
+                    <p>بورتونيو، بوكون، بحيرة يانكيوي، أنشطة خارجية وتسلق براكين</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~10–20 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات عامة</h3>
+                    <p>~1–1.5 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة معلم سياحي</h3>
+                    <p>تختلف (توريس ديل باينيه ~35 دولار أمريكي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>50–100 دولار أمريكي/يوم (يعتمد على نمط الإنفاق)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى سانتياغو</h3>
+                    <p>الوصول إلى مطار سانتياغو - الانتقال إلى الفندق - استراحة - نزهة مسائية في حي بيللافيسا - عشاء في مطعم محلي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: استكشاف سانتياغو</h3>
+                    <p>زيارة سيرو سان كريستوبال - البلازا دي أرماس - بالاسيو دي لا مونيدا - سوق中央 - عشاء في مطعم تقليدي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: رحلة إلى فالبارايسو</h3>
+                    <p>رحلة يومية إلى ميناء فالبارايسو - استكشاف التلال الملونة - المصاعد المعلقة - منزل بابلو نيرودا - العودة إلى سانتياغو مساءً.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: الانتقال إلى صحراء أتاكاما</h3>
+                    <p>رحلة جوية إلى كالاما ثم الانتقال إلى سان بيدرو دي أتاكاما - استراحة - جولة مسائية في الوادي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: صحراء أتاكاما</h3>
+                    <p>زيارة geysers عند الفجر - وادي القمر - بحيرة Laguna Cejar - مشاهدة النجوم ليلاً (أفضل مكان في العالم).</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: العودة إلى سانتياغو</h3>
+                    <p>العودة إلى سانتياغو - تسوق للهدايا التذكارية في حي لاس كوندس - عشاء الوداع مع الأطباق التشيلية التقليدية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> تشيلي بلد طويل وضيق، لذا خطط لرحلتك حسب المناطق التي تريد زيارتها لتوفير الوقت في التنقل.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.chile.travel" class="resource-link" target="_blank">الموقع الرسمي للسياحة في تشيلي</a>
+                <a href="https://www.minrel.gob.cl" class="resource-link" target="_blank">وزارة الخارجية التشيلية</a>
+                <a href="https://www.latam.com" class="resource-link" target="_blank">Latam Airlines - الرحلات الجوية</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+    
+    </script>
+</body>
+</html>

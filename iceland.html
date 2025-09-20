@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آيسلندا - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #02529C;
+            --secondary-blue: #0077C0;
+            --light-blue: #6BB9F0;
+            --red: #DC1E35;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-blue);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #E3F2FD;
+            border-left: 4px solid var(--primary-blue);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="europe.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/is.png')"></div>
+            <h1>آيسلندا (Iceland)</h1>
+            <h2>جمهورية آيسلندا - قارة أوروبا</h2>
+            <p>عاصمة: ريكيافيك - اللغة الرسمية: الآيسلندية - التوقيت: GMT (لا توقيت صيفي)</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>صليب أحمر على خلفية زرقاء مع حدود بيضاء (صليب إسكندنافي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>103,000 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 376,000 نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>ريكيافيك</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>GMT (توقيت غرينتش) - لا يوجد توقيت صيفي</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+354</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>يحتاجون تأشيرة شينغن لدخول آيسلندا كسياح (آيسلندا جزء من منطقة الشنغن)</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع التأشيرات</h3>
+                    <p>سياحية/زيارة قصيرة (Schengen short-stay)، تأشيرة دراسة، عمل، إقامة طويلة</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر سارٍ (3 أشهر بعد تاريخ الخروج)، صور شخصية، خطاب دعوة أو حجز فندق، تذاكر طيران، كشف حساب بنكي، تأمين سفر يغطي 30,000 يورو، استمارة طلب موقعة</p>
+                </div>
+                <div class="info-card">
+                    <h3>التكلفة والمدة</h3>
+                    <p>رسوم الشنغن القياسية ~80 يورو للبالغين، ومدة الصلاحية تختلف حسب نوع التأشيرة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة المعالجة</h3>
+                    <p>عادةً من 15 يوم عمل، وقد تطول حسب الموسم/الحالة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مكان التقديم</h3>
+                    <p>عبر سفارة آيسلندا أو مركز تقديم الطلبات المعتمد في عمان</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات المباشرة</h3>
+                    <p>لا توجد رحلات مباشرة من عمان إلى آيسلندا، تتطلب توقف في أوروبا (مثل لندن، كوبنهاغن، أمستردام)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>تقريباً بين 10-14 ساعة مع التوقف (حسب مدة الانتظار)</p>
+                </div>
+                <div class="info-card">
+                    <h3>قيود الأمتعة</h3>
+                    <p>تعتمد على تذكرة شركة الطيران وفئة السفر؛ تحقق أثناء الحجز</p>
+                </div>
+                <div class="info-card">
+                    <h3>فيزا ترانزيت</h3>
+                    <p>قد تحتاج تأشيرة ترانزيت حسب مطار التوقف ومدته</p>
+                </div>
+                <div class="info-card">
+                    <h3>من المطار إلى المدينة</h3>
+                    <p>Flybus (حافلات المطار)، سيارات الأجرة، خدمات نقل مسبق الحجز. زمن الوصول للعاصمة حوالي 45 دقيقة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل المناطق للسكن في ريكيافيك</h3>
+                    <p>وسط المدينة (101)، ميدابور (ميناء ريكيافيك)، غرافارholt، هليدار</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>فنادق (من 2★ إلى 5★)، ضيوف (Guesthouses)، شقق فندقية، Airbnb، مزارع سياحية</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>فنادق 3★ قد تبدأ من ~120-200 يورو لليلة خارج مواسم الذروة</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>Booking.com, Expedia, Airbnb، أو عبر وكالات محلية متخصصة في السياحة الآيسلندية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>الكرونا الآيسلندية (ISK)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 OMR ≈ 350 ISK (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>بطاقات Visa/Mastercard مقبولة على نطاق واسع في جميع أنحاء البلاد، نادراً ما يحتاج للكاش</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>ATM متوفرة لكن نادراً ما تحتاج للكاش</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>الصيف (يونيو-أغسطس) للطقس الدافئ والأنشطة الخارجية، الشتاء (نوفمبر-مارس) لمشاهدة الشفق القطبي</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>صيف معتدل (10-15°C) مع شمس منتصف الليل، شتاء بارد (-5 إلى 5°C) مع ليالي طويلة</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>طبقات (layering) مع ملابس مقاومة للماء والرياح، ملابس دافئة للشتاء، ملابس مريحة للمشي</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>الآيسلندية هي اللغة الرسمية؛ الإنجليزية مستخدمة بشكل واسع من قبل معظم السكان</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>القوانين البيئية صارمة (عدم الخروج عن المسارات المحددة)، قيادة على اليمين، حظر التدخين في الأماكن العامة</p>
+                </div>
+                <div class="info-card">
+                    <h3>أوقات العمل</h3>
+                    <p>المحلات عادةً تفتح من 10:00–18:00؛ البنوك من 9:00–16:00 تقريبًا (أيام الأسبوع)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات والإكراميات</h3>
+                    <p>الإكراميات (tips) غير متوقعة أو مطلوبة، لكن يمكن تقريب الفاتورة للرقم الأعلى</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>Siminn, Vodafone, Nova</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات مسبقة الدفع متوفرة بالمطارات ومحلات الهاتف</p>
+                </div>
+                <div class="info-card">
+                    <h3>تكلفة الشريحة</h3>
+                    <p>شريحة محلية مع باقة بيانات يومية/أسبوعية متاحة من نحو 15–40 يورو تقريبًا</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>Wi-Fi متوفّر في معظم الفنادق والمقاهي والمطاعم</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>آيسلندا من أكثر البلدان أماناً في العالم، مع معدل جريمة منخفض جداً</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>مطلوب تأمين سفر يغطي تكاليف طبية طارئة بقيمة 30,000 يورو عند التقديم على الشنغن</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>طوارئ طبية 112 — شرطة 112 — إطفاء 112 — طوارئ أوروبية 112</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الدائرة الذهبية</h3>
+                    <p>منتزه ثينغفيلير الوطني، شلال جولفوس، منطقة هوكادالور الجيوحرارية</p>
+                </div>
+                <div class="info-card">
+                    <h3>الساحل الجنوبي</h3>
+                    <p>شلال سكوجافوس، شلال سيلجالاندسفوس، ساحل فيك الأسود، منتزه فاتناجوكول الوطني</p>
+                </div>
+                <div class="info-card">
+                    <h3>الريفييرا الآيسلندية</h3>
+                    <p>بحيرة يوكولسارلون الجليدية، شاطئ الماس، كهف الجليد</p>
+                </div>
+                <div class="info-card">
+                    <h3>الشفق القطبي</h3>
+                    <p>أفضل مشاهدة من سبتمبر إلى مارس في الليالي الصافية بعيداً عن أضواء المدينة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~25–40 يورو</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات عامة</h3>
+                    <p>~3–4 يورو (للتذكرة الواحدة)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة معلم سياحي</h3>
+                    <p>تختلف (حمامات Blue Lagoon مثلاً ~60-90 يورو حسب الموسم)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>100–200 يورو/يوم (يعتمد على نمط الإنفاق والأنشطة)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى ريكيافيك</h3>
+                    <p>الوصول إلى مطار كيفلافيك - الانتقال إلى الفندق في ريكيافيك - استراحة - استكشاف وسط المدينة - زيارة كنيسة هالغريمسكيركيا - عشاء في الميناء القديم.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: الدائرة الذهبية</h3>
+                    <p>رحلة إلى منتزه ثينغفيلير الوطني (موقع التراث العالمي لليونسكو) - شلال جولفوس - منطقة هوكادالور الجيوحرارية - العودة إلى ريكيافيك مساءً.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: الساحل الجنوبي</h3>
+                    <p>زيارة شلال سكوجافوس - شلال سيلجالاندسفوس - ساحل فيك الأسود - الوصول إلى فيك أو كيركجوباياركلاوستور للمبيت.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: بحيرة الجليد والشفق القطبي</h3>
+                    <p>زيارة بحيرة يوكولسارلون الجليدية - جولة بالقارب بين الجبال الجليدية - الانتقال إلى هوفن - مساءً البحث عن الشفق القطبي (في الموسم).</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: الريفييرا الآيسلندية</h3>
+                    <p>زيارة شاطئ الماس - كهف الجليد (في فصل الشتاء) - العودة إلى ريكيافيك عبر الطريق الجنوبي - توقف في شلالات إضافية على الطريق.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: حمامات Blue Lagoon</h3>
+                    <p>زيارة حمامات Blue Lagoon (حجز مسبق ضروري) - تسوق للهدايا التذكارية - عشاء الوداع في ريكيافيك.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> يوصى بحجز الأنشطة والفنادق مسبقاً خاصة في مواسم الذروة (يونيو-أغسطس وديسمبر-يناير).</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.visiticeland.com" class="resource-link" target="_blank">الموقع الرسمي للسياحة في آيسلندا</a>
+                <a href="https://www.iceland.is" class="resource-link" target="_blank">المعلومات الرسمية لآيسلندا</a>
+                <a href="https://www.road.is" class="resource-link" target="_blank">حالة الطرق في آيسلندا</a>
+                <a href="https://en.vedur.is" class="resource-link" target="_blank">توقعات الطقس والشفق القطبي</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً إذا لزم الأمر
+    </script>
+</body>
+</html>

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جرينلاند - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0065A2;
+            --secondary-blue: #3C8DBC;
+            --light-blue: #80C5F0;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-blue);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="europe.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/gl.png')"></div>
+            <h1>جرينلاند (Greenland)</h1>
+            <h2>أرض الثلج والجليد - مملكة الدنمارك</h2>
+            <p>عاصمة: نوك - اللغة الرسمية: الجرينلاندية - التوقيت: توقيت غرينلاند الغربي والشرقي</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>دائرة حمراء وبيضاء على خلفية بيضاء وحمراء (تمثل الشمس المنعكسة على الجليد)</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>2,166,086 كم² (أكبر جزيرة في العالم)</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 56,000 نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>نوك (Nuuk)</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC-1 إلى UTC-4 (توقيت غرينلاند الغربي والشرقي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+299</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>يحتاج العمانيون إلى تأشيرة شنغن لدخول جرينلاند (جزء من مملكة الدنمارك)</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع التأشيرات</h3>
+                    <p>تأشيرة شنغن قصيرة المدة مع تصريح خاص لجرينلاند</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر سارٍ (6 أشهر)، صور شخصية، حجز فندق، تذاكر طيران، كشف حساب بنكي، تأمين سفر، استمارة طلب موقعة</p>
+                </div>
+                <div class="info-card">
+                    <h3>التكلفة والمدة</h3>
+                    <p>رسوم الشنغن القياسية ~80 يورو للبالغين، والمدة تصل إلى 90 يومًا في غضون 180 يومًا</p>
+                </div>
+                <div class="info-card">
+                    <h3>مكان التقديم</h3>
+                    <p>في السفارة الدنماركية أو مركز التأشيرات المعتمد</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>توجد رحلات من كوبنهاجن (الدنمارك) وآيسلندا إلى جرينلاند</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>من كوبنهاجن إلى نوك: حوالي 4.5 ساعة</p>
+                </div>
+                <div class="info-card">
+                    <h3>خطوط الطيران</h3>
+                    <p>خطوط آيسلندا الجوية، خطوط آير جرينلاند</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواصلات الداخلية</h3>
+                    <p>طائرات صغيرة بين المدن، قوارب، زلاجات الكلاب، سيارات الدفع الرباعي</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل المناطق للإقامة</h3>
+                    <p>نوك، إيلوليسات، كاكورتوك، سيسيميوت</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>فنادق صغيرة، نزل، بيوت ضيافة، مخيمات</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>من 150 إلى 300 دولار لليلة في فندق متوسط</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>Booking.com, Expedia، أو عبر وكالات سفر متخصصة في جرينلاند</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>الكرونة الدنماركية (DKK)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 DKK ≈ 0.14 OMR (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>البطاقات الائتمانية مقبولة في المدن الكبرى، النقد مهم في المناطق النائية</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>أجهزة الصراف الآلي متوفرة في المدن الرئيسية فقط</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>من مايو إلى سبتمبر (الصيف) للأنشطة الخارجية، من نوفمبر إلى مارس لمشاهدة الشفق القطبي</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>صيف معتدل (5-15°م)، شتاء بارد جدًا (-20 إلى -5°م)</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس ثقيلة مضادة للماء، طبقات متعددة، أحذية دافئة، قفازات، وقبعة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>الجرينلاندية هي اللغة الرسمية، الدنماركية والإنجليزية مستخدمتان على نطاق واسع</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>احترام البيئة والطبيعة، الالتزام بمناطق الصيد المسموحة، احترام الثقافة المحلية</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات</h3>
+                    <p>ثقافة الإنويت التقليدية، الصيد هو نمط الحياة الرئيسي، الطعام التقليدي (اللحوم البحرية)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>TELE Greenland (الشركة الرئيسية)</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات مسبقة الدفع متوفرة في المدن الرئيسية</p>
+                </div>
+                <div class="info-card">
+                    <h3>التغطية</h3>
+                    <p>تغطية جيدة في المدن، محدودة في المناطق النائية</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>متوفر في الفنادق والمقاهي في المدن، قد يكون بطيئًا في بعض المناطق</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>جرينلاند آمنة جدًا، ولكن يجب الحذر من المخاطر الطبيعية والطقس القاسي</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>تأمين سفر شامل ضروري بسبب تكاليف الرعاية الصحية المرتفعة</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>الشرطة والطوارئ: 112</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>المناظر الطبيعية</h3>
+                    <p>مضيق إيلوليسات الجليدي (موقع تراث عالمي لليونسكو)، الشفق القطبي، الجبال الجليدية</p>
+                </div>
+                <div class="info-card">
+                    <h3>المدن والبلدات</h3>
+                    <p>نوك (العاصمة)، إيلوليسات، كاكورتوك، سيسيميوت</p>
+                </div>
+                <div class="info-card">
+                    <h3>الأنشطة</h3>
+                    <p>مشاهدة الحيتان، رحلات القوارب بين الجبال الجليدية، رحلات زلاجات الكلاب، الصيد</p>
+                </div>
+                <div class="info-card">
+                    <h3>الفعاليات</h3>
+                    <p>مهرجان الشتاء، يوم العلم (21 يونيو)، مسابقات زلاجات الكلاب</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~150-250 كرونة دنماركية (20-35 دولار)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات</h3>
+                    <p>~25-50 كرونة للرحلات المحلية</p>
+                </div>
+                <div class="info-card">
+                    <h3>جولة سياحية</h3>
+                    <p>~500-1500 كرونة للجولات والأنشطة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>1000-2000 كرونة/يوم (150-300 دولار) حسب الأنشطة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى نوك</h3>
+                    <p>الوصول إلى مطار نوك - الانتقال إلى الفندق - استراحة - جولة قصيرة في المدينة - زيارة المتحف الوطني.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: استكشاف نوك</h3>
+                    <p>زيارة مركز جرينلاند الوطني - كاتدرائية نوك - ميناء الصيد - التسوق للحرف اليدوية المحلية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: رحلة إلى إيلوليسات</h3>
+                    <p>رحلة جوية إلى إيلوليسات - تسجيل في الفندق - جولة لمشاهدة الجبال الجليدية في مضيق إيلوليسات.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: مضيق إيلوليسات الجليدي</h3>
+                    <p>رحلة بالقارب بين الجبال الجليدية - زيارة مستوطنة الصيد - مشاهدة غروب الشمس على الجليد.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: أنشطة تقليدية</h3>
+                    <p>تجربة رحلة زلاجات الكلاب - تذوق الطعام التقليدي - زيارة متحف إيلوليسات.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: العودة إلى نوك</h3>
+                    <p>رحلة جوية terug إلى نوك - وقت حر للتسوق - عشاء الوداع مع أطباق محلية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا التذكارية - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> بسبب الطقس المتغير بسرعة، يوصى بالمرونة في خطط السفر ومراقبة توقعات الطقس باستمرار.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://visitgreenland.com" class="resource-link" target="_blank">الموقع الرسمي لسياحة جرينلاند</a>
+                <a href="https://um.dk/en" class="resource-link" target="_blank">وزارة الخارجية الدنماركية</a>
+                <a href="https://www.airgreenland.com" class="resource-link" target="_blank">خطوط آير جرينلاند</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً هنا
+    </script>
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بليز - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0033A0;
+            --secondary-blue: #0047AB;
+            --light-blue: #4C7DE8;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-blue);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="central-america.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/bz.png')"></div>
+            <h1>بليز (Belize)</h1>
+            <h2>دولة بليز - قارة أمريكا الوسطى</h2>
+            <p>عاصمة: بلموبان - اللغة الرسمية: الإنجليزية - التوقيت: UTC-6</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>خلفية زرقاء مع شريط أحمر أفقي في الأعلى والأسفل، وشعار النبالة في الوسط</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>22,966 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 419,000 نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>بلموبان (العاصمة الإدارية)، مدينة بليز (أكبر مدينة)</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC-6 (لا يوجد توقيت صيفي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+501</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>لا يحتاج المواطنون العُمانيون إلى تأشيرة لدخول بليز للإقامة لمدة تصل إلى 90 يوماً</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر ساري المفعول لمدة 6 أشهر على الأقل، تذكرة عودة، إثبات وجود أموال كافية للإقامة</p>
+                </div>
+                <div class="info-card">
+                    <h3>تصريح الإقامة</h3>
+                    <p>يمكن تمديد الإقامة لمدة 30 يوماً إضافياً من خلال دائرة الهجرة في بليز</p>
+                </div>
+                <div class="info-card">
+                    <h3>السفر عبر الولايات المتحدة</h3>
+                    <p>إذا كنت مسافراً عبر الولايات المتحدة، فقد تحتاج إلى تأشيرة عبور أو ESTA</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>لا توجد رحلات مباشرة من عُمان إلى بليز. أفضل المسارات عبر الولايات المتحدة (هيوستن، ميامي) أو المكسيك</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>مع التوقف، تتراوح مدة الرحلة من 18 إلى 24 ساعة حسب المسار والتوقفات</p>
+                </div>
+                <div class="info-card">
+                    <h3>مطار بليز الدولي</h3>
+                    <p>مطار فيليبس إس دبليو جولدسون الدولي (BZE) هو المطار الرئيسي، يبعد حوالي 16 كم من مدينة بليز</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواصلات الداخلية</h3>
+                    <p>الحافلات الصغيرة هي الوسيلة الرئيسية للنقل بين المدن، كما تتوفر سيارات الأجرة والقوارب للجزر</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>من المنتجعات الفاخرة إلى النزل الاقتصادية، مع خيارات فريدة مثل منتجعات الغابات والبيوت الشجرية</p>
+                </div>
+                <div class="info-card">
+                    <h3>المناطق الشعبية</h3>
+                    <p>أمبرجريس كاي (جزيرة سان بيدرو)، كايو، بلموبان، مدينة بليز، ومنتجع بلاسينثيا</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>يتراوح من 50 دولاراً للنزل الاقتصادية إلى 300+ دولار للمنتجعات الفاخرة</p>
+                </div>
+                <div class="info-card">
+                    <h3>موسم الذروة</h3>
+                    <p>من نوفمبر إلى أبريل (موسم الجفاف)، يفضل الحجز المبكر خاصة في الجزر</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>دولار بليز (BZD)، ويتم تثبيت سعره عند 2 BZD = 1 USD</p>
+                </div>
+                <div class="info-card">
+                    <h3>استخدام الدولار الأمريكي</h3>
+                    <p>يقبل الدولار الأمريكي على نطاق واسع في جميع أنحاء بليز</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>يُفضل الدفع نقداً خاصة خارج المدن الكبرى. البطاقات الائتمانية مقبولة في المنتجعات الكبرى والمطاعم</p>
+                </div>
+                <div class="info-card">
+                    <h3>أجهزة الصراف الآلي</h3>
+                    <p>متوفرة في المدن الكبرى ولكن قد تكون محدودة في الجزر والمناطق النائية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>موسم الجفاف</h3>
+                    <p>من نوفمبر إلى أبريل - أفضل وقت للزيارة، مع طقس مشمس وقليل الأمطار</p>
+                </div>
+                <div class="info-card">
+                    <h3>موسم الأمطار</h3>
+                    <p>من مايو إلى أكتوبر - أمطار غزيرة ورطوبة عالية، مع إمكانية هبوب الأعاصير</p>
+                </div>
+                <div class="info-card">
+                    <h3>درجات الحرارة</h3>
+                    <p>تتراوح بين 24°م إلى 30°م على مدار العام، مع رطوبة عالية في المناطق الساحلية</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس خفيفة قطنية، ملابس سباحة، واقي من المطر خلال موسم الأمطار، وملابس طويلة للحماية من البعوض</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>الإنجليزية هي اللغة الرسمية، لكن العديد يتحدثون الكريول الإسبانية والمايا</p>
+                </div>
+                <div class="info-card">
+                    <h3>الثقافة</h3>
+                    <p>مزيج فريد من الثقافات: الكريول، المايا، المستيزو، Garifuna، والمينونايت</p>
+                </div>
+                <div class="info-card">
+                    <h3>القوانين المهمة</h3>
+                    <p>يحظر صيد الأسماك بالرمح أو جمع الشعاب المرجانية. المخدرات غير قانونية بشدة</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات</h3>
+                    <p>الثقافة مسترخية وغير رسمية. "وقت بليز" يعني أن الأمور قد تستغرق وقتاً أطول من المتوقع</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>Digi, Smart Belize</p>
+                </div>
+                <div class="info-card">
+                    <h3>بطاقات SIM</h3>
+                    <p>متوفرة بسهولة في المطارات ومحلات البيع، تحتاج إلى جواز سفر للتسجيل</p>
+                </div>
+                <div class="info-card">
+                    <h3>جودة الإنترنت</h3>
+                    <p>جيدة في المدن الرئيسية، ولكن قد تكون محدودة في الجزر والمناطق النائية</p>
+                </div>
+                <div class="info-card">
+                    <h3>الاتصالات الدولية</h3>
+                    <p>اتصالات جيدة مع معظم دول العالم، لكن التكلفة قد تكون عالية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>بليز آمنة بشكل عام للسياح، لكن ينبغي توخي الحذر في بعض مناطق مدينة بليز ليلاً</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يُنصح بشدة بالتأمين الصحي للسفر، فالرعاية الصحية محدودة وقد تكون مكلفة</p>
+                </div>
+                <div class="info-card">
+                    <h3>الطوارئ</h3>
+                    <p>رقم الطوارئ الموحد: 911 للشرطة، الإسعاف، والمطافئ</p>
+                </div>
+                <div class="info-card">
+                    <h3>التحصينات</h3>
+                    <p>ينصح بالتحصين ضد حمى التيفوئيد والتهاب الكبد A و B، واستخدام طارد البعوض</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الحاجز المرجاني</h3>
+                    <p>ثاني أكبر حاجز مرجاني في العالم، مثالي للغوص والغطس ومشاهدة الحياة البحرية</p>
+                </div>
+                <div class="info-card">
+                    <h3>الثقافة المايا</h3>
+                    <p>مواقع أثرية مثل كاراكول، شونانتونيتش، لاماناي، وشونانتونيتش</p>
+                </div>
+                <div class="info-card">
+                    <h3>المناطق الطبيعية</h3>
+                    <p>محمية ماونتن باين ريدج، كهوف أكتون تونيشيل موكنال، وشلالات ريو أون بوول</p>
+                </div>
+                <div class="info-card">
+                    <h3>الجزر (كايز)</h3>
+                    <p>أمبرجريس كاي، كايو كولكر، تورنيفي أيلاند، وجزر أخرى للاسترخاء والرياضات المائية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~10–20 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات محلية</h3>
+                    <p>~1–3 دولار أمريكي للحافلات بين المدن</p>
+                </div>
+                <div class="info-card">
+                    <h3>جولة غوص</h3>
+                    <p>~80–120 دولار أمريكي للغوص في الحاجز المرجاني</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>50–100 دولار أمريكي/يوم للميزانية المتوسطة (دون احتساب الإقامة)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى مدينة بليز</h3>
+                    <p>الوصول إلى مطار بليز الدولي - الانتقال إلى الفندق في مدينة بليز - استراحة - نزهة على الكورنيش - عشاء بالمطاعم المحلية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: الانتقال إلى سان بيدرو</h3>
+                    <p>رحلة بالقارب أو الطائرة الصغيرة إلى جزيرة أمبرجريس كاي (سان بيدرو) - التسجيل في الفندق - استكشاف المدينة بالعربات الكهربائية - سباحة في البحر.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: الغطس في الحاجز المرجاني</h3>
+                    <p>رحلة غطس إلى الحاجز المرجاني - مشاهدة الأسماك الملونة والشعاب المرجانية - زيارة الثقب الأزرق الشهير (للغواصين المتمرسين) - غروب الشمس على الشاطئ.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: زيارة محمية ماونتن باين ريدج</h3>
+                    <p>العودة إلى البر الرئيسي - الانتقال إلى محمية ماونتن باين ريدج - زيارة كهف أكتون تونيشيل موكنال - السباحة في الشلالات - مشاهدة الطيور والحيوانات.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: استكشاف آثار المايا</h3>
+                    <p>رحلة إلى موقع شونانتونيتش الأثري - التعرف على حضارة المايا - تسلق المعابد - العودة إلى مدينة بليز مساءً.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: ثقافة الكريول والغاريفونا</h3>
+                    <p>جولة في مدينة بليز - زيارة متحف بليز - تجربة المأكولات المحلية - شراء الحرف اليدوية التذكارية - عشاء الوداع.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> بليز مشهورة بالغطس والغوص، لذا احرص على حجز الجولات البحرية مسبقاً خاصة في مواسم الذروة. كما ينصح بتوخي الحذر من الشمس واستخدام واقي الشمس.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.belizetourismboard.org" class="resource-link" target="_blank">هيئة السياحة في بليز</a>
+                <a href="https://www.travelbelize.org" class="resource-link" target="_blank">معلومات السفر إلى بليز</a>
+                <a href="https://www.immigration.gov.bz" class="resource-link" target="_blank">الهجرة إلى بليز</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات مطلوبة هنا
+    </script>
+</body>
+</html>

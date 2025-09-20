@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>غيانا - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #009E49;
+            --secondary-green: #00B557;
+            --light-green: #7CCD7C;
+            --yellow: #FCD116;
+            --red: #CE1126;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-green);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-green);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-green);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-green);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="south-america.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/gy.png')"></div>
+            <h1>غيانا (Guyana)</h1>
+            <h2>جمهورية غيانا التعاونية - قارة أمريكا الجنوبية</h2>
+            <p>عاصمة: جورج تاون - اللغة الرسمية: الإنجليزية - التوقيت: GMT-4</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>أحمر مع مثلث أسود محاط بحدود بيضاء (يُعرف باسم "السهم الذهبي")</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>214,969 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 790 ألف نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>جورج تاون</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>GMT-4 (لا يوجد توقيت صيفي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+592</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>يحتاجون تأشيرة لدخول غيانا كسياح (يمكن الحصول عليها إلكترونياً أو عند الوصول)</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع التأشيرات</h3>
+                    <p>سياحية/زيارة قصيرة، تأشيرة عمل، إقامة طويلة</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر سارٍ (6 أشهر على الأقل)، صور شخصية، حجز فندق، تذاكر طيران ذهاب وعودة، كشف حساب بنكي، شهادة تطعيم ضد الحمى الصفراء</p>
+                </div>
+                <div class="info-card">
+                    <h3>التكلفة والمدة</h3>
+                    <p>تأشيرة سياحية لمرة واحدة: حوالي 50-100 دولار أمريكي، وتكون صالحة لمدة 30 يومًا قابلة للتمديد</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة المعالجة</h3>
+                    <p>عادةً من 5-7 أيام عمل للتأشيرة الإلكترونية</p>
+                </div>
+                <div class="info-card">
+                    <h3>مكان التقديم</h3>
+                    <p>عبر الموقع الإلكتروني الرسمي أو عند الوصول للمطار (يُنصح بالتقديم المسبق)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات المباشرة</h3>
+                    <p>لا توجد رحلات مباشرة من عمان إلى غيانا، تتطلب التوقف في أوروبا أو الولايات المتحدة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>تقريباً بين 18-24 ساعة مع التوقف (حسب المطار المتوقف فيه)</p>
+                </div>
+                <div class="info-card">
+                    <h3>قيود الأمتعة</h3>
+                    <p>تعتمد على شركة الطيران والفئة؛ تحقق أثناء الحجز</p>
+                </div>
+                <div class="info-card">
+                    <h3>فيزا ترانزيت</h3>
+                    <p>قد تكون مطلوبة حسب دولة التوقف؛ تحقق من متطلبات التأشيرة لدول الترانزيت</p>
+                </div>
+                <div class="info-card">
+                    <h3>من المطار إلى المدينة</h3>
+                    <p>مطار كايتوم الدولي (Cheddi Jagan) يبعد حوالي 41 كم عن العاصمة جورج تاون، سيارات الأجرة متوفرة، مدة الوصول حوالي 45-60 دقيقة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل المناطق للسكن</h3>
+                    <p>جورج تاون (العاصمة)، منطقة كايتمور، ومنتجع أرويما على ضفاف نهر مازاروني</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>فنادق (من 3★ إلى 5★)، منتجعات غابية، نزل بيئية، وشقق فندقية</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>فنادق 3★ قد تبدأ من ~60-100 دولار أمريكي لليلة</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>Booking.com, Expedia، أو عبر وكالات سفر متخصصة في السياحة البيئية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>دولار غياني (GYD)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 USD ≈ 209 GYD (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>يُفضل استخدام النقد في معظم الأماكن، وبطاقات الائتمان مقبولة في الفنادق الكبيرة والمطاعم في العاصمة</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>أجهزة الصراف الآلي متوفرة في جورج تاون والمدن الكبرى، ولكن قد تكون محدودة خارجها</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>من فبراير إلى أبريل ومن أغسطس إلى نوفمبر (فترات الجفاف بين مواسم الأمطار)</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>مناخ استوائي حار ورطب على مدار العام مع موسمين للأمطار (مايو-يوليو ونوفمبر-يناير)</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس قطنية خفيفة، ملابس مضادة للمطر، أحذية مريحة للمشي، وملابس سباحة للمناطق المائية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>الإنجليزية هي اللغة الرسمية؛ لكن هناك لهجات محلية مثل الكريول الغيانية</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>التصوير العسكري ممنوع، لا تستعمل/تحمل أدوية محظورة بدون وصفة، احترام الثقافات المحلية</p>
+                </div>
+                <div class="info-card">
+                    <h3>أوقات العمل</h3>
+                    <p>المحلات عادةً تفتح من 8:00–16:30 أيام الأسبوع؛ البنوك من 8:00–14:00 تقريبًا</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات والإكراميات</h3>
+                    <p>الإكراميات (tips) غير شائعة ولكنها مقدرة في الفنادق والمطاعم السياحية (عادة 10%)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>GTT (Guyana Telephone and Telegraph), Digicel Guyana</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات مسبقة الدفع متوفرة في المطارات ومحلات الهاتف</p>
+                </div>
+                <div class="info-card">
+                    <h3>تكلفة الشريحة</h3>
+                    <p>شريحة محلية مع باقة بيانات يومية/أسبوعية متاحة من نحو 10–20 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>Wi-Fi متوفّر في معظم الفنادق في المدن الكبرى، ولكن قد يكون محدوداً في المناطق النائية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>يُنصح بالحذر في المناطق الحضرية ليلاً، والتزام المناطق السياحية المعروفة</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يُوصى بشدة بتأمين سفر يغطي التكاليف الطبية والإخلاء الطبي بسبب محدودية الخدمات الطبية في بعض المناطق</p>
+                </div>
+                <div class="info-card">
+                    <h3>التطعيمات</h3>
+                    <p>شهادة تطعيم ضد الحمى الصفراء مطلوبة، ويُنصح بتطعيمات ضد حمى التيفوئيد والملاريا</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>شرطة 911 — إطفاء 912 — طوارئ طبية 913</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شلالات كايتور</h3>
+                    <p>أعلى شلالات في العالم (ارتفاع 226 متراً)، موقع تراث عالمي لليونسكو</p>
+                </div>
+                <div class="info-card">
+                    <h3>منتزه كايتمور الوطني</h3>
+                    <p>منتزه وطني كبير يوفر فرصاً لمشاهدة الحياة البرية والتنوع البيولوجي</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة جورج تاون</h3>
+                    <p>كاثدرائية سانت جورج (أقدم مبنى خشبي في العالم)، سوق ستابروك، وحديقة الحيوانات</p>
+                </div>
+                <div class="info-card">
+                    <h3>منطقة روبونوني</h3>
+                    <p>موطن لمجتمعات السكان الأصليين، وتوفر تجارب ثقافية فريدة وطبيعة خلابة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~10-20 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات عامة</h3>
+                    <p>~0.5-1 دولار أمريكي (تختلف حسب المسافة)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة معلم سياحي</h3>
+                    <p>تختلف (زيارة شلالات كايتور قد تصل إلى 20-30 دولار أمريكي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>50-100 دولار أمريكي/يوم (يعتمد على نمط الإنفاق والأنشطة)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى جورج تاون</h3>
+                    <p>الوصول إلى مطار كايتوم الدولي - الانتقال إلى الفندق في جورج تاون - استراحة - نزهة مسائية على الواجهة البحرية - عشاء في مطعم محلي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: استكشاف جورج تاون</h3>
+                    <p>زيارة كاتدرائية سانت جورج - متحف غيانا الوطني - سوق ستابروك - حديقة الحيوانات - عشاء في مطعم يقدم المأكولات المحلية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: رحلة إلى شلالات كايتور</h3>
+                    <p>رحلة برية إلى شلالات كايتور (تستغرق حوالي 5 ساعات) - استكشاف الشلالات والمنطقة المحيطة - العودة إلى جورج تاون مساءً.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: منتزه كايتمور الوطني</h3>
+                    <p>جولة في المنتزه الوطني - مشاهدة الطيور والحياة البرية - نزهة في الغابة المطيرة - زيارة مركز الزوار - العودة إلى الفندق.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: منطقة روبونوني</h3>
+                    <p>رحلة إلى منطقة روبونوني للتعرف على ثقافة السكان الأصليين - مشاركة في أنشطة تقليدية - عشاء تقليدي - العودة إلى جورج تاون.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: نهر إسيكويبو وجزيرة الفورتاليزا</h3>
+                    <p>رحلة بالقارب على نهر إسيكويبو - زيارة جزيرة الفورتاليزا التاريخية - استكشاف الحصن الهولندي القديم - عودة إلى جورج تاون للتسوق للهدايا التذكارية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> يُنصح بالحجز المسبق للجولات والأنشطة خاصة خلال مواسم الذروة، والتأكد من الحصول على التطعيمات اللازمة قبل السفر.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.minfor.gov.gy/consular-services/visa-requirements/" class="resource-link" target="_blank">متطلبات التأشيرة لغيانا</a>
+                <a href="https://www.guyanatourism.com/" class="resource-link" target="_blank">الهيئة السياحية الغيانية</a>
+                <a href="https://www.timaticweb2.com" class="resource-link" target="_blank">متطلبات السفر (Timatic)</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+    
+    </script>
+</body>
+</html>

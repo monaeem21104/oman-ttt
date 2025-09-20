@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كوبا - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #002A8F;
+            --secondary-blue: #005CAB;
+            --light-blue: #0077C0;
+            --primary-red: #CF142B;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-red));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-blue);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #E3F2FD;
+            border-left: 4px solid #2196F3;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="caribbean.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/cu.png')"></div>
+            <h1>كوبا (Cuba)</h1>
+            <h2>جمهورية كوبا - قارة الكاريبي</h2>
+            <p>عاصمة: هافانا - اللغة الرسمية: الإسبانية - التوقيت: EST (ت ع م-5)</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>خمسة خطوط أفقية (ثلاثة زرقاء واثنتان بيضاء) مع مثلث أحمر ونجمة بيضاء</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>109,884 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 11.3 مليون نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>هافانا</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC-5 (توقيت شرق أمريكا الشمالية)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+53</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>يحتاجون إلى تأشيرة سياحية (تسمى "بطاقة السياح") لدخول كوبا</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع التأشيرات</h3>
+                    <p>سياحية (30 يوم قابلة للتمديد)، تأشيرة زيارة، تأشيرة عمل</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر سارٍ (6 أشهر على الأقل)، صور شخصية، تذاكر طيران ذهاب وعودة، حجز فندق، تأمين سفر طبي</p>
+                </div>
+                <div class="info-card">
+                    <h3>التكلفة والمدة</h3>
+                    <p>رسوم التأشيرة حوالي 25-50 دولار أمريكي، ومدة الإقامة المسموحة تصل إلى 30 يوم قابلة للتمديد</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة المعالجة</h3>
+                    <p>عادةً من 5-10 أيام عمل، ويمكن الحصول عليها أحياناً بشكل أسرع</p>
+                </div>
+                <div class="info-card">
+                    <h3>مكان التقديم</h3>
+                    <p>عن طريق السفارة الكوبية أو عبر شركات السياحة المعتمدة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>لا توجد رحلات مباشرة من عمان إلى كوبا، تتطلب توقف في أوروبا (مدريد، باريس) أو كندا</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>تقريباً بين 16-20 ساعة حسب نقاط التوقف وخطوط الطيران</p>
+                </div>
+                <div class="info-card">
+                    <h3>خطوط الطيران</h3>
+                    <p>Air France, Iberia, Air Canada, KLM عبر مدن مثل Madrid, Paris, Toronto</p>
+                </div>
+                <div class="info-card">
+                    <h3>فيزا ترانزيت</h3>
+                    <p>قد تحتاج تأشيرة ترانزيت حسب دولة التوقف (أوروبا تتطلب تأشيرة شنغن)</p>
+                </div>
+                <div class="info-card">
+                    <h3>من المطار إلى المدينة</h3>
+                    <p>تاكسي رسمي، حافلات مكوكية، أو تأجير سيارات. المطار الرئيسي: مطار خوسيه مارتي الدولي (HAV) في هافانا</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل المناطق للسكن في هافانا</h3>
+                    <p>هافانا فييخا (المدينة القديمة)، فيدادو، ميرامار</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>فنادق (من اقتصادية إلى فاخرة)، كاساس PARTICULAR (غرف في منازل خاصة)، منتجعات شاطئية</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>كاساس PARTICULAR من 25-50 دولار، فنادق 3 نجوم من 60-100 دولار، فنادق فاخرة من 150-300 دولار</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>Booking.com, Airbnb، أو عبر وكالات سفر متخصصة في كوبا</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>البيسو الكوبي (CUP) للاستخدام المحلي، والبيسو القابل للتحويل (CUC) للسياح (ملاحظة: في عملية توحيد العملات)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 دولار أمريكي ≈ 24 بيزو كوبي (CUP) - يفضل التحقق من أحدث الأسعار</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>الدفع نقداً هو السائد، البطاقات الائتمانية مقبولة في الفنادق الكبرى ولكن قد تواجه صعوبات مع البطاقات الصادرة من بنوك أمريكية</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>أجهزة الصراف الآلي متوفرة في المدن الكبرى ولكن قد تكون محدودة، يفضل حمل نقداً كافياً</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>من نوفمبر إلى أبريل (موسم الجفاف) حيث يكون الطقس معتدلاً ومشمساً</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>مناخ استوائي، حار ورطب صيفاً، معتدل شتاءً. موسم الأعاصير من يونيو إلى نوفمبر</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس قطنية خفيفة، ملابس سباحة، واقي من المطر خلال موسم الأمطار، سترة خفيفة للمساء</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>الإسبانية هي اللغة الرسمية؛ الإنجليزية محدودة الانتشار وتتركز في المناطق السياحية</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>التصوير العسكري ممنوع، احترام القوانين المحلية، ضرورة حمل جواز السفر دائماً</p>
+                </div>
+                <div class="info-card">
+                    <h3>أوقات العمل</h3>
+                    <p>المحلات عادةً تفتح من 9:00–17:00، المطاعم حتى 23:00، النوادي الليلية حتى ساعات متأخرة</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات والإكراميات</h3>
+                    <p>الإكراميات (tips) مقدرة ولكن غير إلزامية (10% من الفاتورة في المطاعم)، وفي الفنادق وخدمات السياحة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>ETECSA (الشركة الحكومية للاتصالات)</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات مسبقة الدفع للإنترنت متوفرة في فنادق ومكاتب ETECSA</p>
+                </div>
+                <div class="info-card">
+                    <h3>تكلفة الشريحة</h3>
+                    <p>بطاقة الإنترنت لمدة ساعة تكلف حوالي 1-2 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>Wi-Fi متوفّر في معظم الفنادق والساحات العامة (الواي فاي العام)، لكن السرعة قد تكون محدودة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>كوبا آمنة نسبياً للمسافرين، لكن ينبغي الحذر من النشالين في المناطق المزدحمة</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>مطلوب تأمين سفر طبي لتغطية التكاليف الطبية في كوبا (يُطلب عند الوصول)</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>الشرطة 106 — الطوارئ الطبية 104 — الإطفاء 105</p>
+                </div>
+                <div class="info-card">
+                    <h3>التطعيمات</h3>
+                    <p>لا توجد تطعيمات إلزامية، لكن يوصى بتطعيمات ضد التهاب الكبد A وB، والتيفوئيد</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>هافانا</h3>
+                    <p>هافانا فييخا (المدينة القديمة)، الكابيتوليو، ماليكون، ساحة الثورة، متحف الثورة</p>
+                </div>
+                <div class="info-card">
+                    <h3>ترينيداد</h3>
+                    <p>مدينة ترينيداد الاستعمارية (موقع تراث عالمي لليونسكو)، وادي السكري</p>
+                </div>
+                <div class="info-card">
+                    <h3>فاراديرو</h3>
+                    <p>شواطئ فاراديرو الجميلة، المنتجعات السياحية، الأنشطة المائية</p>
+                </div>
+                <div class="info-card">
+                    <h3>سيينفويغوس</h3>
+                    <p>مدينة سيينفويغوس الجميلة (تسمى لؤلؤة الجنوب)، قصر فالي</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~10-15 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات عامة</h3>
+                    <p>~0.5-1 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة معلم سياحي</h3>
+                    <p>تختلف (متاحف هافانا مثلاً ~5-10 دولار أمريكي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>50-100 دولار أمريكي/يوم (يعتمد على نمط الإنفاق)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى هافانا</h3>
+                    <p>الوصول إلى مطار خوسيه مارتي - الانتقال إلى الفندق - استراحة - جولة قصيرة في ماليكون - عشاء في مطعم محلي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: استكشاف هافانا فييخا</h3>
+                    <p>زيارة هافانا فييخا (المدينة القديمة) - كاتدرائية هافانا - ساحة السلاح - قلعة لا ريال fuerza - متحف الثورة.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: هافانا المركزية</h3>
+                    <p>زيارة الكابيتوليو - ساحة الثورة - مقبرة كولون - حي فيدادو - مشاهدة عرض كانونازو المسائي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: رحلة إلى فيناليس</h3>
+                    <p>رحلة إلى وادي فيناليس - مشاهدة المناظر الطبيعية - زيارة مزرعة التبغ - تجربة السيجار الكوبي - العودة إلى هافانا مساءً.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: الانتقال إلى ترينيداد</h3>
+                    <p>رحلة برية إلى ترينيداد (حوالي 4 ساعات) - استراحة في الفندق - استكشاف المدينة الاستعمارية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: ترينيداد والمناطق المحيطة</h3>
+                    <p>زيارة متحف العمارة الاستعمارية - صعود برج الجرس - رحلة إلى وادي السكري - العودة إلى ترينيداد.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: العودة إلى هافانا والمغادرة</h3>
+                    <p>العودة إلى هافانا - تسوق للهدايا التذكارية - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> يمكن تعديل الخطة لزيارة فاراديرو بدلاً من ترينيداد للاستمتاع بالشواطئ، لكن ذلك يتطلب تعديلاً في مسار الرحلة.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.tripadvisor.com/Tourism-g147270-Cuba-Vacations.html" class="resource-link" target="_blank">دليل كوبا على TripAdvisor</a>
+                <a href="https://www.lonelyplanet.com/cuba" class="resource-link" target="_blank">دليل لونلي بلانيت لكوبا</a>
+                <a href="https://www.traveltocuba.com/" class="resource-link" target="_blank">معلومات السفر إلى كوبا</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً هنا
+    </script>
+</body>
+</html>

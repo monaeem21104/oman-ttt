@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هايتي - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #00209F;
+            --secondary-blue: #1E40AF;
+            --light-blue: #3B82F6;
+            --red: #D80027;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-blue);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="caribbean.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/ht.png')"></div>
+            <h1>هايتي (Haiti)</h1>
+            <h2>جمهورية هايتي - قارة أمريكا الشمالية/الكاريبي</h2>
+            <p>عاصمة: بورت أو برانس - اللغة الرسمية: الفرنسية والكريولية الهايتية - التوقيت: EST/EDT</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>شريطان أفقيان (أزرق في الأعلى والأسفل، أحمر في المنتصف) مع شعار النبالة في الوسط</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>27,750 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 11.4 مليون نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>بورت أو برانس</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC-5 (توقيت شرق الولايات المتحدة) - لا يوجد توقيت صيفي</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+509</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>لا يحتاج العُمانيون إلى تأشيرة مسبقة لدخول هايتي للإقامة لمدة تصل إلى 90 يوماً</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر ساري المفعول (6 أشهر على الأقل)، تذكرة عودة، إثبات الإقامة، كشف حساب بنكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>التكلفة والمدة</h3>
+                    <p>لا توجد رسوم تأشيرة للإقامة أقل من 90 يوماً</p>
+                </div>
+                <div class="info-card">
+                    <h3>تأشيرة العمل/الدراسة</h3>
+                    <p>تتطلب تأشيرة خاصة يمكن الحصول عليها من السفارة الهايتية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>لا توجد رحلات مباشرة من عُمان إلى هايتي. أفضل المسارات عبر الولايات المتحدة أو أوروبا</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>بما في ذلك التوقف: 18-24 ساعة حسب المسار وخطوط الطيران</p>
+                </div>
+                <div class="info-card">
+                    <h3>المطارات</h3>
+                    <p>مطار تoussaint Louverture الدولي (PAP) في بورت أو برانس هو المطار الرئيسي</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواصلات الداخلية</h3>
+                    <p>تاكسي، حافلات صغيرة (تاب-تاب)، سيارات أجرة، تأجير سيارات (يُنصح بسائق محلي)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل المناطق للسكن</h3>
+                    <p>بورت أو برانس (للمسافرين لأعمال)، بيتيون فيل، جاكمل، كاب هايتيان للمتعة والاسترخاء</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>منتجعات شاطئية، فنادق دولية، نزل صغيرة، بيوت ضيافة</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>فنادق 3 نجوم: 60-100 دولار أمريكي، منتجعات فاخرة: 150-300 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>يُنصح بالحجز المسبق عبر مواقع الحجوزات الدولية أو وكالات السفر</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>غوردة هايتية (HTG) - الدولار الأمريكي مقبول على نطاق واسع</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 USD ≈ 130 HTG (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>يُفضل الدفع نقداً بالدولار الأمريكي. البطاقات الائتمانية مقبولة في الفنادق الكبيرة والمنتجعات</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>أجهزة الصراف الآلي متوفرة في المدن الكبرى ولكن قد لا تعمل دائماً. يوصى بإحضار دولارات نقداً</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>ديسمبر إلى فبراير (موسم الجفاف) حيث الطقس معتدل وهطول الأمطار أقل</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>مناخ استوائي دافئ على مدار العام. موسم الأمطار من أبريل إلى يونيو وأكتوبر إلى نوفمبر</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس قطنية خفيفة، ملابس سباحة، واق من المطر، كريم واق من الشمس، قبعة</p>
+                </div>
+                <div class="info-card">
+                    <h3>موسم الأعاصير</h3>
+                    <p>من يونيو إلى نوفمبر - تحقق من توقعات الطقس قبل السفر</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>اللغتان الرسميتان هما الفرنسية والكريولية الهايتية. الإنجليزية محدودة خارج المناطق السياحية</p>
+                </div>
+                <div class="info-card">
+                    <h3>الدين</h3>
+                    <p>الكاثوليكية الرومانية (80%)، البروتستانتية (16%)، Vodou (ممارسة تقليدية)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات</h3>
+                    <p>شعب ودود ومرحب بالزوار. احترم التقاليد المحلية واطلب الإذن قبل التقاط الصور للأشخاص</p>
+                </div>
+                <div class="info-card">
+                    <h3>العملة والتقاليد</h3>
+                    <p>المساومة شائعة في الأسواق. الإكراميات مقدرة ولكنها ليست إلزامية (10% في المطاعم)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>NatCom (Digicel سابقاً)، Access Haiti، Comcel Venezuela</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات SIM مسبقة الدفع متوفرة في المطارات ومحلات البيع</p>
+                </div>
+                <div class="info-card">
+                    <h3>التغطية</h3>
+                    <p>التغطية جيدة في المدن الرئيسية، محدودة في المناطق النائية</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>متوفر في الفنادق والمنتجعات الكبيرة، ولكن السرعة قد تكون بطيئة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>يُنصح بالحذر بسبب عدم الاستقرار السياسي والجريمة. تجنب السفر ليلاً والسير بمفردك</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يُشدد على ضرورة تأمين طبي شامل يغطي الإخلاء الطبي بسبب محدودية الخدمات الطبية</p>
+                </div>
+                <div class="info-card">
+                    <h3>اللقاحات</h3>
+                    <p>يوصى بلقاحات التهاب الكبد A وB، التيفوئيد، وتناول أدوية الوقاية من الملاريا</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>الشرطة: 114 - الإسعاف: 118 - الإطفاء: 115</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>بورت أو برانس</h3>
+                    <p>متحف الفن الهايتي، سوق الحديد، كاتدرائية نوتردام</p>
+                </div>
+                <div class="info-card">
+                    <h3>كاب هايتيان</h3>
+                    <p>قلعة لا فيرير (قلعة هنري كريستوف)، شاطئ كوربيه، قصر سان سوسي</p>
+                </div>
+                <div class="info-card">
+                    <h3>جاكمل</h3>
+                    <p>الهندسة المعمارية الاستعمارية، مهرجان الجاز السنوي، الشواطئ الجميلة</p>
+                </div>
+                <div class="info-card">
+                    <h3>الجزر</h3>
+                    <p>جزيرة لاغوناف، إيل أفاشي للغطس والسباحة مع الدلافين</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~10-15 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات عامة</h3>
+                    <p>~1-2 دولار أمريكي (للمسافات القصيرة)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة معلم سياحي</h3>
+                    <p>~5-10 دولار أمريكي (تختلف حسب الموقع)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>50-100 دولار أمريكي/يوم (يعتمد على نمط الإنفاق)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى بورت أو برانس</h3>
+                    <p>الوصول إلى مطار توسان لوفرتور - الانتقال إلى الفندق - استراحة - جولة قصيرة في وسط المدينة - عشاء في مطعم محلي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: استكشاف بورت أو برانس</h3>
+                    <p>زيارة متحف الفن الهايتي - سوق الحديد للتحف والتذكارات - كاتدرائية نوتردام - عشاء في مطعم يقدم المأكولات المحلية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: الانتقال إلى كاب هايتيان</h3>
+                    <p>رحلة برية إلى كاب هايتيان (6-7 ساعات) أو رحلة جوية قصيرة - تسجيل الوصول في الفندق - استراحة على الشاطئ.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: قلعة لا فيرير</h3>
+                    <p>زيارة قلعة لا فيرير (قلعة هنري كريستوف) - استكشاف قصر سان سوسي - عودة إلى كاب هايتيان - عشاء في الميناء.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: شواطئ كاب هايتيان</h3>
+                    <p>يوم على شاطئ كوربيه - سباحة واسترخاء - غداء على الشاطئ - جولة في وسط المدينة في المساء.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: العودة إلى بورت أو برانس</h3>
+                    <p>العودة إلى بورت أو برانس - تسوق للهدايا التذكارية - عشاء الوداع في مطعم يقدم المأكولات الكريولية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة أمان:</strong> يوصى بشدة بالسفر مع مرشد محلي أو مجموعة سياحية، خاصة عند زيارة المناطق النائية.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.tourismhaiti.com" class="resource-link" target="_blank">السياحة في هايتي</a>
+                <a href="https://travel.state.gov/content/travel/en/international-travel/International-Travel-Country-Information-Pages/Haiti.html" class="resource-link" target="_blank">معلومات السفر إلى هايتي (وزارة الخارجية الأمريكية)</a>
+                <a href="https://www.who.int/countries/hti" class="resource-link" target="_blank">نصائح صحية لمنظمة الصحة العالمية</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً هنا
+    </script>
+</body>
+</html>

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هندوراس - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0073CE;
+            --secondary-blue: #0096D6;
+            --light-blue: #00A8E8;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-blue);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #E3F2FD;
+            border-left: 4px solid #2196F3;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="central-america.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/hn.png')"></div>
+            <h1>هندوراس (Honduras)</h1>
+            <h2>جمهورية هندوراس - قارة أمريكا الوسطى</h2>
+            <p>عاصمة: تيغوسيغالبا - اللغة الرسمية: الإسبانية - التوقيت: CST (ت ع م-6)</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>ثلاث شرائط أفقية (أزرق - أبيض - أزرق) مع خمس نجوم زرقاء في الوسط</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>112,492 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 10.3 مليون نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>تيغوسيغالبا</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC-6 (توقيت أمريكا الوسطى)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+504</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>يحتاجون تأشيرة دخول إلى هندوراس، ويمكن الحصول عليها عند الوصول أو من السفارة مسبقاً</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع التأشيرات</h3>
+                    <p>سياحية/زيارة قصيرة (90 يوم)، تأشيرة عمل، إقامة مؤقتة</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر سارٍ (6 أشهر على الأقل)، صور شخصية، تذاكر طيران ذهاب وعودة، حجز فندق، كشف حساب بنكي، تأمين سفر</p>
+                </div>
+                <div class="info-card">
+                    <h3>التكلفة والمدة</h3>
+                    <p>رسوم التأشيرة عند الوصول ~30-50 دولار أمريكي، ومدة الإقامة المسموحة تصل إلى 90 يوم</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة المعالجة</h3>
+                    <p>التأشيرة عند الوصول تصدر فورياً، بينما التأشيرة من السفارة قد تستغرق 5-10 أيام عمل</p>
+                </div>
+                <div class="info-card">
+                    <h3>مكان التقديم</h3>
+                    <p>عند الوصول للمطار أو عبر السفارة/القنصلية الهندوراسية في الدول المجاورة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>لا توجد رحلات مباشرة من عمان إلى هندوراس، تتطلب توقف في أوروبا أو الولايات المتحدة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>تقريباً بين 18-24 ساعة حسب نقاط التوقف وخطوط الطيران</p>
+                </div>
+                <div class="info-card">
+                    <h3>خطوط الطيران</h3>
+                    <p>American Airlines, United, Avianca, Copa Airlines عبر مدن مثل Miami, Houston, Panama City</p>
+                </div>
+                <div class="info-card">
+                    <h3>فيزا ترانزيت</h3>
+                    <p>قد تحتاج تأشيرة ترانزيت حسب دولة التوقف (الولايات المتحدة تتطلب ESTA أو تأشيرة)</p>
+                </div>
+                <div class="info-card">
+                    <h3>من المطار إلى المدينة</h3>
+                    <p>تاكسي، حافلات مكوكية، أو تأجير سيارات. المطارات الرئيسية: تونكونتين (TGU) في تيغوسيغالبا، رامون فيليدا (SAP) في سان بيدرو سولا</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل المناطق للسكن</h3>
+                    <p>في تيغوسيغالبا: منطقة كولونيا بالميرا، في سان بيدرو سولا: منطقة زونا فيفا، في الجزر: ويست إند في رواتان</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>فنادق (من اقتصادية إلى فاخرة)، منتجعات، بيوت ضيافة، شقق مفروشة</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>فنادق 3 نجوم تبدأ من ~40-80 دولار أمريكي لليلة، المنتجعات في الجزر من ~100-300 دولار</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>Booking.com, Expedia, Airbnb، أو عبر وكالات سفر محلية متخصصة في أمريكا الوسطى</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>لمبيرة هندوراسية (HNL)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 OMR ≈ 60 HNL (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>الدفع نقداً مفضل في كثير من الأماكن، البطاقات الائتمانية مقبولة في الفنادق والمطاعم الكبيرة</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>أجهزة الصراف الآلي متوفرة في المدن الكبرى، ولكن قد تكون محدودة في المناطق النائية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>من ديسمبر إلى أبريل (موسم الجفاف) حيث يكون الطقس مشمساً وجافاً</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>مناخ استوائي، حار ورطب على السواحل، معتدل في المرتفعات. موسم الأمطار من مايو إلى نوفمبر</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس قطنية خفيفة، ملابس سباحة، واقي من المطر خلال موسم الأمطار، سترة خفيفة للمرتفعات</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>الإسبانية هي اللغة الرسمية؛ الإنجليزية محدودة الانتشار وتتركز في المناطق السياحية والجزر</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>احترام القوانين المحلية، تجنب التصوير العشوائي للقواعد العسكرية، الحذر من مناطق معينة ليلاً</p>
+                </div>
+                <div class="info-card">
+                    <h3>أوقات العمل</h3>
+                    <p>المحلات عادةً تفتح من 8:00–12:00 ثم 14:00–18:00، المراكز التجارية حتى 21:00</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات والإكراميات</h3>
+                    <p>الإكراميات (tips) متوقعة في المطاعم (10% من الفاتورة)، وفي الفنادق وخدمات السياحة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>Tigo, Claro, Hondutel</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات مسبقة الدفع متوفرة في المتاجر ومحلات الهاتف</p>
+                </div>
+                <div class="info-card">
+                    <h3>تكلفة الشريحة</h3>
+                    <p>شريحة محلية مع باقة بيانات يومية/أسبوعية متاحة من نحو 5–15 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>Wi-Fi متوفّر في معظم الفنادق والمقاهي في المدن، لكن قد يكون محدوداً في المناطق النائية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>بعض المناطق في المدن الكبرى تتطلب الحذر، يفضل السفر مع مرشدين محليين وتجنب المناطق المعزولة ليلاً</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يوصى بشدة بتأمين سفر يغطي التكاليف الطبية والإخلاء الطبي</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>الشرطة 199 — الطوارئ الطبية 195 — الإطفاء 198</p>
+                </div>
+                <div class="info-card">
+                    <h3>التطعيمات</h3>
+                    <p>يوصى بتطعيمات ضد الحمى الصفراء والتهاب الكبد A وB، واستشارة طبيب قبل السفر</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>جزر الخليج (بايا)</h3>
+                    <p>رواتان، أوتيلا، وغواناخا: غوص، شعب مرجانية، شواطئ جميلة، وحياة بحرية غنية</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواقع الأثرية</h3>
+                    <p>أطلال كوبان المايا، حديقة كوبان الأثرية الوطنية</p>
+                </div>
+                <div class="info-card">
+                    <h3>المحميات الطبيعية</h3>
+                    <p>محمية بحيرة يوجوا، محمية بونكاك، محمية كوياجوا، وغابة الغيوم في لا تيغرا</p>
+                </div>
+                <div class="info-card">
+                    <h3>المدن الرئيسية</h3>
+                    <p>تيغوسيغالبا (العاصمة)، سان بيدرو سولا (العاصمة الصناعية)، لا سيبا (على ساحل الكاريبي)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~5-10 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات عامة</h3>
+                    <p>~0.5-1 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة معلم سياحي</h3>
+                    <p>تختلف (كوبان مثلاً ~15 دولار أمريكي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>50-100 دولار أمريكي/يوم (يعتمد على نمط الإنفاق)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى تيغوسيغالبا</h3>
+                    <p>الوصول إلى مطار تونكونتين - الانتقال إلى الفندق - استراحة - جولة قصيرة في وسط المدينة - عشاء في مطعم محلي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: استكشاف العاصمة</h3>
+                    <p>زيارة كاتدرائية سان ميغيل - متحف الهوية الوطنية - حديقة لا كونكورديا - التسوق في سوق الحرف اليدوية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: رحلة إلى لا تيغرا</h3>
+                    <p>رحلة إلى غابة الغيوم في لا تيغرا - مشاهدة الطيور والنباتات النادرة - العودة إلى تيغوسيغالبا مساءً.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: الانتقال إلى كوبان</h3>
+                    <p>رحلة برية إلى كوبان (حوالي 3-4 ساعات) - استراحة في الفندق - استكشاف بلدة كوبان الصغيرة.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: أطلال كوبان</h3>
+                    <p>زيارة موقع كوبان الأثري - مشاهدة الميدان الكبير - السلالم الهيروغليفية - متحف النحت.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: رحلة إلى سان بيدرو سولا</h3>
+                    <p>الانتقال إلى سان بيدرو سولا - زيارة متحف الأنثروبولوجيا - التسوق في مركز المدينة - عشاء الوداع.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> يمكن تعديل الخطة لزيارة جزر الخليج (رواتان) بدلاً من بعض الأماكن البرية، لكن ذلك يتطلب رحلات طيران داخلية إضافية.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.visitcentroamerica.com" class="resource-link" target="_blank">السياحة في أمريكا الوسطى</a>
+                <a href="https://www.visithonduras.com" class="resource-link" target="_blank">المجلس السياحي الهندوراسي</a>
+                <a href="https://www.lonelyplanet.com/honduras" class="resource-link" target="_blank">دليل لونلي بلانيت لهندوراس</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً هنا
+    </script>
+</body>
+</html>

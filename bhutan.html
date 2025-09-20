@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوتان - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #006341;
+            --secondary-green: #008753;
+            --light-green: #66B032;
+            --black: #000000;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-green);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-green);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-green);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-green);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .warning {
+            background: #F8D7DA;
+            border-left: 4px solid #DC3545;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="asia.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/bt.png')"></div>
+            <h1>بوتان (Bhutan)</h1>
+            <h2>مملكة بوتان - قارة آسيا</h2>
+            <p>عاصمة: تيمفو - اللغة الرسمية: الدزونكا - التوقيت: UTC+6</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>أصفر وبرتقالي مقسمين قطرياً مع تنين أبيض في المنتصف يرمز إلى اسم بوتان "أرض التنين"</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>38,394 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 787,000 نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>تيمفو</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC+6 (توقيت بوتان)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+975</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>يحتاجون تأشيرة دخول إلى بوتان، ولا يمكن الحصول عليها إلا عبر وكالات سفر معتمدة</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع التأشيرات</h3>
+                    <p>سياحية فقط (السياحة الجماعية المنظمة)</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر ساري المفعول (6 أشهر على الأقل)، صور شخصية، حجز كامل للرحلة عبر وكالة معتمدة</p>
+                </div>
+                <div class="info-card">
+                    <h3>التكلفة والمدة</h3>
+                    <p>250 دولار أمريكي للشخص/اليوم (تشمل الإقامة، الطعام، النقل، والمرشد)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة المعالجة</h3>
+                    <p>تستغرق عادة من 5 إلى 7 أيام عمل</p>
+                </div>
+                <div class="info-card">
+                    <h3>مكان التقديم</h3>
+                    <p>عبر وكالات السفر المعتمدة فقط (لا توجد سفارة بوتانية في عمان)</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>ملاحظة:</strong> بوتان تطبق سياسة "التكلفة العالية، القيمة العالية" للسياحة للحفاظ على ثقافتها وبيئتها.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>لا توجد رحلات مباشرة من عمان إلى بوتان، وتتطلب التوقف في دول مثل الهند أو تايلاند أو سنغافورة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>مع التوقف، تستغرق الرحلة من 8 إلى 12 ساعة حسب وجهة التوقف</p>
+                </div>
+                <div class="info-card">
+                    <h3>شركات الطيران</h3>
+                    <p>دراك للطيران (الناقل الوطني)، طيران الهند، الخطوط الجوية البنغالية، الخطوط الجوية التايلاندية</p>
+                </div>
+                <div class="info-card">
+                    <h3>من المطار إلى المدينة</h3>
+                    <p>مطار بارو الدولي هو المطار الوحيد - الانتقال إلى تيمفو يستغرق حوالي ساعة ونصف بالسيارة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل المناطق للسكن</h3>
+                    <p>تيمفو، بارو، بوناخا</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>فنادق (من 3★ إلى 5★)، منتجعات، بيوت ضيافة تقليدية</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>مشمولة في التكلفة اليومية (250 دولار)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>يتم الحجز حصرياً عبر وكالات السفر المعتمدة من قبل الحكومة البوتانية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>النجولترم البوتاني (BTN) والروبية الهندية</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 OMR ≈ 215 BTN (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>يُفضل استخدام النقد (العملة المحلية أو الدولار الأمريكي)، مع قبول محدود للبطاقات الائتمانية</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>أجهزة الصراف الآلي متوفرة في المدن الكبرى فقط مثل تيمفو وبارو</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>أكتوبر إلى نوفمبر ومارس إلى أبريل لطقس معتدل ومناظر طبيعية خلابة</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>صيف معتدل وممطر، وشتاء بارد وجاف خاصة في المناطق الجبلية</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس مناسبة للطقس مع طبقات، أحذية مريحة للمشي، ملابس محتشمة لزيارة المعابد</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>الدزونكا هي اللغة الرسمية، والإنجليزية منتشرة في المناطق السياحية</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>احترام التقاليد البوذية، ارتداء الملابس المحتشمة في المعابد، عدم التدخين في الأماكن العامة</p>
+                </div>
+                <div class="info-card">
+                    <h3>أوقات العمل</h3>
+                    <p>المحلات تفتح عادة من 9:00-17:00 مع إغلاق خلال أيام الأعياد الدينية</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات</h3>
+                    <p>إزالة الأحذية عند دخول المعابد والمنازل، تقديم الهدايا بكلتا اليدين، تجنب لمس رؤوس الآخرين</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>Bhutan Telecom, TashiCell</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات مسبقة الدفع متوفرة في المحلات</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>خدمة الإنترنت متوفرة في المدن الرئيسية لكنها قد تكون بطيئة في المناطق النائية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>بوتان دولة آمنة للغاية مع معدل جريمة منخفض جداً</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يُشدد على ضرورة الحصول على تأمين صحي شامل يغطي الإخلاء الطبي في حالات الطوارئ</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>الشرطة: 113 — إسعاف: 112 — إطفاء: 110</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>ملاحظة:</strong> بوتان من أكثر الدول أماناً في العالم، لكن يُنصح باتباع إرشادات المرشدين المحليين خاصة عند التجدل في المناطق الجبلية.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>تيمفو</h3>
+                    <p>دير تاشيتشو دزونغ، تمثال بوذا العملاق، سوق عطلة نهاية الأسبوع</p>
+                </div>
+                <div class="info-card">
+                    <h3>بارو</h3>
+                    <p>دير تاكستانغ (عش النمر)، متحف النسيج الوطني، دير رينكينغ</p>
+                </div>
+                <div class="info-card">
+                    <h3>بوناخا</h3>
+                    <p>دير بوناخا دزونغ، جسر الحبال التقليدي</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواصلات الداخلية</h3>
+                    <p>سيارات خاصة مع سائقين مرشدين (مشمولة في البرنامج السياحي)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~10-15 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات عامة</h3>
+                    <p>غير متوفرة للسياح (يستخدمون سيارات خاصة)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة معلم سياحي</h3>
+                    <p>مشمولة في التكلفة اليومية</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>250 دولار أمريكي/يوم (الحد الأدنى المطلوب للسياح)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى بارو</h3>
+                    <p>الوصول إلى مطار بارو الدولي - الانتقال إلى تيمفو (ساعة ونصف) - التسجيل في الفندق - استراحة - نزهة مسائية في تيمفو.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: استكشاف تيمفو</h3>
+                    <p>زيارة دير تاشيتشو دزونغ - متحف التراث الشعبي - تمثال بوذا العملاق - سوق عطلة نهاية الأسبوع.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: الانتقال إلى بوناخا</h3>
+                    <p>رحلة بالسيارة إلى بوناخا (3 ساعات) - زيارة دير بوناخا دزونغ - جسر الحبال التقليدي - مشاهدة طائر الكوكل النادر.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: العودة إلى بارو</h3>
+                    <p>رحلة بالسيارة إلى بارو - زيارة دير تاكستانغ (عش النمر) - متحف النسيج الوطني.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: معالم بارو</h3>
+                    <p>زيارة دير رينكينغ - معهد التقاليد والفنون - حديقة حيوانات بوتان (لمشاهدة التاكين النادر).</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: الثقافة والتسوق</h3>
+                    <p>ورشة عمل للحرف اليدوية التقليدية - شراء الهدايا التذكارية - عشاء تقليدي مع عرض للرقصات البوتانية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا - الانتقال إلى مطار بارو - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>ملاحظة:</strong> هذه الخطة افتراضية وقد تتغير حسب الموسم والظروف الجوية وتوفر الإقامة.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.mofa.gov.om" class="resource-link" target="_blank">وزارة الخارجية العمانية</a>
+                <a href="https://www.tourism.gov.bt" class="resource-link" target="_blank">المجلس السياحي في بوتان (باللغة الإنجليزية)</a>
+                <a href="https://www.gov.uk/foreign-travel-advice/bhutan" class="resource-link" target="_blank">نصائح السفر البريطانية (باللغة الإنجليزية)</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً إذا لزم الأمر
+    </script>
+</body>
+</html>

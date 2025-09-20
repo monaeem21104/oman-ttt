@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أمريكا الشمالية - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-orange: #FF6B35;
+            --secondary-orange: #FF8C42;
+            --light-orange: #FFB366;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-orange);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-orange);
+            transform: scale(1.1);
+        }
+
+        .continent-info {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .continent-info h2 {
+            color: var(--primary-orange);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .continent-info p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .country-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .country-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: var(--primary-orange);
+        }
+
+        .flag {
+            width: 80px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #ddd;
+        }
+
+        .country-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .country-capital {
+            font-size: 0.9rem;
+            color: var(--primary-orange);
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            flex-direction: column;
+            display: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--light-gray);
+            border-top: 5px solid var(--primary-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+        }
+
+        .no-results {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 2rem;
+            color: var(--text-dark);
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .countries-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>جاري تحميل صفحة الدولة...</p>
+    </div>
+
+    <header class="header">
+        <h1>قارة أمريكا الشمالية</h1>
+        <p>اكتشف جمال القارة الشمالية بتنوعها الجغرافي والثقافي المذهل</p>
+    </header>
+
+    <section class="continent-info">
+        <h2>معلومات عن أمريكا الشمالية</h2>
+        <p>أمريكا الشمالية هي ثالث أكبر قارة في العالم، وتضم 23 دولة ومنطقة مستقلة. تمتد من الدائرة القطبية الشمالية إلى أمريكا الوسطى والبحر الكاريبي.</p>
+        <p>تتميز أمريكا الشمالية بتنوعها الجغرافي الكبير، من القمم الجبلية الشاهقة في روكي إلى الصحاري الشاسعة، والغابات الكثيفة، والشواطئ البكر. كما تضم بعضاً من أكثر المدن تطوراً في العالم.</p>
+        <p>للمواطن العماني: تتمتع سلطنة عمان بعلاقات دبلوماسية واقتصادية قوية مع العديد من دول أمريكا الشمالية، خاصة الولايات المتحدة وكندا والمكسيك.</p>
+    </section>
+
+    <div class="search-container">
+        <input type="text" class="search-box" id="searchInput" placeholder="ابحث عن دولة...">
+    </div>
+
+    <section class="countries-section">
+        <div class="countries-grid" id="countriesGrid">
+            <div class="country-card" data-country="united-states">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/us.png')"></div>
+                <div class="country-name">الولايات المتحدة</div>
+                <div class="country-capital">واشنطن العاصمة</div>
+            </div>
+            
+            <div class="country-card" data-country="canada">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/ca.png')"></div>
+                <div class="country-name">كندا</div>
+                <div class="country-capital">أوتاوا</div>
+            </div>
+            
+            <div class="country-card" data-country="mexico">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/mx.png')"></div>
+                <div class="country-name">المكسيك</div>
+                <div class="country-capital">مكسيكو سيتي</div>
+            </div>
+            
+            <div class="country-card" data-country="greenland">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/gl.png')"></div>
+                <div class="country-name">جرينلاند</div>
+                <div class="country-capital">نوك</div>
+            </div>
+            
+            <div class="country-card" data-country="belize">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/bz.png')"></div>
+                <div class="country-name">بليز</div>
+                <div class="country-capital">بيلموبان</div>
+            </div>
+            
+            <div class="country-card" data-country="costa-rica">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/cr.png')"></div>
+                <div class="country-name">كوستاريكا</div>
+                <div class="country-capital">سان خوسيه</div>
+            </div>
+            
+            <div class="country-card" data-country="el-salvador">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/sv.png')"></div>
+                <div class="country-name">السلفادور</div>
+                <div class="country-capital">سان سلفادور</div>
+            </div>
+            
+            <div class="country-card" data-country="guatemala">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/gt.png')"></div>
+                <div class="country-name">غواتيمالا</div>
+                <div class="country-capital">غواتيمالا سيتي</div>
+            </div>
+            
+            <div class="country-card" data-country="honduras">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/hn.png')"></div>
+                <div class="country-name">هندوراس</div>
+                <div class="country-capital">تيغوسيغالبا</div>
+            </div>
+            
+            <div class="country-card" data-country="nicaragua">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/ni.png')"></div>
+                <div class="country-name">نيكاراغوا</div>
+                <div class="country-capital">ماناغوا</div>
+            </div>
+            
+            <div class="country-card" data-country="panama">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/pa.png')"></div>
+                <div class="country-name">بنما</div>
+                <div class="country-capital">بنما سيتي</div>
+            </div>
+            
+            <div class="country-card" data-country="bahamas">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/bs.png')"></div>
+                <div class="country-name">باهاماس</div>
+                <div class="country-capital">ناساو</div>
+            </div>
+            
+            <div class="country-card" data-country="barbados">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/bb.png')"></div>
+                <div class="country-name">بربادوس</div>
+                <div class="country-capital">بريدج تاون</div>
+            </div>
+            
+            <div class="country-card" data-country="cuba">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/cu.png')"></div>
+                <div class="country-name">كوبا</div>
+                <div class="country-capital">هافانا</div>
+            </div>
+            
+            <div class="country-card" data-country="dominica">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/dm.png')"></div>
+                <div class="country-name">دومينيكا</div>
+                <div class="country-capital">روسو</div>
+            </div>
+            
+            <div class="country-card" data-country="dominican-republic">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/do.png')"></div>
+                <div class="country-name">جمهورية الدومينيكان</div>
+                <div class="country-capital">سانتو دومينغو</div>
+            </div>
+            
+            <div class="country-card" data-country="grenada">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/gd.png')"></div>
+                <div class="country-name">غرينادا</div>
+                <div class="country-capital">سانت جورجز</div>
+            </div>
+            
+            <div class="country-card" data-country="haiti">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/ht.png')"></div>
+                <div class="country-name">هايتي</div>
+                <div class="country-capital">بورت أو برانس</div>
+            </div>
+            
+            <div class="country-card" data-country="jamaica">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/jm.png')"></div>
+                <div class="country-name">جامايكا</div>
+                <div class="country-capital">كينغستون</div>
+            </div>
+            
+            <div class="country-card" data-country="saint-kitts">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/kn.png')"></div>
+                <div class="country-name">سانت كيتس ونيفيس</div>
+                <div class="country-capital">باستير</div>
+            </div>
+            
+            <div class="country-card" data-country="saint-lucia">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/lc.png')"></div>
+                <div class="country-name">سانت لوسيا</div>
+                <div class="country-capital">كاستري</div>
+            </div>
+            
+            <div class="country-card" data-country="saint-vincent">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/vc.png')"></div>
+                <div class="country-name">سانت فنسنت والغرينادين</div>
+                <div class="country-capital">كينغستاون</div>
+            </div>
+            
+            <div class="country-card" data-country="trinidad">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/tt.png')"></div>
+                <div class="country-name">ترينيداد وتوباغو</div>
+                <div class="country-capital">بورت أوف سبين</div>
+            </div>
+            
+            <div class="country-card" data-country="antigua">
+                <div class="flag" style="background-image: url('https://flagcdn.com/w320/ag.png')"></div>
+                <div class="country-name">أنتيغوا وباربودا</div>
+                <div class="country-capital">سانت جونز</div>
+            </div>
+        </div>
+        
+        <div class="no-results" id="noResults">
+            <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+            <h3>لم يتم العثور على نتائج</h3>
+            <p>حاول البحث باسم دولة أخرى</p>
+        </div>
+    </section>
+
+    <script>
+        // دالة لفتح صفحة الدولة
+        function openCountryPage(countryCode) {
+            // عرض شاشة التحميل
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.style.display = 'flex';
+            
+            // اسم ملف HTML للدولة (باستخدام الكود الموجود في data-country)
+            const fileName = `${countryCode}.html`;
+            
+            // محاكاة وقت التحميل (يمكن إزالته عند التطبيق الفعلي)
+            setTimeout(() => {
+                // الانتقال إلى صفحة الدولة
+                window.location.href = fileName;
+            }, 1000);
+        }
+        
+        // إضافة مستمعي الأحداث لكل بطاقة دولة
+        document.querySelectorAll('.country-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const countryCode = card.getAttribute('data-country');
+                openCountryPage(countryCode);
+            });
+        });
+        
+        // وظيفة البحث
+        const searchInput = document.getElementById('searchInput');
+        const countriesGrid = document.getElementById('countriesGrid');
+        const countryCards = document.querySelectorAll('.country-card');
+        const noResults = document.getElementById('noResults');
+        
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.trim().toLowerCase();
+            let hasResults = false;
+            
+            countryCards.forEach(card => {
+                const countryName = card.querySelector('.country-name').textContent.toLowerCase();
+                const capitalName = card.querySelector('.country-capital').textContent.toLowerCase();
+                
+                if (countryName.includes(searchTerm) || capitalName.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    hasResults = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // عرض أو إخفاء رسالة عدم وجود نتائج
+            noResults.style.display = hasResults ? 'none' : 'block';
+        });
+    </script>
+</body>
+</html>

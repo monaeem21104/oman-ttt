@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ناورو - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-orange: #FF6B35;
+            --secondary-orange: #FF8C42;
+            --light-orange: #FFB366;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-orange);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-orange);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-orange);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-orange);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-orange);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-orange);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-orange);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="australia-oceania.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/nr.png')"></div>
+            <h1>ناورو (Nauru)</h1>
+            <h2>جمهورية ناورو - قارة أوقيانوسيا</h2>
+            <p>عاصمة: ضاحية يارين - اللغة الرسمية: الناورونية، الإنجليزية - التوقيت: (UTC+12)</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>أزرق مع خط ذهبي أفقي في المنتصف ونجمة بيضاء ذات 12 رأسًا في الجهة اليسرى</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>21 كم² (ثالث أصغر دولة في العالم)</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 10,800 نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة الرسمية</h3>
+                    <p>ضاحية يارين (لا توجد مدن في ناورو، فقط مناطق أو ضواحي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC+12 (لا توقيت صيفي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+674</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>يحتاجون تأشيرة دخول لناورو ويجب التقديم مسبقًا</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع التأشيرات</h3>
+                    <p>تأشيرة زيارة، تأشيرة عمل، تأشيرة دراسة</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر ساري المفعول (6 أشهر على الأقل)، صور شخصية، حجز فندق، تذاكر طيران ذهاب وعودة، كشف حساب بنكي، خطاب تغطية</p>
+                </div>
+                <div class="info-card">
+                    <h3>التكلفة والمدة</h3>
+                    <p>تأشيرة الزيارة ~100 دولار أسترالي، وتصلح لمدة 30 يومًا</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة المعالجة</h3>
+                    <p>من 5 إلى 10 أيام عمل</p>
+                </div>
+                <div class="info-card">
+                    <h3>مكان التقديم</h3>
+                    <p>عن طريق البريد الإلكتروني أو عبر السفارات الأسترالية (ناورو لا تملك سفارات في العديد من الدول)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>توجد رحلات محدودة من بريسبان (أستراليا) ونادي (فيجي) إلى ناورو</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>من بريسبان: حوالي 4.5 ساعات، من نادي: حوالي 1.5 ساعة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مطار ناورو</h3>
+                    <p>مطار ناورو الدولي (IATA: INU) هو المطار الوحيد في الجزيرة</p>
+                </div>
+                <div class="info-card">
+                    <h3>فيزا ترانزيت</h3>
+                    <p>قد تحتاج تأشيرة ترانزيت حسب دولة التوقف ومدة الانتظار</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواصلات الداخلية</h3>
+                    <p>سيارات الأجرة متوفرة، ويمكن استئجار سيارات، كما أن الطريق الساحلي يحيط بالجزيرة بالكامل</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>خيارات الإقامة</h3>
+                    <p>خيارات محدودة، أشهرها: منتجع مينين (Menen Hotel)، وفندق أود-ن-أييو (Od'n Aiwo)</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>فنادق محدودة، وشقق مفروشة، وإمكانية للإقامة مع العائلات المحلية (بترتيب مسبق)</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>~100-200 دولار أسترالي لليلة حسب نوع الغرفة والموسم</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>يجب الحجز مسبقًا عبر الهاتف أو البريد الإلكتروني بسبب محدودية الخيارات</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>الدولار الأسترالي (AUD)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 AUD ≈ 0.26 OMR (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>يُفضل الدفع نقدًا، وبطاقات الائتمان مقبولة في أماكن محدودة</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>يوجد بنك واحد في ناورو (بنك ناورو) به ماكينة صراف آلي واحدة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>من مايو إلى أكتوبر (موسم الجفاف) حيث تكون درجات الحرارة معتدلة والأمطار أقل</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>مناخ استوائي مع موسم أمطار من نوفمبر إلى فبراير، وموسم جفاف من مايو إلى أكتوبر</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس قطنية خفيفة، واقي شمس، قبعة، نظارات شمسية، ومظلة خلال موسم الأمطار</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>اللغة الناورونية هي اللغة الوطنية، والإنجليزية مستخدمة على نطاق واسع</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>ناورو دولة مسيحية محافظة، يُنصح باحترام التقاليد والعادات المحلية</p>
+                </div>
+                <div class="info-card">
+                    <h3>أوقات العمل</h3>
+                    <pالمحلات تفتح عادة من 9 صباحاً إلى 5 مساءً من الاثنين إلى الجمعة</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات</h3>
+                    <p>الشعب الناوروني ودود ومضياف، ومن المهذب قبول الدعوات للوجبات المنزلية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>ناورو للإتصالات (Nauru Telecommunications Corporation - NTC)</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات مسبقة الدفع متوفرة في المطار والمحلات</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>خدمة الإنترنت محدودة وبطيئة نسبيًا، متوفرة في الفنادق الرئيسية</p>
+                </div>
+                <div class="info-card">
+                    <h3>التغطية</h3>
+                    <p>تغطية الهاتف المحمول جيدة في معظم أنحاء الجزيرة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>ناورو آمنة جدًا مع معدل جريمة منخفض، لكن ينبغي اتخاذ الاحتياطات المعتادة</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>مطلوب تأمين سفر يغطي التكاليف الطبية والإخلاء الطبي بسبب محدودية الخدمات الصحية</p>
+                </div>
+                <div class="info-card">
+                    <h3>الخدمات الصحية</h3>
+                    <p>يوجد مستشفى رئيسي واحد في الجزيرة، والحالات الحرجة تتطلب إخلاءً طبيًا</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>الشرطة: 110، الإسعاف: 111، المطافئ: 112</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مناطق الجذب الطبيعية</h3>
+                    <p>منحدرات الفوسفات، بحيرة بوادا (البحيرة الوحيدة في ناورو)، الشواطئ المرجانية</p>
+                </div>
+                <div class="info-card">
+                    <h3>المعالم الثقافية</h3>
+                    <p>متحف ناورو، بقايا المعدات اليابانية من الحرب العالمية الثانية</p>
+                </div>
+                <div class="info-card">
+                    <h3>الأنشطة</h3>
+                    <p>الغوص، صيد الأسماك، استكشاف المناظر الطبيعية الفريدة، مشاهدة الطيور</p>
+                </div>
+                <div class="info-card">
+                    <h3>الحياة البرية</h3>
+                    <p>طيور البحر، سرطان جوز الهند، أنواع مختلفة من الأسماك والشعاب المرجانية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم</h3>
+                    <p>~15-30 دولار أسترالي</p>
+                </div>
+                <div class="info-card">
+                    <h3>زجاجة ماء</h3>
+                    <p>~2-3 دولار أسترالي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة دخول للمواقع</h3>
+                    <p>معظم المواقع مجانية أو برسوم رمزية</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>80-150 دولار أسترالي/يوم (بسبب استيراد معظم السلع)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 5 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول واستكشاف يارين</h3>
+                    <p>الوصول إلى مطار ناورو - الانتقال إلى الفندق - استراحة - جولة في منطقة يارين (البرلمان، المطار، المتحف).</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: المناطق الساحلية</h3>
+                    <p>جولة حول الجزيرة بالسيارة (طريق طوله 19 كم) - زيارة منحدرات الفوسفات - الاستمتاع بالشواطئ - مشاهدة غروب الشمس.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: بحيرة بوادا والطبيعة</h3>
+                    <p>زيارة بحيرة بوادا - مشاهدة الطيور - استكشاف بقايا الحرب العالمية الثانية - زيارة مواقع التعدين السابقة.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: الثقافة والغوص</h3>
+                    <p>زيارة المتحف - التعرف على الثقافة الناورونية - أنشطة الغوص أو السباحة - عشاء تقليدي (إذا أمكن).</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: المغادرة</h3>
+                    <p>تسوق للهدايا التذكارية - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> بسبب صغر حجم الجزيرة، يمكن استئجار سيارة واستكشاف معظم المعالم في أيام قليلة.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.nauru.gov.nr" class="resource-link" target="_blank">الموقع الرسمي لحكومة ناورو</a>
+                <a href="https://www.our-airlines.com" class="resource-link" target="_blank">خطوط ناورو الجوية (Our Airline)</a>
+                <a href="https://www.dfat.gov.au" class="resource-link" target="_blank">معلومات السفر عبر الخارجية الأسترالية</a>
+                <a href="https://www.who.int" class="resource-link" target="_blank">نصائح صحية لمنطقة المحيط الهادئ</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً إذا لزم الأمر
+    </script>
+</body>
+</html>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إندونيسيا - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #FF0000;
+            --primary-white: #FFFFFF;
+            --secondary-red: #CC0000;
+            --dark-red: #8F0010;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-red);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--dark-red);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-red);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-red);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-red);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--dark-red);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .warning {
+            background: #F8D7DA;
+            border-left: 4px solid #DC3545;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="asia.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/id.png')"></div>
+            <h1>إندونيسيا (Indonesia)</h1>
+            <h2>جمهورية إندونيسيا - قارة آسيا</h2>
+            <p>عاصمة: جاكرتا - اللغة الرسمية: الإندونيسية - التوقيت: UTC+7 إلى UTC+9</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>شريطين أفقيين: أحمر (أعلى) وأبيض (أسفل) - يرمز الأحمر للشجاعة والأبيض للنقاء</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>1,904,569 كم² (خامس عشر أكبر دولة في العالم)</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>أكثر من 275 مليون نسمة (رابع أكبر دولة من حيث عدد السكان)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>جاكرتا (ستنتقل إلى نوسانتارا في 2024)</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>ثلاثة مناطق زمنية: UTC+7 (غرب)، UTC+8 (وسط)، UTC+9 (شرق)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+62</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>يمكن لمواطني عمان الدخول إلى إندونيسيا بدون تأشيرة لمدة تصل إلى 30 يوم</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع التأشيرات</h3>
+                    <p>إعفاء تأشيرة (30 يوم)، تأشيرة عند الوصول (30 يوم)، تأشيرة سياحية (60 يوم)، تأشيرة عمل</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر ساري المفعول (6 أشهر على الأقل)، تذكرة ذهاب وعودة، إثبات الإقامة، كشف حساب بنكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>التكلفة والمدة</h3>
+                    <p>الإعفاء التأشيري: مجاني 30 يوم، التأشيرة عند الوصول: 35 دولار لمدة 30 يوم، التأشيرة السياحية: 50 دولار لمدة 60 يوم</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة المعالجة</h3>
+                    <p>التأشيرة الإلكترونية: 1-3 أيام عمل، التأشيرة من السفارة: 5-7 أيام عمل</p>
+                </div>
+                <div class="info-card">
+                    <h3>مكان التقديم</h3>
+                    <p>الإلكتروني عبر الموقع الرسمي، أو عند الوصول للمطار، أو عبر سفارة إندونيسيا</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>توجد رحلات مباشرة من مسقط إلى جاكرتا وبالي، بالإضافة إلى رحلات مع التوقف عبر دول الخليج أو ماليزيا</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>المباشرة: 8-9 ساعات، مع التوقف: 12-16 ساعة حسب وجهة التوقف</p>
+                </div>
+                <div class="info-card">
+                    <h3>شركات الطيران</h3>
+                    <p>الطيران العُماني، غارودا إندونيسيا، الخطوط الجوية القطرية، طيران الإمارات، الخطوط الجوية الماليزية</p>
+                </div>
+                <div class="info-card">
+                    <h3>من المطار إلى المدينة</h3>
+                    <p>تتوفر سيارات الأجرة، نقل الفندق، أوبر/جراب، حافلات النقل العام من المطارات إلى المدن</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل المناطق للسكن</h3>
+                    <p>بالي: كوتا، سيمينياك، أوبود. جاكرتا: مينتنج، سوديرمان. يوجياكارتا: منطقة ماليوبورو</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>جميع الخيارات متاحة من نزل اقتصادية إلى فنادق 5 نجوم فاخرة ومنتجعات وفيلات خاصة</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>فنادق 3★: 30-70 دولار، فنادق 5★: 100-400+ دولار، فيلات: 80-300 دولار</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>يُمكن الحجز عبر المواقع الإلكترونية العالمية مثل Booking.com وAgoda، أو عبر المكاتب المحلية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>الروبية الإندونيسية (IDR)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 OMR ≈ 3,900 IDR (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>يُستخدم النقد على نطاق واسع، البطاقات الائتمانية مقبولة في الفنادق والمتاجر الكبرى. الدفع الإلكتروني عبر GoPay شائع</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>أجهزة الصراف الآلي متوفرة على نطاق واسع في المدن والمناطق السياحية، ولكن قد تكون محدودة في الجزر النائية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>من أبريل إلى أكتوبر (الموسم الجاف) عندما يكون الطقس مشمساً وقليل الأمطار</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>مناخ استوائي على مدار السنة، موسم الأمطار من نوفمبر إلى مارس، درجة الحرارة ثابتة (25-32°C)</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس قطنية خفيفة، ملابس سباحة، ملابس محتشمة لزيارة المعابد، مظلة خلال موسم الأمطار</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>الإندونيسية (اللغة الرسمية)، بالإضافة إلى أكثر من 700 لغة محلية</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>احترام القوانين المحلية، ارتداء الملابس المحتشمة في المعابد، تجنب المخدرات (عقوبات صارمة)، عدم التقاط الصور في المناطق العسكرية</p>
+                </div>
+                <div class="info-card">
+                    <h3>أوقات العمل</h3>
+                    <p>المحلات تفتح عادة من 9:00-22:00، المكاتب من 8:00-17:00، المراكز التجارية حتى 22:00</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات</h3>
+                    <p>التحية "سيلامات" مع الانحناء قليلاً، استخدام اليد اليمنى في الأكل والتلقي، إزالة الأحذية قبل دخول المنازل والمعابد</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>Telkomsel, Indosat Ooredoo, XL Axiata, 3</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات SIM مسبقة الدفع متوفرة في المطارات ومحلات الاتصالات، تحتاج جواز سفر للتسجيل</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>خدمة الإنترنت جيدة في المدن الكبرى، متوسطة في المناطق الريفية، مع توفر Wi-Fi مجاني في الفنادق والمقاهي</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>إندونيسيا آمنة بشكل عام للمسافرين، لكن ينبغي الحذر من النشل في الأماكن المزدحمة واحتيال سائقي التاكسي</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يُشدد على ضرورة الحصول على تأمين صحي شامل يغطي العلاج في المستشفيات الخاصة والنقل الطبي</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>الشرطة: 110 — إسعاف: 118 — إطفاء: 113 — البحث والإنقاذ: 115</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> انتبه للتيارات المائية القوية عند السباحة في الشواطئ، وتأكد من ارتداء سترة النجاة في رحلات القوارب.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>بالي</h3>
+                    <p>معبد تانا لوط، معبد أولوواتو، حقول الأرز في تيغالالانغ، شاطئ كوتا، منتزه سافاري</p>
+                </div>
+                <div class="info-card">
+                    <h3>يوجياكارتا</h3>
+                    <p>معبد برامبانان، معبد بوروبودور، قصر السلطان، كهف جوملانغ</p>
+                </div>
+                <div class="info-card">
+                    <h3>جزر أخرى</h3>
+                    <p>لومبوك، جيلي آير، جيلي تراوانغان، كومودو (تنين كومودو)، رجا أمبات (الغوص)</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواصلات الداخلية</h3>
+                    <p>طيران داخلي بين الجزر، عبّارات، حافلات، سيارات أجرة، دراجات نارية للإيجار، تطبيقات النقل (جراب، غوجيك)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~30,000-100,000 روبية (2-7 دولار أمريكي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات عامة</h3>
+                    <p>~5,000-20,000 روبية (0.3-1.5 دولار أمريكي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة معلم سياحي</h3>
+                    <p>تختلف (عادة ما بين 25,000-200,000 روبية / 1.5-14 دولار أمريكي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>500,000-1,500,000 روبية/يوم (35-100 دولار أمريكي) حسب نمط الإنفاق</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى بالي</h3>
+                    <p>الوصول إلى مطار نغوراه راي - الانتقال إلى الفندق في كوتا أو سيمينياك - استراحة - مشاهدة غروب الشمس في شاطئ كوتا.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: استكشاف جنوب بالي</h3>
+                    <p>زيارة معبد أولوواتو - مشاهدة رقصة كيكاك - زيارة معبد تانا لوط - شاطئ جيمباران.</p>
+                </                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: وسط بالي وأوبود</h3>
+                    <p>زيارة حقول الأرز في تيغالالانغ - قرية أوبود - مشاهدة عرض الرقص التقليدي - زيارة السوق التقليدي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: شمال بالي</h3>
+                    <p>رحلة إلى شلالات جيتجيت - زيارة معبد أولون دانو براتان - بحيرة براتان - العودة إلى الفندق.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: رحلة إلى يوجياكارتا</h3>
+                    <p>رحلة جوية إلى يوجياكارتا - الوصول إلى الفندق - زيارة قصر السلطان - شارع ماليوبورو للتسوق.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: معابد يوجياكارتا</h3>
+                    <p>زيارة معبد برامبانان - معبد بوروبودور - مشاهدة غروب الشمس من أحد المعابد - العودة إلى الفندق.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا التذكارية - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.mofa.gov.om" class="resource-link" target="_blank">وزارة الخارجية العمانية</a>
+                <a href="https://molina.imigrasi.go.id" class="resource-link" target="_blank">التأشيرة الإلكترونية لإندونيسيا</a>
+                <a href="https://www.indonesia.travel" class="resource-link" target="_blank">السياحة في إندونيسيا</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً إذا لزم الأمر
+    </script>
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نيوزيلندا - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #00573F;
+            --secondary-green: #007A5E;
+            --light-green: #8FC31F;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-green);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-green);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-green);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-green);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #E6F4EA;
+            border-left: 4px solid #34A853;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="oceania.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/nz.png')"></div>
+            <h1>نيوزيلندا (New Zealand)</h1>
+            <h2>أوتياروا - قارة أوقيانوسيا</h2>
+            <p>عاصمة: ويلينغتون - اللغة الرسمية: الإنجليزية، الماورية - التوقيت: UTC+12/+13</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>أزرق مع علم المملكة المتحدة في الزاوية وأربعة نجوم حمراء تمثل الصليب الجنوبي</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>268,021 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 5.1 مليون نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>ويلينغتون</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC+12 (التوقيت القياسي)، UTC+13 (توقيت الصيف)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+64</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>يحتاجون إلى تأشيرة NZeTA (تصريح سفر إلكتروني) قبل السفر إلى نيوزيلندا</p>
+                </div>
+                <div class="info-card">
+                    <h3>نوع التأشيرة</h3>
+                    <p>NZeTA للسياحة لمدة تصل إلى 3 أشهر (ليست تأشيرة ولكن تصريح سفر إلكتروني)</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر ساري المفعول، تأمين سفر، تذكرة عودة، إثبات القدرة المالية، استمارة NZeTA</p>
+                </div>
+                <div class="info-card">
+                    <h3>التكلفة والمدة</h3>
+                    <p>رسوم NZeTA: 17 دولار نيوزيلندي، ورسوم IVL (ضيف بيئي دولي): 35 دولار نيوزيلندي</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة المعالجة</h3>
+                    <p>عادةً تتم الموافقة على NZeTA خلال 72 ساعة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مكان التقديم</h3>
+                    <p>عبر التطبيق الرسمي أو الموقع الإلكتروني لنيوزيلندا</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>لا توجد رحلات مباشرة من عمان إلى نيوزيلندا. الرحلات تتطلب توقف في دول مثل أستراليا أو الإمارات أو سنغافورة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>تقريباً بين 20 إلى 28 ساعة حسب نقاط التوقف والانتظار</p>
+                </div>
+                <div class="info-card">
+                    <h3>المطارات</h3>
+                    <p>مطار أوكلاند الدولي (AKL) هو المطار الرئيسي، ومطار كرايستشيرش (CHC)، ومطار ويلينغتون (WLG)</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواصلات الداخلية</h3>
+                    <p>رحلات جوية محلية، قطارات، حافلات، سيارات تأجير، عبّارات بين الجزر</p>
+                </div>
+                <div class="info-card">
+                    <h3>من المطار إلى المدينة</h3>
+                    <p>حافلات المطار، سيارات الأجرة، خدمات نقل مسبق الحجز، وسائل النقل العام في المدن الكبرى</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>فنادق، منتجعات، بيوت ضيافة، شقق فندقية، نزل، مزارع، منتجعات تزلج</p>
+                </div>
+                <div class="info-card">
+                    <h3>أفضل المناطق للإقامة</h3>
+                    <p>أوكلاند (وسط المدينة)، كوينزتاون، كرايستشيرش، ويلينغتون، روتوروا</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>من 100 إلى 300 دولار نيوزيلندي حسب نوع الإقامة والموقع والموسم</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>Booking.com, Expedia, Airbnb، أو مباشرة عبر مواقع الفنادق</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>دولار نيوزيلندي (NZD)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 NZD ≈ 0.24 OMR (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>بطاقات الائتمان مقبولة على نطاق واسع، الدفع النقدي أقل شيوعاً خاصة في المدن</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>أجهزة الصراف الآلي متوفرة في جميع المدن والبلدات</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>ديسمبر إلى فبراير (الصيف) للطقس الدافئ والأنشطة الخارجية، أو سبتمبر إلى نوفمبر (الربيع) للأزهار والطقس المعتدل</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>معتدل بحري، مع تنوع كبير بين المناطق. الشمال أكثر دفئاً من الجنوب</p>
+                </div>
+                <div class="info-card">
+                    <h3>درجة الحرارة</h3>
+                    <p>تتراوح بين 10°C إلى 25°C في معظم المناطق، مع برودة أكبر في المناطق الجبلية</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>طبقات (layering)، معطف مضاد للمطر، ملابس دافئة للجبال، ملابس سباحة للشواطئ والينابيع الساخنة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغات</h3>
+                    <p>الإنجليزية (رسمية)، الماورية (رسمية)، لغة الإشارة النيوزيلندية (رسمية)</p>
+                </div>
+                <div class="info-card">
+                    <h3>الدين</h3>
+                    <p>مسيحية (37%)، لا دينيون (48%)، أديان أخرى (15%)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات والتقاليد</h3>
+                    <p>احترام ثقافة الماوري، التحية بالأنف (hongi) في المناسبات التقليدية، احترام الطبيعة والبيئة</p>
+                </div>
+                <div class="info-card">
+                    <h3>القوانين المهمة</h3>
+                    <p>القيادة على الجانب الأيسر، سن الشرب 18 عاماً، قيود صارمة على استيراد المنتجات الغذائية والزراعية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>Spark, Vodafone NZ, 2degrees</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات SIM مسبقة الدفع متوفرة في المطارات ومحلات البيع</p>
+                </div>
+                <div class="info-card">
+                    <h3>التغطية</h3>
+                    <p>جيدة في المدن والمناطق المأهولة، محدودة في المناطق النائية والجبلية</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>متوفر في الفنادق والمقاهي، مع سرعات جيدة في المدن</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>نيوزيلندا آمنة بشكل عام، لكن ينصح باتخاذ الاحتياطات المعتادة ضد السرقة خاصة في المدن الكبرى</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يُنصح بشدة بالتأمين الصحي للسفر لأن الرعاية الصحية للزوار مكلفة</p>
+                </div>
+                <div class="info-card">
+                    <h3>الرعاية الصحية</h3>
+                    <p>الرعاية الطبية ممتازة ولكنها مكلفة للزوار بدون تأمين</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>طوارئ: 111 (شرطة، إسعاف، إطفاء)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الجزيرة الشمالية</h3>
+                    <p>أوكلاند، روتوروا (الينابيع الساخنة)، وايتومو (كهوف اليراعات)، خليج الجزر، منتزه تونغاريرو الوطني</p>
+                </div>
+                <div class="info-card">
+                    <h3>الجزيرة الجنوبية</h3>
+                    <p>كوينزتاون، ميلفورد ساوند، فرانز جوزيف Glaciers، كرايستشيرش، دنيدن، أبيل تاسمان الوطني</p>
+                </div>
+                <div class="info-card">
+                    <h3>الأنشطة</h3>
+                    <p>التزلج، ركوب الزوارق، المشي لمسافات طويلة، القفز البنجي، رحلات الطيران، مشاهدة الحيتان، زيارة مواقع ثقافة الماوري</p>
+                </div>
+                <div class="info-card">
+                    <h3>الفعاليات</h3>
+                    <p>مهرجان هاكا، سباق يخوت أمريكا كأس، مهرجانات الطعام والنبيذ، احتفالات رأس السنة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~20-40 دولار نيوزيلندي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات محلية</h3>
+                    <p>~2-5 دولار نيوزيلندي للحافلات داخل المدينة</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة معلم سياحي</h3>
+                    <p>~30-100 دولار نيوزيلندي حسب النشاط</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>150-300 دولار نيوزيلندي/يوم حسب نمط الإنفاق</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 10 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى أوكلاند</h3>
+                    <p>الوصول إلى مطار أوكلاند - الانتقال إلى الفندق - استراحة - استكشاف وسط المدينة - صعود برج سكاي تاور.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: أوكلاند وخليج الجزر</h3>
+                    <p>جولة في ميناء أوكلاند - رحلة إلى خليج الجزر - رحلة بالقارب - مشاهدة الدلافين - العودة إلى أوكلاند.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: الانتقال إلى روتوروا</h3>
+                    <p>رحلة برية إلى روتوروا - زيارة قرية الماوري الثقافية - مشاهدة عروض الهاكا التقليدية - الاسترخاء في الينابيع الساخنة.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: روتوروا والمناطق الحرارية</h3>
+                    <p>زيارة وايوتابو الحرارية - مشاهدة بحيرة الفيروز - نافورة السجين - منطقة الينابيع الساخنة - السوق الليلي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: الانتقال إلى كوينزتاون</h3>
+                    <p>رحلة جوية إلى كوينزتاون - الانتقال إلى الفندق - استكشاف بحيرة واكاتيبو - ركوب التلفريك - مشاهدة المناظر البانورامية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: مغامرات كوينزتاون</h3>
+                    <p>اختيار بين القفز البنجي، ركوب الزوارق، الطيران بالمظلات، أو رحلة إلى ميلفورد ساوند.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: رحلة إلى ميلفورد ساوند</h3>
+                    <p>رحلة يوم كامل إلى ميلفورد ساوند - رحلة بالقارب بين المنحدرات الشاهقة - مشاهدة الشلالات والحياة البرية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 8: الانتقال إلى فرانز جوزيف</h3>
+                    <p>رحلة برية عبر المناظر الطبيعية الخلابة - زيارة Glaciers - جولة بالقرب من الأنهار الجليدية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 9: كرايستشيرش</h3>
+                    <p>رحلة إلى كرايستشيرش - جولة في المدينة - زيارة حديقة النباتات - متحف كانتربري.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 10: المغادرة</h3>
+                    <p>تسوق آخر للهدايا التذكارية - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> نيوزيلندا بلد كبير ومتنوع، لذا يوصى بالتخطيط المسبق للرحلات الداخلية وحجز الأنشطة خاصة في مواسم الذروة.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.immigration.govt.nz" class="resource-link" target="_blank">هجرة نيوزيلندا - معلومات NZeTA</a>
+                <a href="https://www.newzealand.com" class="resource-link" target="_blank">المكتب السياحي الرسمي لنيوزيلندا</a>
+                <a href="https://www.airnewzealand.com" class="resource-link" target="_blank">الخطوط الجوية النيوزيلندية</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً إذا لزم الأمر
+    </script>
+</body>
+</html>

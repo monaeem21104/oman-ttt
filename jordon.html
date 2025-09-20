@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأردن - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #006341;
+            --secondary-green: #008753;
+            --light-green: #66B032;
+            --black: #000000;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-green);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-green);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-green);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-green);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .warning {
+            background: #F8D7DA;
+            border-left: 4px solid #DC3545;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="asia.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/jo.png')"></div>
+            <h1>الأردن (Jordan)</h1>
+            <h2>المملكة الأردنية الهاشمية - قارة آسيا</h2>
+            <p>عاصمة: عمان - اللغة الرسمية: العربية - التوقيت: UTC+3</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>ألوانه الأسود والأبيض والأخضر مع مثلث أحمر في الجهة اليسرى ونجمة سباعية بيضاء في وسطه</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>89,342 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 11 مليون نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>عمان</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC+3 (توقيت الأردن)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+962</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>لا يحتاج العمانيون إلى تأشيرة مسبقة لزيارة الأردن لمدة تصل إلى 3 أشهر</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع التأشيرات</h3>
+                    <p>سياحية، عمل، دراسية، عبور</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر ساري المفعول (6 أشهر على الأقل)، صورة شخصية، استمارة طلب التأشيرة (لغير العمانيين)</p>
+                </div>
+                <div class="info-card">
+                    <h3>التكلفة والمدة</h3>
+                    <p>لغير المواطنين العرب: تأشيرة الدخول لمرة واحدة 40 دينار أردني، وتأشيرة متعددة الدخول 120 دينار</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة المعالجة</h3>
+                    <p>تستغرق عادة من 3 إلى 5 أيام عمل</p>
+                </div>
+                <div class="info-card">
+                    <h3>مكان التقديم</h3>
+                    <p>السفارات والقنصليات الأردنية حول العالم، أو عبر الإنترنت (لجنسيات محددة)</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>ملاحظة:</strong> يمكن للمواطنين العمانيين الدخول إلى الأردن بدون تأشيرة مسبقة لمدة تصل إلى 3 أشهر.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>توجد رحلات مباشرة من مسقط إلى عمان على الخطوط الجوية الملكية الأردنية والطيران العماني</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>تستغرق الرحلة المباشرة حوالي 3 ساعات و30 دقيقة</p>
+                </div>
+                <div class="info-card">
+                    <h3>شركات الطيران</h3>
+                    <p>الخطوط الجوية الملكية الأردنية، الطيران العماني، طيران العربية، طيران الشرق الأوسط</p>
+                </div>
+                <div class="info-card">
+                    <h3>من المطار إلى المدينة</h3>
+                    <p>تتوفر سيارات الأجرة والحافلات من مطار الملكة علياء الدولي إلى وسط عمان (حوالي 35 دقيقة)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل المناطق للسكن في عمان</h3>
+                    <p>الصويفية، الشميساني، عبدون، دوار الداخلية</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>فنادق فاخرة (5 نجوم)، فنادق متوسطة، شقق فندقية، بيوت ضيافة</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>فنادق 3★ تبدأ من ~30-70 دينار أردني، فنادق 5★ تبدأ من ~100-200 دينار أردني</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>يُنصح بالحجز مسبقاً عبر مواقع الحجوزات الإلكترونية أو وكالات السفر</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>الدينار الأردني (JOD)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 OMR ≈ 1.85 JOD (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>يُفضل استخدام النقد (العملة المحلية)، مع قبول البطاقات الائتمانية في الفنادق والمطاعم الكبرى</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>أجهزة الصراف الآلي متوفرة على نطاق واسع في المدن والمناطق السياحية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>الربيع (مارس-مايو) والخريف (سبتمبر-نوفمبر) لطقس معتدل ومناسب للسياحة</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>صيف حار وجاف، وشتاء بارد وممطر مع تساقط الثلوج أحياناً في المرتفعات</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس خفيفة في الصيف، وملابس دافئة في الشتاء، مع مراعاة الملابس المحتشمة عند زيارة الأماكن الدينية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>العربية هي اللغة الرسمية، وتنتشر الإنجليزية على نطاق واسع</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>احترام القوانين والعادات المحلية، ارتداء الملابس المحتشمة في الأماكن الدينية، تجنب التقاط الصور للقواعد العسكرية</p>
+                </div>
+                <div class="info-card">
+                    <h3>أوقات العمل</h3>
+                    <p>المحلات تفتح عادة من 9:00-18:00 مع إغلاق خلال أوقات الصلاة يوم الجمعة</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات</h3>
+                    <p>التحية التقليدية "السلام عليكم"، المصافحة باليد اليمنى، إزالة الأحذية عند دخول المنازل والمساجد</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>زين الأردن، أمنية، أورانج الأردن</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات مسبقة الدفع متوفرة في المحلات ومكاتب الشركات</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>خدمة الإنترنت متوفرة على نطاق واسع مع تغطية جيدة في المدن والمناطق السياحية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>الأردن دولة آمنة ومستقرة، وتتمتع بمستوى أمان مرتفع مقارنة بغيرها من دول المنطقة</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يُنصح بالحصول على تأمين صحي للسفر لتغطية النفقات الطبية في حالات الطوارئ</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>الشرطة: 911 — إسعاف: 911 — إطفاء: 911</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>ملاحظة:</strong> الأردن تعتبر من الدول الآمنة للسياحة، ولكن يُنصح دائمًا باتخاذ الاحتياطات العامة ومراقبة التطورات الأمنية.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>البتراء</h3>
+                    <p>إحدى عجائب الدنيا السبع الجديدة، مدينة أثرية منحوتة في الصخور الوردية</p>
+                </div>
+                <div class="info-card">
+                    <h3>وادي رم</h3>
+                    <p>صحراء خلابة تشتهر بتكويناتها الصخرية الفريدة ومشاهد غروب الشمس الساحرة</p>
+                </div>
+                <div class="info-card">
+                    <h3>البحر الميت</h3>
+                    <p>أخفض نقطة على سطح الأرض، تشتهر بمياهها المالحة والطين العلاجي</p>
+                </div>
+                <div class="info-card">
+                    <h3>جرش</h3>
+                    <p>مدينة رومانية أثرية تحافظ على مبانيها الرومانية بشكل مذهل</p>
+                </div>
+                <div class="info-card">
+                    <h3>عمان</h3>
+                    <p>القلعة، المدرج الروماني، متحف الأردن، أسواق وسط البلد</p>
+                </div>
+                <div class="info-card">
+                    <h3>أقصاب</h3>
+                    <p>قلعة十字军 التاريخية التي تطل على وادي الأردن</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~5-10 دينار أردني</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات عامة</h3>
+                    <p>~0.5-1 دينار أردني</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة معلم سياحي</h3>
+                    <p>تختلف (البتراء: 50 دينار للزائر الأجنبي، 1 دينار للعربي المقيم)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>50-100 دينار أردني/يوم (يعتمد على نمط الإنفاق)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى عمان</h3>
+                    <p>الوصول إلى مطار الملكة علياء الدولي - الانتقال إلى الفندق - استراحة - جولة في وسط البلد والتسوق من الأسواق الشعبية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: استكشاف عمان</h3>
+                    <p>زيارة القلعة والمدرج الروماني - متحف الأردن - جولة في مناطق عبدون والشميساني - عشاء في مطعم تقليدي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: رحلة إلى البتراء</h3>
+                    <p>الانتقال إلى البتراء (3 ساعات بالسيارة) - استكشاف المدينة الوردية - السيق والخزنة - العودة إلى عمان مساءً.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: رحلة إلى وادي رم</h3>
+                    <p>الانتقال إلى وادي رم (4 ساعات بالسيارة) - جولة بالجمال أو سيارات الدفع الرباعي - مشاهدة غروب الشمس - المبيت في المخيم الصحراوي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: البحر الميت</h3>
+                    <p>الانتقال إلى البحر الميت (ساعتين بالسيارة) - الاستمتاع بالطفو في المياه المالحة - العلاج بالطين - العودة إلى عمان مساءً.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: جرش وأقصاب</h3>
+                    <p>الانتقال إلى جرش (ساعة بالسيارة) - استكشاف الآثار الرومانية - زيارة قلعة十字军 في أقصاب - العودة إلى عمان.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا التذكارية - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.mota.gov.jo" class="resource-link" target="_blank">وزارة السياحة الأردنية</a>
+                <a href="https://www.visitjordan.com" class="resource-link" target="_blank">المجلس الوطني للسياحة الأردنية</a>
+                <a href="https://www.mofa.gov.om" class="resource-link" target="_blank">وزارة الخارجية العمانية</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً إذا لزم الأمر
+    </script>
+</body>
+</html>

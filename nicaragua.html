@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نيكاراغوا - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-orange: #FF6B35;
+            --secondary-orange: #FF8C42;
+            --light-orange: #FFB366;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-orange);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-orange);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-orange);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-orange);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-orange);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-orange);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-orange);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="central-america.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/ni.png')"></div>
+            <h1>نيكاراغوا (Nicaragua)</h1>
+            <h2>جمهورية نيكاراغوا - قارة أمريكا الوسطى</h2>
+            <p>عاصمة: ماناغوا - اللغة الرسمية: الإسبانية - توقيت نيكاراغوا: CST</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>ثلاث شرائط أفقية (أزرق - أبيض - أزرق) مع شعار النبالة في المنتصف</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>130,375 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 6.7 مليون نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>ماناغوا</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC-6 (توقيت وسط أمريكا)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+505</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>لا يحتاج العُمانيون إلى تأشيرة مسبقة لدخول نيكاراغوا لمدة تصل إلى 90 يوماً</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر ساري المفعول لمدة 6 أشهر على الأقل، تذكرة عودة، إثبات القدرة المالية</p>
+                </div>
+                <div class="info-card">
+                    <h3>رسوم الدخول</h3>
+                    <p>10 دولار أمريكي عند الوصول (قد تتغير)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تأشيرة العبور</h3>
+                    <p>غير مطلوبة للرحلات العابرة التي لا تغادر منطقة المطار</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>لا توجد رحلات مباشرة من عُمان إلى نيكاراغوا. تتطلب الرحلة توقفاً في أمريكا أو أوروبا ثم إلى ماناغوا</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>تقريباً 18-24 ساعة مع التوقف</p>
+                </div>
+                <div class="info-card">
+                    <h3>مطار الوصول</h3>
+                    <p>مطار أوغستو ساندينو الدولي (MGA) في ماناغوا</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواصلات الداخلية</h3>
+                    <p>حافلات، تاكسيات، وسيارات أجرة مشتركة. تأجير السيارات متاح لكن القيادة قد تكون صعبة خارج المدن</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل المناطق للسكن</h3>
+                    <p>غراندا (منطقة استعمارية جميلة)، سان خوان ديل سور (للشواطئ)، ماناغوا (للاستكشاف الحضري)</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>من نزل اقتصادية إلى منتجعات فاخرة، خاصة في مناطق الجزر والشواطئ</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>30-80 دولار أمريكي لفنادق 3 نجوم، 100-200 دولار للفنادق الفاخرة</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>Booking.com, Airbnb، أو الحجز مباشرة مع الفنادق المحلية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>كوردوبا نيكاراغوا (NIO)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 OMR ≈ 105 NIO (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>استخدام الدولار</h3>
+                    <p>يقبل الدولار الأمريكي في العديد من الأماكن السياحية</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>يُفضل الدفع نقداً خاصة خارج المدن الكبرى. البطاقات الائتمانية مقبولة في الفنادق الكبرى والمطاعم</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>من نوفمبر إلى أبريل (موسم الجفاف) حيث تكون الأجواء أكثر اعتدالاً وهطول أقل للأمطار</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>استوائي حار على السواحل، معتدل في المرتفعات. موسم الأمطار من مايو إلى أكتوبر</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس قطنية خفيفة، ملابس سباحة، واق من المطر خلال موسم الأمطار، سترة خفيفة للمساء</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>الإسبانية هي اللغة الرسمية. الإنجليزية محدودة خارج المناطق السياحية</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>احترام التقاليد المحلية، تجنب التصوير العسكري، عدم تعاطي المخدرات</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات المحلية</h3>
+                    <p>الشعب ودود ومضياف. التحية اللفظية مهمة قبل بدء المحادثات</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإكراميات</h3>
+                    <p>10% من الفاتورة في المطاعم إذا لم تكن مضمنة. غير متوقعة في خدمات أخرى</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>Claro, Movistar, COOTEL</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات SIM مسبقة الدفع متوفرة بأسعار معقولة</p>
+                </div>
+                <div class="info-card">
+                    <h3>التغطية</h3>
+                    <p>جيدة في المدن، محدودة في المناطق النائية والجزر</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>متوفر في الفنادق والمقاهي في المدن، قد يكون بطيئاً في المناطق النائية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>نيكاراغوا آمنة نسبياً لكن يجب توخي الحذر من السرقة في المدن الكبرى</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يُنصح بشدة بتأمين سفر يغطي النفقات الطبية والإخلاء الطبي</p>
+                </div>
+                <div class="info-card">
+                    <h3>اللقاحات</h3>
+                    <p>يُنصح بلقاحات التهاب الكبد A والتيفوئيد، خاصة لمن يزورون المناطق الريفية</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>الشرطة 118 — الطوارئ الطبية 128 — الإطفاء 115</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مدينة غراندا</h3>
+                    <p>أقدم مدينة استعمارية، معمارها الجميل وشوارعها المرصوفة بالحجارة</p>
+                </div>
+                <div class="info-card">
+                    <h3>جزر أوميتيبي</h3>
+                    <p>أكبر جزيرة بركانية في بحيرة نيكاراغوا، طبيعة خلابة وتاريخ غني</p>
+                </div>
+                <div class="info-card">
+                    <h3>سان خوان ديل سور</h3>
+                    <p>منتجع ساحلي شهير للموجات، ركوب الأمواج والاسترخاء على الشاطئ</p>
+                </div>
+                <div class="info-card">
+                    <h3>ليون</h3>
+                    <p>مدينة تاريخية ذات أهمية ثقافية، مع كاتدرائية ليون التي تعتبر من مواقع التراث العالمي لليونسكو</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~5-10 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات عامة</h3>
+                    <p>~0.5-1 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة معلم سياحي</h3>
+                    <p>~5-15 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>40-80 دولار أمريكي/يوم (يعتمد على نمط الإنفاق)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى ماناغوا</h3>
+                    <p>الوصول إلى مطار ماناغوا - الانتقال إلى الفندق - استراحة - جولة قصيرة في وسط المدينة - عشاء في مطعم محلي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: استكشاف غراندا</h3>
+                    <p>الانتقال إلى غراندا (ساعة بالسيارة) - استكشاف المركز التاريخي - زيارة كاتدرائية غراندا - جولة بالقارب في بحيرة نيكاراغوا.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: جزر أوميتيبي</h3>
+                    <p>رحلة إلى جزيرة أوميتيبي - زيارة متحف الآثار والمسارات الطبيعية - استكشاف الفن الصخري القديم - العودة إلى غراندا مساءً.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: سان خوان ديل سور</h3>
+                    <p>الانتقال إلى سان خوان ديل سور (ساعتان بالسيارة) - استراحة على الشاطئ - تجربة ركوب الأمواج أو مشاهدة المتزلجين المحترفين.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: محمية الطبيعية وماسايا</h3>
+                    <p>زيارة بركان ماسايا النشط - مشاهدة الحمم البركانية - جولة في سوق الحرف اليدوية في ماسايا - العودة إلى ماناغوا.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: مدينة ليون</h3>
+                    <p>رحلة إلى ليون (ساعة ونصف بالسيارة) - زيارة كاتدرائية ليون - متحف الثورة - العودة إلى ماناغوا للتسوق الليلي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا التذكارية - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> يُنصح بالسفر بين المدن في ساعات النهار وتجنب القيادة ليلاً لسلامتك.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.visitnicaragua.us" class="resource-link" target="_blank">المجلس السياحي الرسمي لنيكاراغوا</a>
+                <a href="https://www.migob.gob.ni" class="resource-link" target="_blank">هجرة نيكاراغوا (المعلومات الرسمية)</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+                <a href="https://www.tripadvisor.com/Tourism-g294479-Nicaragua-Vacations.html" class="resource-link" target="_blank">مراجعات السياح في نيكاراغوا</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً هنا
+    </script>
+</body>
+</html>

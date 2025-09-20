@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بالاو - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0072BC;
+            --secondary-blue: #0099D5;
+            --light-blue: #6EC4E8;
+            --yellow: #FFD100;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-blue);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #E3F2FD;
+            border-left: 4px solid var(--primary-blue);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="pacific.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/pw.png')"></div>
+            <h1>بالاو (Palau)</h1>
+            <h2>جمهورية بالاو - قارة أوقيانوسيا</h2>
+            <p>عاصمة: نغيرولمد - اللغة الرسمية: البالاوية والإنجليزية - التوقيت: UTC+9</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>خلفية زرقاء بدائرة صفراء في المنتصف ترمز إلى القمر</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>459 كم² (تتكون من حوالي 340 جزيرة)</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 18,000 نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>نغيرولمد (على جزيرة بابيلداوب)</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC+9 (لا يوجد توقيت صيفي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+680</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>يمكن لمواطني عُمان الدخول إلى بالاو بدون تأشيرة لمدة تصل إلى 30 يوماً</p>
+                </div>
+                <div class="info-card">
+                    <h3>متطلبات الدخول</h3>
+                    <p>جواز سفر ساري المفعول لمدة 6 أشهر على الأقل، تذكرة عودة، وإثبات كافٍ للإقامة</p>
+                </div>
+                <div class="info-card">
+                    <h3>تصريح الإقامة</h3>
+                    <p>للبقاء أكثر من 30 يوماً، يجب التقدم بطلب للحصول على تصريح إقامة</p>
+                </div>
+                <div class="info-card">
+                    <h3>الضرائب البيئية</h3>
+                    <p>يجب على جميع الزوار دفع ضريبة بيئية قدرها 100 دولار عند المغادرة (مضمنة في تذكرة الطيران غالباً)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>لا توجد رحلات مباشرة من عُمان إلى بالاو. أفضل المسارات عبر مانيلا أو تايوان أو سيول</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>مدة السفر الإجمالية مع التوقف تتراوح بين 18 إلى 24 ساعة حسب المسار</p>
+                </div>
+                <div class="info-card">
+                    <h3>مطار بالاو الدولي</h3>
+                    <p>مطار رومان تيميتوشل الدولي (ROR) في جزيرة بابيلداوب</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواصلات الداخلية</h3>
+                    <p>سيارات الأجرة محدودة، يفضل استئجار سيارة أو استخدام القوارب للتنقل بين الجزر</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>منتجعات فاخرة، فنادق متوسطة، نزل بيئية، ومنازل ضيافة</p>
+                </div>
+                <div class="info-card">
+                    <h3>أفضل المناطق للإقامة</h3>
+                    <p>كورور (العاصمة التجارية)، جزيرة بابيلداوب، ومنتجعات الجزر الخاصة</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>يتراوح بين 100-400 دولار أمريكي حسب نوع الإقامة والموسم</p>
+                </div>
+                <div class="info-card">
+                    <h3>الحجز المسبق</h3>
+                    <p>يُفضل الحجز مسبقاً خاصة في مواسم الذروة (ديسمبر-فبراير ويوليو-أغسطس)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>الدولار الأمريكي (USD)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 USD ≈ 0.38 OMR (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>يُفضل الدفع نقداً، خاصة في الجزر الصغيرة. البطاقات الائتمانية مقبولة في المنتجعات الكبرى</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>أجهزة الصراف الآلي محدودة (متوفرة في كورور ومطار رور)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>من نوفمبر إلى أبريل (موسم الجفاف) حيث تكون درجات الحرارة معتدلة والأمطار أقل</p>
+                </div>
+                <div class="info-card">
+                    <h3>موسم الأمطار</h3>
+                    <p>من مايو إلى أكتوبر مع أمطار متكررة ورطوبة عالية</p>
+                </div>
+                <div class="info-card">
+                    <h3>درجة الحرارة</h3>
+                    <p>تتراوح بين 24-31°م على مدار العام</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس خفيفة قطنية، ملابس سباحة، واقي من الشمس، سترة خفيفة للأمسيات</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغات</h3>
+                    <p>اللغة البالاوية (رسمية) والإنجليزية (منتشرة على نطاق واسع)</p>
+                </div>
+                <div class="info-card">
+                    <h3>القوانين البيئية</h3>
+                    <p>قوانين بيئية صارمة لحماية الحياة البحرية. يُمنع لمس الشعاب المرجانية أو إزعاج الحياة البحرية</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات المحلية</h3>
+                    <p>ثقافة تقليدية قوية. يُطلب من الزوار احترام التقاليد والعادات المحلية</p>
+                </div>
+                <div class="info-card">
+                    <h3>نظام الحكم</h3>
+                    <p>جمهورية ديمقراطية رئاسية في ارتباط حر مع الولايات المتحدة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>Palau National Communications Corporation (PNCC) هي المزود الرئيسي</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات SIM مسبقة الدفع متوفرة في المطار ومتاجر PNCC</p>
+                </div>
+                <div class="info-card">
+                    <h3>جودة التغطية</h3>
+                    <p>التغطية جيدة في الجزر المأهولة، محدودة في الجزر النائية</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>متوفر في الفنادق والمنتجعات، لكن السرعة قد تكون محدودة في بعض المناطق</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>بالاو آمنة جداً للسياح مع معدل جريمة منخفض جداً</p>
+                </div>
+                <div class="info-card">
+                    <h3>المخاطر الطبيعية</h3>
+                    <p>الاهتمام بتحذيرات الطقس وأمواج البحر أثناء ممارسة الأنشطة المائية</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يُنصح بشدة بالتأمين الصحي والسفري الذي يغطي الإخلاء الطبي</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>الشرطة: 911 - المستشفى: 488-2558 أو 911 للطوارئ</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>بحيرات قنديل البحر</h3>
+                    <p>أشهر معالم بالاو، حيث يمكن السباحة مع قناديل البحر غير اللاسعة</p>
+                </div>
+                <div class="info-card">
+                    <h3>الشعاب المرجانية</h3>
+                    <p>من أفضل مواقع الغوص في العالم، مع تنوع حيوي مذهل</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصب بالاو الوطني</h3>
+                    <p>منطقة محمية تضم مجموعة من الجزر الصخرية المغطاة بالخضرة</p>
+                </div>
+                <div class="info-card">
+                    <h3>شلالات نجاردماو</h3>
+                    <p>أعلى شلالات في بالاو، موقع رائع للتصوير والاسترخاء</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~15-25 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>زجاجة المياه</h3>
+                    <p>~1-2 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>جولة غوص</h3>
+                    <p>~80-150 دولار أمريكي للغوصة الواحدة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>150-300 دولار أمريكي/يوم (يعتمد على نمط الإنفاق والأنشطة)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول واستكشاف كورور</h3>
+                    <p>الوصول إلى مطار رور - الانتقال إلى الفندق في كورور - استراحة - جولة في متحف بالاو الوطني - عشاء في مطعم محلي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: جولة بالقارب في الجزر الصخرية</h3>
+                    <p>رحلة بالقارب إلى النصب الصخري الوطني - السباحة والغوص - مشاهدة المنحدرات الشهيرة - غروب الشمس الرائع.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: بحيرات قنديل البحر</h3>
+                    <p>رحلة إلى بحيرة قنديل البحر - السباحة مع القناديل غير اللاسعة - استكشاف القنوات المائية المحيطة.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: الغوص في حطام السفن</h3>
+                    <p>غوص في مواقع شهيرة مثل Blue Corner أو German Channel - مشاهدة أسماك القرش والمانتا راي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: جزيرة بابيلداوب</h3>
+                    <p>جولة في أكبر جزر بالاو - زيارة شلالات نجاردماو - التعرف على الثقافة المحلية في القرى التقليدية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: يوم حر للاسترخاء</h3>
+                    <p>وقت للاسترخاء على الشاطئ - التسوق للهدايا التذكارية - سباحة في بحيرة الحليب الشهيرة.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا - دفع الضريبة البيئية - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> احرص على حجز جولات الغوص والأنشطة المائية مسبقاً خاصة في مواسم الذروة.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.palaugov.pw" class="resource-link" target="_blank">الموقع الرسمي لحكومة بالاو</a>
+                <a href="https://www.visitpalau.org" class="resource-link" target="_blank">مكتب السياحة في بالاو</a>
+                <a href="https://www.palaudiver.com" class="resource-link" target="_blank">دليل الغوص في بالاو</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً إذا لزم الأمر
+    </script>
+</body>
+</html>

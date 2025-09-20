@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>باراغواي - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0038A8;
+            --secondary-blue: #0051F2;
+            --light-blue: #4B92DB;
+            --white: #FFFFFF;
+            --red: #D52B1E;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-blue);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="south-america.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/py.png')"></div>
+            <h1>باراغواي (Paraguay)</h1>
+            <h2>جمهورية باراغواي - قارة أمريكا الجنوبية</h2>
+            <p>عاصمة: أسونسيون - اللغة الرسمية: الإسبانية والغوارانية - التوقيت: GMT-4</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>ثلاثة أشرطة أفقية (أحمر - أبيض - أزرق) مع شعار النبالة في الوسط</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>406,752 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 7.3 مليون نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>أسونسيون</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>توقيت باراغواي (GMT-4)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+595</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>لا يحتاج العُمانيون إلى تأشيرة مسبقة لدخول باراغواي للسياحة لمدة تصل إلى 90 يومًا</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر ساري المفعول لمدة 6 أشهر على الأقل، تذكرة عودة، دليل على وجود أموال كافية للإقامة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الإقامة</h3>
+                    <p>حتى 90 يومًا قابلة للتمديد محليًا</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يُنصح بشدة بالحصول على تأمين صحي للسفر</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>لا توجد رحلات مباشرة من عُمان إلى باراغواي. الرحلات تتطلب توقفًا في أوروبا أو الولايات المتحدة أو دول أمريكا الجنوبية المجاورة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>مدة السفر الإجمالية تتراوح بين 20 إلى 30 ساعة حسب التوقفات</p>
+                </div>
+                <div class="info-card">
+                    <h3>المطارات الرئيسية</h3>
+                    <p>مطار سيلفيو بيتيروسي الدولي في أسونسيون (ASU)</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواصلات الداخلية</h3>
+                    <p>حافلات مريحة بين المدن، سيارات الأجرة، وحافلات النقل العام في المدن الكبرى</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل المناطق للسكن</h3>
+                    <p>حي中心 (Centro) في أسونسيون، منطقة مانوركا، ومنتجع إيتايبو على حدود البرازيل</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>فنادق بجميع الفئات، منتجعات، نزل اقتصادية، شقق فندقية، ومنازل للإيجار عبر منصات مثل Airbnb</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>فنادق 3 نجوم تبدأ من 40-60 دولار أمريكي، فنادق 5 نجوم من 100-150 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>Booking.com, Expedia, Airbnb، أو عبر وكالات سفر محلية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>الغواراني الباراغواياني (PYG)</p>
+                </div>
+                <div class="info-card">
+                    <h3>سعر الصرف</h3>
+                    <p>1 دولار أمريكي ≈ 7,300 غواراني (يتغير يوميًا)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>البطاقات الائتمانية مقبولة في المدن الكبرى، ولكن النقد هو الأفضل في المناطق النائية والأسواق</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>أجهزة الصراف الآلي متوفرة في المدن الكبرى، ولكن قد تكون محدودة في المناطق النائية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>من مايو إلى سبتمبر (فصل الشتاء والجفاف) حيث تكون درجات الحرارة معتدلة وهطول الأمطار أقل</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>مناخ شبه استوائي: صيف حار رطب (أكتوبر-مارس) وشتاء معتدل جاف (مايو-سبتمبر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس خفيفة قطنية للصيف، ملابس دافئة للشتاء، ومعاطف مطر خلال فصل الصيف</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>الإسبانية والغوارانية هما اللغتان الرسميتان. الإنجليزية محدودة خارج المناطق السياحية</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>احترام المقدسات والثقافة المحلية، تجنب التعامل بالمخدرات، الالتزام باللوائح في المناطق المحمية</p>
+                </div>
+                <div class="info-card">
+                    <h3>أوقات العمل</h3>
+                    <p>المتاجر من 8 صباحًا إلى 6 مساءً، البنوك من 9 صباحًا إلى 3 مساءً (أيام الأسبوع)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات والإكراميات</h3>
+                    <p>الإكراميات تتراوح بين 5-10% في المطاعم، وليست إلزامية ولكنها مقدرة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>Claro, Tigo, Personal</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات SIM مسبقة الدفع متوفرة بسهولة في المطارات ومحلات الاتصالات</p>
+                </div>
+                <div class="info-card">
+                    <h3>تكلفة الشريحة</h3>
+                    <p>شريحة محلية مع باقة بيانات تبدأ من 5-10 دولارات أمريكية</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>Wi-Fi متوفر في معظم الفنادق والمقاهي في المدن الكبرى، ولكن قد يكون محدودًا في المناطق النائية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>كن حذرًا من النشل في المدن الكبرى والأماكن المزدحمة. تجنب المناطق الخطرة ليلاً</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يُنصح بشدة بالحصول على تأمين صحي شامل يغطي النشاطات الخارجية والعلاج الطبي</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>الشرطة 911 - الطوارئ الطبية 911 - الإطفاء 911</p>
+                </div>
+                <div class="info-card">
+                    <h3>التلقيح</h3>
+                    <p>يُنصح بالتلقيح ضد الحمى الصفراء والتهاب الكبد A و B</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أسونسيون</h3>
+                    <p>العاصمة ذات الهندسة المعمارية الاستعمارية، القصر الرئاسي، ومتحف باراغواي للفنون الجميلة</p>
+                </div>
+                <div class="info-card">
+                    <h3>شلالات Monday</h3>
+                    <p>شلالات رائعة تقع بالقرب من سيوداد ديل إيستي، أقل شهرة من شلالات إيغواسو ولكنها جميلة</p>
+                </div>
+                <div class="info-card">
+                    <h3>منطقة تشاكو</h3>
+                    <p>منطقة طبيعية شاسعة غنية بالحياة البرية والمحميات الطبيعية</p>
+                </div>
+                <div class="info-card">
+                    <h3>سد إيتايبو</h3>
+                    <p>أحد أكبر السدود في العالم على نهر بارانا، يمكن زيارة المنشآت ومشاهدة السد</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>8-15 دولارًا أمريكيًا</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات عامة</h3>
+                    <p>0.5-1 دولار أمريكي داخل المدن</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة معلم سياحي</h3>
+                    <p>تختلف حسب الموقع (5-15 دولار للمواقع الرئيسية)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>50-100 دولار أمريكي/يوم (يعتمد على نمط الإنفاق والمنطقة)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى أسونسيون</h3>
+                    <p>الوصول إلى مطار أسونسيون - الانتقال إلى الفندق - استراحة - نزهة في المنطقة المجاورة - التعرف على المدينة.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: اكتشاف أسونسيون</h3>
+                    <p>جولة في المركز التاريخي - زيادة القصر الرئاسي - كاتدرائية أسونسيون - متحف باراغواي للفنون الجميلة - سوق الحرف اليدوية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: رحلة إلى سد إيتايبو</h3>
+                    <p>رحلة إلى سد إيتايبو الضخم - جولة في المنشآت - مشاهدة السد - العودة إلى أسونسيون مساءً.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: شلالات Monday</h3>
+                    <p>رحلة إلى سيوداد ديل إيستي - زيارة شلالات Monday - الاستمتاع بالمناظر الطبيعية - العودة إلى أسونسيون.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: رحلة إلى انكارناسيون</h3>
+                    <p>رحلة إلى مدينة انكارناسيون الجنوبية - زيارة آثار يسوع - الاستمتاع بالهندسة المعمارية الفريدة.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: تجربة الثقافة المحلية</h3>
+                    <p>زيارة مزرعة تقليدية - تجربة المطبخ الباراغواياني - تعلم بعض كلمات الغوارانية - تسوق للهدايا التذكارية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا التذكارية - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> جرب المأكولات المحلية مثل السوبا باراغوايا (خبز الذرة) وتيريري (شراب عشبي تقليدي).</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.paraguay.travel" class="resource-link" target="_blank">الموقع الرسمي للسياحة في باراغواي</a>
+                <a href="https://www.mre.gov.py" class="resource-link" target="_blank">وزارة الخارجية الباراغوايانية</a>
+                <a href="https://www.lonelyplanet.com/paraguay" class="resource-link" target="_blank">دليل لونلي بلانيت لباراغواي</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي scripts لاحقًا هنا
+    </script>
+</body>
+</html>

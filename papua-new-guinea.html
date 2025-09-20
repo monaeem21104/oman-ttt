@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بابوا غينيا الجديدة - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #CE1126;
+            --secondary-red: #E5425C;
+            --gold: #FCD116;
+            --black: #000000;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-red), var(--secondary-red));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-red);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-red);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-red);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-red);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-red);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-red);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #FFE6E6;
+            border-left: 4px solid var(--primary-red);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="oceania.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/pg.png')"></div>
+            <h1>بابوا غينيا الجديدة (Papua New Guinea)</h1>
+            <h2>دولة بابوا غينيا الجديدة - قارة أوقيانوسيا</h2>
+            <p>عاصمة: بورت مورسبي - اللغة الرسمية: الإنجليزية والتوك بيسين والهيري موتو - التوقيت: UTC+10</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>أحمر وأسود مع مثلث أبيض وأصفر يحتوي على طائر الجنة</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>462,840 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 9.7 مليون نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>بورت مورسبي</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC+10 (لا يوجد توقيت صيفي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+675</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>يحتاج مواطنو عُمان إلى تأشيرة لدخول بابوا غينيا الجديدة</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع التأشيرات</h3>
+                    <p>تأشيرة سياحية (60 يومًا)، تأشيرة عمل، تأشيرة زيارة</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر ساري المفعول (6 أشهر)، صور شخصية، حجز فندق، تذاكر طيران ذهاب وعودة، كشف حساب بنكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>التكلفة والمدة</h3>
+                    <p>رسوم التأشيرة حوالي 100 دولار أمريكي، وتصل صلاحيتها إلى 60 يومًا للسياحة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مكان التقديم</h3>
+                    <p>عن طريق السفارة الأسترالية (تمثل بابوا غينيا الجديدة في بعض البلدان) أو عبر الإنترنت</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>لا توجد رحلات مباشرة من عُمان. أفضل المسارات عبر سنغافورة أو أستراليا أو الفلبين</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>مدة السفر الإجمالية مع التوقف تتراوح بين 16 إلى 22 ساعة حسب المسار</p>
+                </div>
+                <div class="info-card">
+                    <h3>مطار جاكسون الدولي</h3>
+                    <p>مطار بورت مورسبي الدولي (POM) هو المطار الرئيسي</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواصلات الداخلية</h3>
+                    <p>طائرات محلية صغيرة للتنقل بين الجزر، سيارات الأجرة، والحافلات محدودة خارج المدن الكبرى</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>فنادق دولية في العاصمة، منتجعات سياحية، نزل بيئية، ومنازل ضيافة محلية</p>
+                </div>
+                <div class="info-card">
+                    <h3>أفضل المناطق للإقامة</h3>
+                    <p>بورت مورسبي (للمبتدئين)، منتجعات الجزر، ومناطق الغوص المتخصصة</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>يتراوح بين 80-250 دولار أمريكي حسب نوع الإقامة والموقع</p>
+                </div>
+                <div class="info-card">
+                    <h3>الحجز المسبق</h3>
+                    <p>يُفضل الحجز مسبقاً خاصة خارج العاصمة حيث الخيارات محدودة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>كينا بابوا غينيا الجديدة (PGK)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 PGK ≈ 0.0010 OMR (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>يُفضل الدفع نقداً، خاصة خارج المدن الكبرى. البطاقات الائتمانية مقبولة في الفنادق الكبرى</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>أجهزة الصراف الآلي متوفرة في المدن الكبرى فقط</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>المناخ الاستوائي</h3>
+                    <p>حار ورطب على مدار العام مع أمطار غزيرة</p>
+                </div>
+                <div class="info-card">
+                    <h3>موسم الجفاف</h3>
+                    <p>من مايو إلى أكتوبر (أفضل وقت للزيارة)</p>
+                </div>
+                <div class="info-card">
+                    <h3>موسم الأمطار</h3>
+                    <p>من ديسمبر إلى مارس مع أمطار غزيرة ورطوبة عالية</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس خفيفة قطنية، ملابس سباحة، واقي من المطر، أحذية مريحة للمشي</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>التنوع الثقافي</h3>
+                    <p>أكثر من 800 لغة محلية، وتعد من أكثر الدول تنوعاً ثقافياً في العالم</p>
+                </div>
+                <div class="info-card">
+                    <h3>القوانين المحلية</h3>
+                    <p>احترام التقاليد والعادات المحلية، خاصة في القرى النائية</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات التقليدية</h3>
+                    <p>مهرجانات القبائل، الرقصات التقليدية، وطقوس الزينة بالريش والألوان</p>
+                </div>
+                <div class="info-card">
+                    <h3>نظام الحكم</h3>
+                    <p>ملكية دستورية ضمن كومنولث المملكة المتحدة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>بيسيل (Bmobile) وديجيسيل (Digicel) هما المزودان الرئيسيان</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات SIM مسبقة الدفع متوفرة في المطار والمتاجر</p>
+                </div>
+                <div class="info-card">
+                    <h3>جودة التغطية</h3>
+                    <p>التغطية جيدة في المدن الكبرى، محدودة في المناطق النائية والجزر</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>متوفر في الفنادق والمنتجعات، لكن السرعة قد تكون محدودة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>يُنصح بالحذر خاصة في المناطق الحضرية ليلاً. الاستعانة بمرشدين محليين للرحلات خارج المدن</p>
+                </div>
+                <div class="info-card">
+                    <h3>المخاطر الصحية</h3>
+                    <p>الملاريا منتشرة في بعض المناطق. يوصى بتلقي التطعيمات اللازمة واستشارة طبيب السفر</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يُنصح بشدة بالتأمين الصحي والسفري الذي يغطي الإخلاء الطبي</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>الشرطة: 112 - الإسعاف: 111 - المطافئ: 110</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مهرجان سينغ سينغ</h3>
+                    <p>أشهر مهرجان ثقافي يقام سنوياً في جوروكا، يعرض تقاليد القبائل</p>
+                </div>
+                <div class="info-card">
+                    <h3>غوص السفن الغارقة</h3>
+                    <p>من أفضل مواقع غوص السفن الغارقة من الحرب العالمية الثانية</p>
+                </div>
+                <div class="info-card">
+                    <h3>حديقة متنزه وورلد هيرتيج</h3>
+                    <p>من مواقع التراث العالمي لليونسكو، تضم أنظمة بيئية فريدة</p>
+                </div>
+                <div class="info-card">
+                    <h3>جزر تروبرياند</h3>
+                    <p>شهيرة بثقافتها الفريدة وتقاليد الصيد والزراعة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~15-30 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>زجاجة المياه</h3>
+                    <p>~1-2 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>جولة غوص</h3>
+                    <p>~100-200 دولار أمريكي للغوصة الواحدة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>100-250 دولار أمريكي/يوم (يعتمد على نمط الإنفاق والأنشطة)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى بورت مورسبي</h3>
+                    <p>الوصول إلى مطار جاكسون الدولي - الانتقال إلى الفندق - استراحة - جولة في المتحف الوطني - عشاء في مطعم محلي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: استكشاف العاصمة</h3>
+                    <p>زيارة سوق الحريري - متحف بابوا غينيا الجديدة - حديقة النباتات - مشاهدة المنازل التقليدية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: رحلة إلى جوروكا</h3>
+                    <p>رحلة جوية إلى جوروكا في المرتفعات - زيارة قرية محلية - التعرف على ثقافة القبائل.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: الغوص في راباول</h3>
+                    <p>رحلة إلى راباول - غوص في مواقع السفن الغارقة من الحرب العالمية الثانية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: جزر تروبرياند</h3>
+                    <p>رحلة إلى جزر تروبرياند - التعرف على ثقافة السكان المحليين - مشاهدة الرقصات التقليدية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: العودة إلى بورت مورسبي</h3>
+                    <p>العودة إلى العاصمة - تسوق للهدايا التذكارية - عشاء الوداع.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> يُنصح بالسفر مع مرشد محلي وترتيب الرحلات الداخلية مسبقاً بسبب محدودية البنية التحتية.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.papuanewguinea.travel" class="resource-link" target="_blank">الموقع الرسمي للسياحة في بابوا غينيا الجديدة</a>
+                <a href="https://www.immigration.gov.pg" class="resource-link" target="_blank">هجرة بابوا غينيا الجديدة</a>
+                <a href="https://www.lonelyplanet.com/papua-new-guinea" class="resource-link" target="_blank">دليل لونلي بلانيت</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً إذا لزم الأمر
+    </script>
+</body>
+</html>

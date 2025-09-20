@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تركمانستان - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #006341;
+            --secondary-green: #008753;
+            --light-green: #66B032;
+            --black: #000000;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-green);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-green);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-green);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-green);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .warning {
+            background: #F8D7DA;
+            border-left: 4px solid #DC3545;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="asia.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/tm.png')"></div>
+            <h1>تركمانستان (Turkmenistan)</h1>
+            <h2>جمهورية تركمانستان - قارة آسيا</h2>
+            <p>عاصمة: عشق آباد - اللغة الرسمية: التركمانية - التوقيت: UTC+5</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>خلفية خضراء مع هلال وخمس نجوم بيضاء في الأعلى، وشريط عمودي أحمر به خمس سجادات تقليدية</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>488,100 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 6.2 مليون نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>عشق آباد</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC+5 (توقيت تركمانستان)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+993</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>يحتاجون تأشيرة دخول إلى تركمانستان، ويجب الحصول عليها مسبقاً قبل السفر</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع التأشيرات</h3>
+                    <p>سياحية، عمل، زيارة، عبور</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر ساري المفعول (6 أشهر على الأقل)، صور شخصية، خطاب دعوة معتمد، استمارة طلب التأشيرة، حجز فندق</p>
+                </div>
+                <div class="info-card">
+                    <h3>التكلفة والمدة</h3>
+                    <p>تختلف حسب نوع التأشيرة والمدة، وعادة ما تكون بين 50-85 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة المعالجة</h3>
+                    <p>تستغرق عادة من 10 إلى 15 يوم عمل</p>
+                </div>
+                <div class="info-card">
+                    <h3>مكان التقديم</h3>
+                    <p>عبر سفارة تركمانستان في أبوظبي أو طهران (لا توجد تمثيل دبلوماسي في عمان)</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>ملاحظة:</strong> تتطلب تركمانستان خطاب دعوة معتمدة للحصول على التأشيرة السياحية.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات الجوية</h3>
+                    <p>لا توجد رحلات مباشرة من عمان إلى تركمانستان، وتتطلب التوقف في دول مثل الإمارات أو تركيا</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>مع التوقف، تستغرق الرحلة من 5 إلى 8 ساعات حسب وجهة التوقف</p>
+                </div>
+                <div class="info-card">
+                    <h3>شركات الطيران</h3>
+                    <p>طيران الإمارات، الخطوط الجوية التركية، Turkmenistan Airlines</p>
+                </div>
+                <div class="info-card">
+                    <h3>من المطار إلى المدينة</h3>
+                    <p>تتوفر سيارات الأجرة من مطار عشق آباد الدولي إلى وسط المدينة (حوالي 20 دقيقة)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل المناطق للسكن في عشق آباد</h3>
+                    <p>منطقة المركز، منطقة برزخ، منطقة نيترالني</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>فنادق (من 3★ إلى 5★)، شقق فندقية</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>فنادق 3★ قد تبدأ من ~60-120 دولار أمريكي لليلة</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>يُنصح بالحجز مسبقاً عبر مواقع الحجوزات الدولية أو وكالات السفر</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>مانات تركمانستاني (TMT)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 OMR ≈ 9.8 TMT (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>يُفضل استخدام النقد (العملة المحلية أو الدولار الأمريكي)، مع قبول محدود للبطاقات الائتمانية في الفنادق الكبرى</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>أجهزة الصراف الآلي متوفرة في المدن الكبرى ولكن قد تكون محدودة خارج العاصمة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>الربيع (أبريل-مايو) والخريف (سبتمبر-أكتوبر) لطقس معتدل</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>صيف حار وجاف (قد تصل إلى 45°م)، وشتاء بارد مع تساقط ثلوج خفيفة</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس خفيفة للصيف، ملابس دافئة للشتاء، مع مراعاة الاحتشام في الأماكن العامة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>التركمانية هي اللغة الرسمية، والروسية منتشرة كلغة ثانية</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>احترام القوانين المحلية، تصريح خاص للتصوير في بعض المناطق، احترام تقاليد المجتمع المحافظ</p>
+                </div>
+                <div class="info-card">
+                    <h3>أوقات العمل</h3>
+                    <p>المحلات تفتح عادة من 9:00-18:00 مع إغلاق خلال ساعة الغداء (13:00-14:00)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات</h3>
+                    <p>التحية التقليدية "سلام"، المصافحة مع الأشخاص من نفس الجنس، إظهار الاحترام للكبار</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>Turkmentelekom, Altyn Asyr, MTS Turkmenistan</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات مسبقة الدفع متوفرة في المحلات ومكاتب البريد</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>خدمة الإنترنت متوفرة لكنها قد تكون بطيئة ومقيدة في بعض المواقع</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>تعتبر تركمانستان دولة آمنة نسبياً مع وجود شرطة سياحية في المناطق المهمة</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يُشدد على ضرورة الحصول على تأمين صحي شامل يغطي العلاج في المستشفيات الخاصة</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>الشرطة: 02 — إسعاف: 03 — إطفاء: 01</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>ملاحظة:</strong> يُنصح المسافرون بالحصول على تصاريح خاصة لزيارة بعض المناطق وإبلاغ السفارة ببرنامج سفرهم.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>عشق آباد</h3>
+                    <p>قصر روح التركمان، سوق تولكوچكا، النصب التذكاري للحياد، المتحف الوطني</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدن أخرى</h3>
+                    <p>مرو (مدينة تاريخية)، داشوغوز، تركمنباشي (على بحر قزوين)، بوابة الجحيم (حفرة الغاز)</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواصلات الداخلية</h3>
+                    <p>سيارات الأجرة، الحافلات، القطارات بين المدن الرئيسية</p>
+                </div>
+                <div class="info-card">
+                    <h3>الفعاليات</h3>
+                    <p>عيد الاستقلال (27 سبتمبر)، عيد العلم (19 فبراير)، عيد النويروز (21 مارس)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~8-15 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات عامة</h3>
+                    <p>~0.3-0.5 دولار أمريكي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة معلم سياحي</h3>
+                    <p>تختلف (عادة ما بين 5-20 دولار أمريكي)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>70-150 دولار أمريكي/يوم (يعتمد على نمط الإنفاق)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى عشق آباد</h3>
+                    <p>الوصول إلى مطار عشق آباد الدولي - الانتقال إلى الفندق - استراحة - نزهة قصيرة في المنطقة المحيطة.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: استكشاف عشق آباد</h3>
+                    <p>زيارة المتحف الوطني - قصر روح التركمان - النصب التذكاري للحياد - التسوق في سوق تولكوچكا.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: رحلة إلى بوابة الجحيم</h3>
+                    <p>رحلة برية إلى حفرة الغاز الشهيرة (دارفازا) - مشاهدة الغروب عند البوابة - العودة إلى عشق آباد مساءً.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: رحلة إلى مرو القديمة</h3>
+                    <p>رحلة إلى مدينة مرو التاريخية - زيارة مواقع التراث العالمي لليونسكو - العودة إلى عشق آباد.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: منتجع أوالانيز</h3>
+                    <p>رحلة إلى منتجع أوالانيز على بحر قزوين - الاستمتاع بالمناظر الطبيعية والطعام المحلي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: التسوق والثقافة</h3>
+                    <p>زيارة الأسواق التقليدية - شراء السجاد التركماني الشهير - زيارة مركز ثقافي محلي - عشاء الوداع.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>ملاحظة:</strong> بعض المناطق في تركمانستان تتطلب تصاريح خاصة للزيارة، يرجى الترتيب مسبقاً مع وكالات السفر المحلية.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.mofa.gov.om" class="resource-link" target="_blank">وزارة الخارجية العمانية</a>
+                <a href="https://turkmenistan.gov.tm" class="resource-link" target="_blank">البوابة الرسمية لتركمانستان</a>
+                <a href="https://www.lonelyplanet.com/turkmenistan" class="resource-link" target="_blank">دليل لونلي بلانيت (باللغة الإنجليزية)</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً إذا لزم الأمر
+    </script>
+</body>
+</html>

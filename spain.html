@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إسبانيا - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-orange: #FF6B35;
+            --secondary-orange: #FF8C42;
+            --light-orange: #FFB366;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-orange);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-orange);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-orange);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-orange);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-orange);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-orange);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-orange);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="europe.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/es.png')"></div>
+            <h1>إسبانيا (Spain)</h1>
+            <h2>مملكة إسبانيا - قارة أوروبا</h2>
+            <p>عاصمة: مدريد - اللغة الرسمية: الإسبانية - توقيت مدريد: CET/CEST</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>ثلاث شرائط أفقية (أحمر - أصفر - أحمر) مع شعار النبالة على الجانب الأيسر</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>505,990 كم²</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 47.4 مليون نسمة (تقدير 2023)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>مدريد</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC+1 (توقيت وسط أوروبا) - UTC+2 (توقيت الصيف)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+34</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>يحتاجون تأشيرة شينغن قصيرة لدخول إسبانيا كسياح (باستثناء حاملي الجوازات الدبلوماسية/الخاصة)</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع التأشيرات</h3>
+                    <p>سياحية/زيارة قصيرة (Schengen short-stay)، تأشيرة دراسة، عمل، إقامة طويلة</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر سارٍ (3 أشهر بعد تاريخ الخروج)، صور شخصية، خطاب دعوة أو حجز فندق، تذاكر طيران، كشف حساب بنكي، تأمين سفر يغطي 30,000 يورو، استمارة طلب موقعة</p>
+                </div>
+                <div class="info-card">
+                    <h3>التكلفة والمدة</h3>
+                    <p>رسوم الشنغن القياسية ~80 يورو للبالغين، ومدة الصلاحية تختلف حسب نوع التأشيرة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة المعالجة</h3>
+                    <p>عادةً من 15 يوم عمل، وقد تطول حسب الموسم/الحالة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مكان التقديم</h3>
+                    <p>عبر سفارة إسبانيا أو مراكز التأشيرات المعتمدة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الرحلات المباشرة</h3>
+                    <p>رحلات مباشرة منتظمة تُشغّلها Oman Air بين مسقط ومدريد (تواتر محدد بالأسبوع)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>تقريباً بين 7 ساعات و30 دقيقة إلى 8 ساعات</p>
+                </div>
+                <div class="info-card">
+                    <h3>المطارات الرئيسية</h3>
+                    <p>مطار مدريد-باراخاس (MAD)، مطار برشلونة-إل برات (BCN)، مطار مالقة-كوستا ديل سول (AGP)</p>
+                </div>
+                <div class="info-card">
+                    <h3>من المطار إلى المدينة</h3>
+                    <p>مترو المطار، حافلات مكوكية، سيارات الأجرة الرسمية، خدمة النقل المسبق، واستئجار السيارات</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواصلات الداخلية</h3>
+                    <p>شبكة قطارات AVE فائقة السرعة، حافلات بين المدن، مترو في المدن الكبرى</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل المناطق للسكن في مدريد</h3>
+                    <p>وسط المدينة (Centro)، منطقة سالامانكا، باركي ديل ريتيرو، ومالاسانيا</p>
+                </div>
+                <div class="info-card">
+                    <h3>أفضل المناطق للسكن في برشلونة</h3>
+                    <p>حي غوثيك، شارع لارامبلا، حي بورن، وحي غراسيا</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>فنادق (من 2★ إلى 5★)، شقق فندقية، Airbnb، هوستلات، ومنتجعات شاطئية</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>فنادق 3★ قد تبدأ من ~80–150 يورو لليلة خارج مواسم الذروة</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>اليورو (EUR)</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 EUR ≈ 0.45 OMR (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>بطاقات Visa/Mastercard مقبولة على نطاق واسع، النقود متداولة بشكل كبير خاصة في الأسواق الصغيرة</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>ATM متوفرة بكثرة في جميع المدن والمناطق السياحية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>الربيع (أبريل-يونيو) والخريف (سبتمبر-أكتوبر) لطقس معتدل وأجواء مريحة</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>صيف حار وجاف (25-35°C)، شتاء معتدل وممطر (5-15°C) خاصة في المناطق الساحلية</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس خفيفة في الصيف، معطف خفيف في الربيع والخريف، معطف ومظلة شتاءً</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغة</h3>
+                    <p>الإسبانية (القشتالية) هي اللغة الرسمية؛ الإنجليزية مستخدمة في المناطق السياحية</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>لا تستعمل/تحمل أدوية محظورة بدون وصفة؛ احترام قواعد الأماكن العامة (التدخين، القوانين المرورية)</p>
+                </div>
+                <div class="info-card">
+                    <h3>أوقات العمل</h3>
+                    <p>المحلات عادةً تفتح حتى 20:00–21:00؛ المراكز التجارية حتى 22:00</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات والإكراميات</h3>
+                    <p>الإكراميات (tips) غير إلزامية ولكنها مقدرة (عادة 5-10% في المطاعم إذا كانت الخدمة جيدة)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>Movistar, Vodafone, Orange</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات مسبقة الدفع متوفرة في المتاجر والمقاهي</p>
+                </div>
+                <div class="info-card">
+                    <h3>تكلفة الشريحة</h3>
+                    <p>شريحة محلية مع باقة بيانات يومية/أسبوعية متاحة من نحو 10–20 يورو</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>Wi-Fi متوفّر في معظم الفنادق والمقاهي والمطاعم في المدن الكبرى</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>إسبانيا بلد آمن نسبيًا لكن كن حذرًا من النشّالين في المناطق السياحية المزدحمة</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>مطلوب تأمين سفر يغطي التكاليف الطبية الطارئة بقيمة 30,000 يورо عند التقديم على الشنغن</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>طوارئ طبية 112 — شرطة 112 — إطفاء 112 — طوارئ أوروبية 112</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مدريد</h3>
+                    <p>قصر مدريد الملكي، متحف برادو، ساحة بلازا مايور، وملعب سانتياغو برنابيو</p>
+                </div>
+                <div class="info-card">
+                    <h3>برشلونة</h3>
+                    <p>كنيسة ساغرادا فاميليا، بارك غويل، حي غوثيك، وملعب كامب نو</p>
+                </div>
+                <div class="info-card">
+                    <h3>أندلسيا</h3>
+                    <p>قصر الحمراء في غرناطة، مسجد قرطبة، كاتدرائية إشبيلية، وحي البيازين</p>
+                </div>
+                <div class="info-card">
+                    <h3>جزر الكناري</h3>
+                    <p>تِنيريفي، غران كناريا، لانزاروت، وفويرتيفنتورا - شواطئ رائعة وطبيعة بركانية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>وجبة في مطعم متوسط</h3>
+                    <p>~15–30 يورو</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة مواصلات عامة</h3>
+                    <p>~1.50–2.50 يورو للتذكرة الواحدة</p>
+                </div>
+                <div class="info-card">
+                    <h3>تذكرة معلم سياحي</h3>
+                    <p>تختلف (قصر الحمراء ~19 يورو، ساغرادا فاميليا ~26 يورو)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>80–180 يورو/يوم (يعتمد على نمط الإنفاق)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة 7 أيام</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">اليوم 1: الوصول إلى مدريد</h3>
+                    <p>الوصول إلى مطار مدريد-باراخاس - الانتقال إلى الفندق - استراحة - نزهة في ساحة بلازا مايور - عشاء في مطعم إسباني تقليدي.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 2: استكشاف مدريد</h3>
+                    <p>زيارة قصر مدريد الملكي - متحف برادو - ساحة سيبيليس - حديقة ريتيرو - عشاء في أحد المطاعم المحلية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 3: رحلة إلى طليطلة</h3>
+                    <p>رحلة إلى طليطلة (30 دقيقة) - استكشاف المدينة القديمة - كاتدرائية طليطلة - العودة إلى مدريد مساءً.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 4: الانتقال إلى برشلونة</h3>
+                    <p>رحلة بالقطار فائق السرعة إلى برشلونة (2.5 ساعة) - التسجيل في الفندق - جولة في حي غوثيك - عشاء على شارع لارامبلا.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 5: استكشاف برشلونة</h3>
+                    <p>زيارة كنيسة ساغرادا فاميليا - بارك غويل - حي بورن - شاطئ برشلونة - عشاء في مطعم مأكولات بحرية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 6: مونتسيرات أو التسوق</h3>
+                    <p>رحلة إلى دير مونتسيرات (اختياري) أو يوم للتسوق في برشلونة - شراء الهدايا التذكارية - عشاء الوداع.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">اليوم 7: المغادرة</h3>
+                    <p>تسوق أخير للهدايا - الانتقال إلى المطار - المغادرة.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> جرب المأكولات الإسبانية التقليدية مثل الباييا، التاباس، الجامون الإيبيري، والبولبو á feira، وتذوق المشروبات المحلية مثل السانجريا والنبيذ الإسباني.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="https://www.spain.info" class="resource-link" target="_blank">الموقع السياحي الرسمي</a>
+                <a href="https://www.omanair.com" class="resource-link" target="_blank">الطيران العُماني (رحلات إلى إسبانيا)</a>
+                <a href="https://www.renfe.com" class="resource-link" target="_blank">القطارات الإسبانية (RENFE)</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً إذا لزم الأمر
+    </script>
+</body>
+</html>

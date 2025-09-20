@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفاتيكان - عمان للسفر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-orange: #FF6B35;
+            --secondary-orange: #FF8C42;
+            --light-orange: #FFB366;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #2C3E50;
+            --text-dark: #34495E;
+            --bg-color: #FFFFFF;
+            --text-color: #34495E;
+            --card-bg: #F8F9FA;
+            --section-padding: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-orange));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .country-flag {
+            width: 120px;
+            height: 90px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--primary-orange);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-orange);
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-orange);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-left: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: var(--primary-orange);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .travel-plan {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .day {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .day-title {
+            color: var(--primary-orange);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .resource-link {
+            display: block;
+            background: var(--primary-orange);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: var(--secondary-orange);
+            transform: translateY(-3px);
+        }
+
+        .alert {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="europe.html" class="back-btn">
+        <i class="fas fa-arrow-right"></i>
+    </a>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="country-flag" style="background-image: url('https://flagcdn.com/w320/va.png')"></div>
+            <h1>الفاتيكان (Vatican)</h1>
+            <h2>دولة مدينة الفاتيكان - قارة أوروبا</h2>
+            <p>عاصمة: الفاتيكان - اللغة الرسمية: اللاتينية، الإيطالية - توقيت الفاتيكان: CET/CEST</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> معلومات عامة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العلم</h3>
+                    <p>شريطان عموديان (أصفر - أبيض) مع تاج البابا ومفاتيح القديس بطرس المتقاطعة</p>
+                </div>
+                <div class="info-card">
+                    <h3>المساحة</h3>
+                    <p>0.44 كم² (أصغر دولة في العالم)</p>
+                </div>
+                <div class="info-card">
+                    <h3>عدد السكان</h3>
+                    <p>حوالي 800 نسمة (أقل دولة من حيث عدد السكان)</p>
+                </div>
+                <div class="info-card">
+                    <h3>العاصمة</h3>
+                    <p>مدينة الفاتيكان</p>
+                </div>
+                <div class="info-card">
+                    <h3>التوقيت</h3>
+                    <p>UTC+1 (توقيت وسط أوروبا) - UTC+2 (توقيت الصيف)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مفتاح الاتصال</h3>
+                    <p>+379</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-passport"></i> التأشيرة (Visa)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>متطلبات المواطن العُماني</h3>
+                    <p>الفاتيكان ليس لديه حدود أو ضوابط هجرة، لكن الوصول إليه يكون عبر إيطاليا التي تتطلب تأشيرة شنغن</p>
+                </div>
+                <div class="info-card">
+                    <h3>الدخول إلى الفاتيكان</h3>
+                    <p>الدخول مفتوح للجميع دون تأشيرة، لكن يجب الحصول على تأشيرة شنغن لدخول إيطاليا أولاً</p>
+                </div>
+                <div class="info-card">
+                    <h3>المستندات المطلوبة</h3>
+                    <p>جواز سفر سارٍ مع تأشيرة شنغن سارية المفعول لدخول إيطاليا</p>
+                </div>
+                <div class="info-card">
+                    <h3>التكلفة والمدة</h3>
+                    <p>لا توجد رسوم لدخول الفاتيكان، لكن بعض المتاحمف والمباني تتطلب تذاكر دخول</p>
+                </div>
+                <div class="info-card">
+                    <h3>لمن يحتاج التأشيرة</h3>
+                    <p>للدبلوماسيين والموظفين فقط، حيث أن الفاتيكان ليس لديه سكان دائمين بالمعنى التقليدي</p>
+                </div>
+                <div class="info-card">
+                    <h3>مكان التقديم</h3>
+                    <p>عبر سفارة إيطاليا للحصول على تأشيرة شنغن</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-plane"></i> السفر (Flight & Transport)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الوصول إلى الفاتيكان</h3>
+                    <p>لا يوجد مطار في الفاتيكان، يتم الوصول عبر مطارات روما: ليوناردو دا فينشي (FCO) أو شيامبينو (CIA)</p>
+                </div>
+                <div class="info-card">
+                    <h3>مدة الرحلة</h3>
+                    <p>رحلة جوية إلى روما (6-8 ساعات) ثم براً إلى الفاتيكان (30-45 دقيقة من المطار)</p>
+                </div>
+                <div class="info-card">
+                    <h3>من المطار إلى الفاتيكان</h3>
+                    <p>قطار المطار، حافلات، سيارات أجرة، أو استئجار سيارة من مطار روما إلى وسط المدينة</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواصلات داخل الفاتيكان</h3>
+                    <p>المشي هو أفضل طريقة لاستكشاف الفاتيكان، الدولة صغيرة جداً ويمكن تجولها سيراً على الأقدام</p>
+                </div>
+                <div class="info-card">
+                    <h3>المواصلات من روما</h3>
+                    <p>مترو روما (خط A - محطة Ottaviano)، حافلات، سيراً على الأقدام من وسط روما (حوالي 20 دقيقة)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-hotel"></i> الإقامة (Accommodation)</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>الإقامة في الفاتيكان</h3>
+                    <p>لا يوجد فنادق أو أماكن إقامة مفتوحة للجمهور داخل الفاتيكان</p>
+                </div>
+                <div class="info-card">
+                    <h3>أفضل المناطق للسكن في روما</h3>
+                    <p>حول الفاتيكان: براتي، وسط روما، تريستفيري، ومنطقة نافونا</p>
+                </div>
+                <div class="info-card">
+                    <h3>أنواع الإقامة</h3>
+                    <p>فنادق (من 2★ إلى 5★)، شقق فندقية، بيوت ضيافة، هوستلات في روما</p>
+                </div>
+                <div class="info-card">
+                    <h3>متوسط سعر الليلة</h3>
+                    <p>فنادق 3★ قد تبدأ من ~80–150 يورو لليلة قرب الفاتيكان</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الحجز</h3>
+                    <p>Booking.com, Expedia, Airbnb، أو عبر وكالات محلية</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-money-bill-wave"></i> العملة والدفع</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>العملة الرسمية</h3>
+                    <p>اليورو (EUR) - الفاتيكان يصدر عملاته الخاصة ولكن اليورو الإيطالي مقبول</p>
+                </div>
+                <div class="info-card">
+                    <h3>تحويل العملة</h3>
+                    <p>1 EUR ≈ 0.45 OMR (يتغير يوميًا — تحقّق قبل السفر)</p>
+                </div>
+                <div class="info-card">
+                    <h3>طرق الدفع</h3>
+                    <p>بطاقات الائتمان مقبولة في المتاجر والمتاحف، النقود مفضلة للتبرعات والمشتريات الصغيرة</p>
+                </div>
+                <div class="info-card">
+                    <h3>سحب النقود</h3>
+                    <p>ATM متوفرة في إيطاليا المحيطة بالفاتيكان، لا توجد داخل الفاتيكان</p>
+                </div>
+                <div class="info-card">
+                    <h3>عملات تذكارية</h3>
+                    <p>الفاتيكان يصدر عملات تذكارية خاصة يمكن جمعها كهدايا</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-cloud-sun"></i> الطقس والمناخ</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>أفضل أوقات الزيارة</h3>
+                    <p>الربيع (أبريل-يونيو) والخريف (سبتمبر-أكتوبر) لطقس معتدل وأعداد زوار أقل</p>
+                </div>
+                <div class="info-card">
+                    <h3>حالة الطقس</h3>
+                    <p>صيف حار وجاف (25-30°C)، شتاء معتدل وممطر (5-15°C)</p>
+                </div>
+                <div class="info-card">
+                    <h3>نصائح للملابس</h3>
+                    <p>ملابس محتشمة للدخول إلى الكنائس (أكتاف وأرجل مغطاة)، أحذية مريحة للمشي</p>
+                </div>
+                <div class="info-card">
+                    <h3>المناسبات الدينية</h3>
+                    <p>أعياد الميلاد والفصح تجذب أعداداً كبيرة، تحتاج إلى ترتيب مسبق</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-landmark"></i> الثقافة والقوانين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>اللغات الرسمية</h3>
+                    <p>اللاتينية (رسمية)، الإيطالية (عمل)، العديد من اللغات مستخدمة للزوار</p>
+                </div>
+                <div class="info-card">
+                    <h3>قوانين مهمة</h3>
+                    <p>اللباس المحتشم إلزامي، عدم التدخين، تصوير محدود في بعض المناطق، الهدوء في الأماكن المقدسة</p>
+                </div>
+                <div class="info-card">
+                    <h3>أوقات الزيارة</h3>
+                    <p>المتاحف: 9:00-18:00، الكنائس: 7:00-19:00، الساحات: مفتوحة ولكن قد تغلق في المناسبات الخاصة</p>
+                </div>
+                <div class="info-card">
+                    <h3>العادات والتقاليد</h3>
+                    <p>احترام الطقوس الدينية، الصمت في الأماكن المقدسة، عدم الانقطاع أثناء الصلوات</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> الاتصالات والإنترنت</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>شركات الاتصالات</h3>
+                    <p>خدمات إيطالية: TIM, Vodafone, Wind Tre تغطي منطقة الفاتيكان</p>
+                </div>
+                <div class="info-card">
+                    <h3>باقات الاتصال</h3>
+                    <p>بطاقات مسبقة الدفع إيطالية تعمل في الفاتيكان</p>
+                </div>
+                <div class="info-card">
+                    <h3>الإنترنت</h3>
+                    <p>Wi-Fi محدود داخل الفاتيكان، متوفر في بعض المقاهي والمطاعم في المناطق المحيطة</p>
+                </div>
+                <div class="info-card">
+                    <h3>خدمة البريد</h3>
+                    <p>الفاتيكان لديه خدمة بريد خاصة، طوابع تذكارية مشهورة لدى الجامعين</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> الأمان والتأمين</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>مستوى الأمان</h3>
+                    <p>الفاتيكان آمن جداً مع حراسة مشددة من الحرس السويسري والشرطة الإيطالية</p>
+                </div>
+                <div class="info-card">
+                    <h3>التأمين الصحي</h3>
+                    <p>يُنصح بالتأمين الصحي الأوروبي، الخدمات الطبية محدودة داخل الفاتيكان</p>
+                </div>
+                <div class="info-card">
+                    <h3>أرقام الطوارئ</h3>
+                    <p>طوارئ إيطالية 112 — طبية 118 — يمكن التواصل مع الحرس السويسري في الحالات الطارئة</p>
+                </div>
+                <div class="info-card">
+                    <h3>الحرس السويسري</h3>
+                    <p>مسؤول عن أمن البابا والدولة، يمكن التعرف عليهم بزيهم التقليدي المميز</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-monument"></i> الأماكن السياحية</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>كاتدرائية القديس بطرس</h3>
+                    <p>أكبر كنيسة في العالم، تحوي تحفاً فنية including Pieta لمايكل أنجلو والقبة الشهيرة</p>
+                </div>
+                <div class="info-card">
+                    <h3>متحف الفاتيكان</h3>
+                    <p>مجمع متاحف يضم مجموعة فنية هائلة، including كنيسة سيستينا ولوحات مايكل أنجلو</p>
+                </div>
+                <div class="info-card">
+                    <h3>ساحة القديس بطرس</h3>
+                    <p>ساحة ضخمة صممها برنيني، مكان تجمع للمؤمنين خلال المناسبات البابوية</p>
+                </div>
+                <div class="info-card">
+                    <h3>حدائق الفاتيكان</h3>
+                    <p>حدائق خلفية جميلة، يمكن زيارتها بجولات مصحوبة بمرشدين فقط</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-receipt"></i> تكاليف المعيشة</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>تذاكر الدخول</h3>
+                    <p>كاتدرائية القديس بطرس: مجانية — متاحف الفاتيكان: ~17-21 يورو — قبة الكاتدرائية: ~8-10 يورو</p>
+                </div>
+                <div class="info-card">
+                    <h3>الوجبات</h3>
+                    <p>مقاهي حول الفاتيكان: ~10-20 يورو للوجبة — داخل الفاتيكان: مقهى واحد بأسعار معقولة</p>
+                </div>
+                <div class="info-card">
+                    <h3>الهدايا التذكارية</h3>
+                    <p>طوابع بريد: ~2-5 يورو — عملات تذكارية: ~10-30 يورو — منتجات دينية: أسعار متنوعة</p>
+                </div>
+                <div class="info-card">
+                    <h3>مصروف يومي تقريبي</h3>
+                    <p>50-100 يورو/يوم (بالإقامة في روما) يشمل المواصلات والطعام والتذاكر</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-calendar-alt"></i> خطة سفر جاهزة ليوم واحد</h2>
+            <div class="travel-plan">
+                <div class="day">
+                    <h3 class="day-title">الصباح: كاتدرائية القديس بطرس</h3>
+                    <p>الوصول مبكراً (8:00) لتجنب الطوابير — زيارة الكاتدرائية — الصعود إلى قبة الكاتدرائية للمشاهد البانورامية — زيارة السرداب حيث دفن الباباوات.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">منتصف النهار: متاحف الفاتيكان</h3>
+                    <p>زيارة متاحف الفاتيكان (حجز مسبق عبر الإنترنت) — مشاهدة كنيسة سيستينا — المعارض الفنية — غرف رافائيل.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">بعد الظهر: ساحة القديس بطرس والحدائق</h3>
+                    <p>جولة في ساحة القديس بطرس — حضور الصلاة Angelus (أيام الأحد) — جولة في الحدائق (بترتيب مسبق) — شراء الهدايا التذكارية.</p>
+                </div>
+                <div class="day">
+                    <h3 class="day-title">المساء: العودة إلى روما</h3>
+                    <p>العودة إلى روما — تناول العشاء في حي براتي — الاستمتاع بمنظر الفاتيكان المضاء ليلاً.</p>
+                </div>
+            </div>
+            <div class="alert">
+                <p><strong>نصيحة:</strong> احجز تذاكر متاحف الفاتيكان مسبقاً عبر الإنترنت لتجنب طوابير الانتظار الطويلة التي قد تصل إلى ساعتين أو أكثر.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-link"></i> روابط مفيدة</h2>
+            <div class="resources">
+                <a href="http://www.vatican.va" class="resource-link" target="_blank">الموقع الرسمي للفاتيكان</a>
+                <a href="https://biglietteriamusei.vatican.va" class="resource-link" target="_blank">حجز تذاكر متاحف الفاتيكان</a>
+                <a href="https://www.italia.it" class="resource-link" target="_blank">السياحة الإيطالية (للوصول إلى الفاتيكان)</a>
+                <a href="https://www.xe.com" class="resource-link" target="_blank">أسعار صرف العملات (XE)</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // يمكن إضافة أي سكريبتات لاحقاً إذا لزم الأمر
+    </script>
+</body>
+</html>
